@@ -13,7 +13,7 @@ const p = await ctx.newPage();
 await p.goto(base + '/?ui-test=1');
 await p.waitForFunction(() => window.__aceRuns?.app);
 await p.evaluate(async ([s, m]) => {
-  await window.__aceRuns.app.startRunDirect({ character: 'moana', ride: 'bike', stage: s, mode: m, seed: 4, skipCountdown: m !== 'tutorial' });
+  await window.__aceRuns.app.startRunDirect({ character: 'ciela', ride: 'bike', stage: s, mode: m, seed: 4, skipCountdown: m !== 'tutorial' });
   if (m !== 'tutorial') window.__startBot();
   window.__hits = []; window.__samples = 0;
   const shown = (e) => e.offsetParent !== null && !e.classList.contains('hidden') && +getComputedStyle(e).opacity > 0.05 && e.getBoundingClientRect().width > 2;

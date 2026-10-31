@@ -11,7 +11,7 @@ const p = await ctx.newPage();
 const errs = []; p.on('pageerror', (e) => errs.push(String(e)));
 await p.goto(base + '/?ui-test=1');
 await p.waitForFunction(() => window.__aceRuns?.app);
-await p.evaluate(() => window.__aceRuns.app.startRunDirect({ character: 'moana', ride: 'shoes', stage: 'indoor', mode: 'adventure', seed: 3, skipCountdown: true }));
+await p.evaluate(() => window.__aceRuns.app.startRunDirect({ character: 'ciela', ride: 'shoes', stage: 'indoor', mode: 'adventure', seed: 3, skipCountdown: true }));
 await p.evaluate(() => { window.__eats = 0; window.__aceRuns.engine.on((e) => { if (e.type === 'food') window.__eats++; }); window.__startBot(); });
 await p.waitForFunction(() => window.__eats >= 1, null, { timeout: 30000 });
 for (let i = 0; i < 5; i++) { await p.screenshot({ path: `${out}/eat-${i}.png` }); await p.waitForTimeout(40); }

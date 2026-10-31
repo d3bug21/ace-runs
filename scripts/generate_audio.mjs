@@ -40,19 +40,26 @@ const KID_TAGS_BY_GROUP = {
   vision: '[amazed]', new_food: '[amazed]', unlock: '[amazed]',
   bump: '[giggles]', teeth: '[giggles]', tummy: '[giggles]', freeze: '[giggles]',
   slow: '[sighs]',
+  cooldown_go: '[cheerful]', cooldown_done: '[cheerful]', // calm, happy cool-down
 };
 // Per-line tag overrides chosen from the Scribe STT experiments (see scripts/voice-stt-check.json).
 const KID_TAGS_BY_ID = {
   ace_hello_1: '[cheerful]', // 'Kia ora' was heard clearly far more often with a calmer delivery + hyphenation
-  moana_near_miss_1: '[relieved]', // '[excited] Phew!' came out as a sneeze-like sound
-  moana_start_2: '[cheerful]', // keeps the Kiwi 'eh' audible
+  ciela_near_miss_1: '[relieved]', // '[excited] Phew!' came out as a sneeze-like sound
+  ciela_start_2: '[cheerful]', // keeps the Kiwi 'eh' audible
+  ciela_stretch_cheer_2: '[cheerful]', // '[excited] Ka pai!' came out as 'Cup high' in 3/3 takes
+  ciela_hello_2: '[cheerful]', // calmer delivery keeps "Syeh-lah" two clean syllables
 };
 
 // Request-only punctuation tweaks where the STT check showed a word being swallowed or misheard.
 // Words are unchanged; the manifest `tts` stays the source of truth.
 const TTS_REQUEST_OVERRIDES = {
   ace_hello_1: "Ki-a o-ra! I'm Ace!", // Ace's voice blurred 'Kia ora' into 'Yoda'/'Chona' without the syllable breaks
-  moana_hello_1: "Kia ora... I'm Moana!", // short pause stops 'Kia ora' running into 'I'm' ('Kiara')
+  // Ciela is said "SYEH-lah" (two syllables, sy-glide). Request-only respellings chosen from Scribe experiments
+  // (see scripts/voices.json -> ciela.pronunciation); the manifest text still says "Ciela".
+  ciela_hello_1: "Ki-a o-ra... I'm Sieh-lah!", // syllable breaks + pause keep 'Kia ora' clear; 'Sieh-lah' heard as 'Ciela' 3/3
+  ciela_hello_2: "Hi! Syeh-lah... here! Let's have some fun!", // pause after the name; heard 'Ciela', Mandarin read 2 syllables
+  narrator_char_ciela_1: 'Syeh-lah!', // Jessie: heard as Mandarin 谢啦 'xie la' = /ɕjɛ la/
   ace_yum_5: 'Mmm... crunchy!', // pause stops 'crunchy' being clipped ('crotchy')
   ace_shield_1: 'Germs... bounce off!', // pause keeps the 'r' colour of 'germs' ('gems')
 };
@@ -161,7 +168,7 @@ function requestFor(e, take) {
     if (!v) throw new Error(`unknown speaker ${e.speaker}`);
     const model_id = modelFallback[e.speaker] || v.model_id;
     let text = TTS_REQUEST_OVERRIDES[e.id] || e.tts;
-    if ((e.speaker === 'ace' || e.speaker === 'moana') && model_id === 'eleven_v3') {
+    if ((e.speaker === 'ace' || e.speaker === 'ciela') && model_id === 'eleven_v3') {
       text = `${KID_TAGS_BY_ID[e.id] || KID_TAGS_BY_GROUP[e.group] || KID_TAG_DEFAULT} ${text}`;
     }
     return {
@@ -236,7 +243,7 @@ const KEYWORDS = [
   { word: 'kia ora', heard: /\bkia\s*ora\b/ },
   { word: 'ka pai', heard: /\bka\s*pai\b/ },
   { word: 'chur', heard: /\b(chur|cha|chair|cher|cheer)\b/ },
-  { word: 'moana', heard: /\bmoana\b/ },
+  { word: 'ciela', heard: /\bciela\b/ },
 ];
 const plain = (s) => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 const words = (s) => plain(s).replace(/\[[^\]]*\]/g, ' ').replace(/-/g, ' ').replace(/[^a-z' ]+/g, ' ').split(/\s+/).filter(Boolean)
@@ -249,7 +256,8 @@ function lcsRatio(x, y) {
   return (2 * dp[x.length][y.length]) / (x.length + y.length);
 }
 function scoreStt(expected, heard) {
-  const e = words(expected).join(' '), h = words(heard).join(' ');
+  if (/ciela/i.test(expected)) heard = heard.replace(/谢\s*[啦拉]|\bcielo\b/gi, 'Ciela'); // see verify_voice_stt.mjs nameAliases()
+  const e = words(expected).join(' '), h = plain(heard).replace(/[^a-z' ]+/g, ' '); // keywords: no repeated-letter collapse
   const missing = KEYWORDS.filter((k) => e.includes(k.word) && !k.heard.test(h)).map((k) => k.word);
   const sim = lcsRatio(words(expected), words(heard));
   return { sim: Number(sim.toFixed(2)), missing, score: sim - missing.length };

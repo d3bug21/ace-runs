@@ -89,7 +89,7 @@ const SCREENS = {
   run: async (p) => {
     await p.evaluate(async () => {
       const a = window.__aceRuns;
-      await a.app.startRunDirect({ stage: 'sports', mode: 'adventure', character: 'moana', ride: 'bike', skipCountdown: true });
+      await a.app.startRunDirect({ stage: 'sports', mode: 'adventure', character: 'ciela', ride: 'bike', skipCountdown: true });
       a.fake?.busy();
     });
   },
@@ -118,7 +118,7 @@ const SCREENS = {
   'tutorial-food': async (p) => {
     await p.evaluate(async () => {
       const a = window.__aceRuns;
-      await a.app.startRunDirect({ stage: 'indoor', mode: 'tutorial', character: 'moana', ride: 'shoes', skipCountdown: true });
+      await a.app.startRunDirect({ stage: 'indoor', mode: 'tutorial', character: 'ciela', ride: 'shoes', skipCountdown: true });
       if (a.fake) setTimeout(() => a.fake.emit({ type: 'tutorial', step: 'healthy' }), 450);
     });
     await p.waitForTimeout(300);
@@ -134,11 +134,40 @@ const SCREENS = {
   'pause-settings': async (p) => {
     await p.evaluate(async () => {
       const a = window.__aceRuns;
-      await a.app.startRunDirect({ stage: 'arcade', mode: 'adventure', character: 'moana', ride: 'skate', skipCountdown: true });
+      await a.app.startRunDirect({ stage: 'arcade', mode: 'adventure', character: 'ciela', ride: 'skate', skipCountdown: true });
       a.app.requestPause();
     });
     await p.waitForTimeout(450);
     await p.locator('.modal-layer.pause .btn.chip-btn', { hasText: 'Settings' }).click();
+  },
+  warmup: async (p) => {
+    await p.evaluate(() => window.__aceRuns.app.debugScreen('character'));
+    await p.waitForTimeout(450);
+    await p.locator('.character .stretch-btn').click();
+    await p.waitForTimeout(2600);
+  },
+  'ride-repick': async (p) => p.evaluate(() => window.__aceRuns.app.debugScreen('repick')),
+  'ride-warmup': async (p) => {
+    await p.evaluate(() => window.__aceRuns.app.debugScreen('repick'));
+    await p.waitForTimeout(450);
+    await p.locator('.ride .stretch-btn').click();
+    await p.waitForTimeout(2600);
+  },
+  intro: async (p) => p.evaluate(() => window.__aceRuns.app.debugScreen('intro')),
+  'intro-stretch': async (p) => {
+    await p.evaluate(() => window.__aceRuns.app.debugScreen('intro'));
+    await p.waitForTimeout(450);
+    await p.locator('.intro .stretch-btn').click();
+    await p.waitForTimeout(2600);
+  },
+  cooldown: async (p) => p.evaluate((s) => window.__aceRuns.app.debugCooldown(s, 0), { ...STATS, stage: 'outdoor' }),
+  'cooldown-hold': async (p) => {
+    await p.evaluate((s) => window.__aceRuns.app.debugCooldown(s, 3), { ...STATS, stage: 'jungle', character: 'ciela' });
+    await p.waitForTimeout(1500);
+  },
+  'cooldown-breathe': async (p) => {
+    await p.evaluate((s) => window.__aceRuns.app.debugCooldown(s, 5), { ...STATS, stage: 'parks' });
+    await p.waitForTimeout(1300);
   },
   results: async (p) => p.evaluate((s) => window.__aceRuns.app.debugResults(s), { ...STATS, stage: 'outdoor' }),
   'results-try': async (p) =>
@@ -227,7 +256,7 @@ function probe() {
 
 async function main() {
   mkdirSync(OUT, { recursive: true });
-  const browser = await chromium.launch({ executablePath: CHROME, args: ['--autoplay-policy=no-user-gesture-required', '--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'] });
+  const browser = await chromium.launch({ executablePath: CHROME, args: ['--autoplay-policy=no-user-gesture-required', '--use-angle=metal'] });
   const report = [];
   const t0 = Date.now();
   for (const [sname, w, h, mobile] of sizes) {

@@ -33,11 +33,16 @@ async function waitDist(p, d, ms = 200000) { const t = Date.now(); while (Date.n
   await click(p, 'Play'); await waitState(p, 'title'); await p.waitForTimeout(1500);
   await shot(p, '01-title');
   await click(p, 'Play'); await waitState(p, 'character'); await p.waitForTimeout(1200);
-  await click(p, 'Moana'); await p.waitForTimeout(1500);
+  await click(p, 'Ciela'); await p.waitForTimeout(1500);
   await shot(p, '02-character');
   await click(p, 'Next'); await waitState(p, 'ride'); await p.waitForTimeout(800);
   await click(p, 'Bike'); await p.waitForTimeout(1800);
   await shot(p, '03-ride');
+  await p.getByRole('button', { name: /Stretch with me/i }).first().click({ force: true });
+  await p.waitForTimeout(7000);
+  await shot(p, '03b-warmup-move');
+  await p.getByRole('button', { name: /Stop/i }).first().click({ force: true }).catch(() => undefined);
+  await p.waitForTimeout(600);
   await click(p, "Let's go"); await p.waitForTimeout(500);
   // Tutorial: answer each hint with the right key.
   const keys = { left: 'KeyA', right: 'KeyD', jump: 'KeyW', slide: 'KeyS' };
@@ -67,10 +72,10 @@ async function waitDist(p, d, ms = 200000) { const t = Date.now(); while (Date.n
 
 // ---- 2. stage runs with everything unlocked
 const unlocked = { tutorialDone: true, stages: Object.fromEntries(['indoor', 'arcade', 'outdoor', 'sports', 'jungle', 'parks'].map((s) => [s, { unlocked: true, cleared: true, bestDistance: 900, stars: 2 }])) };
-const runs = [['indoor', 'ace', 'shoes', [260]], ['arcade', 'moana', 'skate', [300]], ['outdoor', 'ace', 'scooter', [280]], ['sports', 'moana', 'bike', [150, 560, 1150]], ['jungle', 'ace', 'skate', [320, 700]], ['parks', 'moana', 'shoes', [180, 630, 1080, 1540]]];
+const runs = [['indoor', 'ace', 'shoes', [260]], ['arcade', 'ciela', 'skate', [300]], ['outdoor', 'ace', 'scooter', [280]], ['sports', 'ciela', 'bike', [150, 560, 1150]], ['jungle', 'ace', 'skate', [320, 700]], ['parks', 'ciela', 'shoes', [180, 630, 1080, 1540]]];
 for (const [stage, ch, ride, at] of runs) {
   const { c, p } = await ctx(unlocked);
-  await p.evaluate(([s, ch, r]) => { const a = window.__aceRuns.app; a.selectCharacter(ch, false); a.selectRide(r, false); a.startStage(s, 'adventure'); }, [stage, ch, ride]);
+  await p.evaluate(([s, ch, r]) => { const a = window.__aceRuns.app; a.selectCharacter(ch, false); a.selectRide(r, false); void a.startRunDirect({ character: ch, ride: r, stage: s, mode: 'adventure' }); }, [stage, ch, ride]);
   await waitState(p, 'run'); await p.waitForTimeout(3600);
   await p.evaluate(() => window.__startBot());
   let i = 0;
@@ -81,7 +86,9 @@ for (const [stage, ch, ride, at] of runs) {
     for (let k = 0; k < 400; k++) { await p.waitForTimeout(100); if (await p.evaluate(() => window.__foodShot)) break; }
     await p.waitForTimeout(350); await shot(p, '07-food-benefit');
     const h = await waitDist(p, 5000, 150000);
-    await waitState(p, 'results', 20000); await p.waitForTimeout(4500);
+    await waitState(p, 'cooldown', 60000); await p.waitForTimeout(9000);
+    await shot(p, '08a-cooldown-hold');
+    await waitState(p, 'results', 60000); await p.waitForTimeout(4500);
     await shot(p, '08-results');
     await p.evaluate(() => window.__aceRuns.app.openBook()); await p.waitForTimeout(1500);
     await shot(p, '09-book');
@@ -95,6 +102,9 @@ for (const [stage, ch, ride, at] of runs) {
   const { c, p } = await ctx(unlocked);
   await p.evaluate(() => window.__aceRuns.app.goStages()); await p.waitForTimeout(1800);
   await shot(p, '05-stages');
+  await p.evaluate(() => window.__aceRuns.app.startStage('arcade', 'adventure')); await waitState(p, 'ride'); await p.waitForTimeout(1800);
+  await shot(p, '05b-ride-repick');
+  await p.evaluate(() => window.__aceRuns.app.goStages()); await p.waitForTimeout(1200);
   await p.evaluate(() => window.__aceRuns.app.openSettings()); await p.waitForTimeout(1000);
   await shot(p, '10-settings');
   await c.close();

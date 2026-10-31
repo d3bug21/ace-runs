@@ -9,13 +9,13 @@ import type * as THREE from 'three';
 export const LANE_WIDTH = 2.2;
 export const laneX = (lane: number): number => lane * LANE_WIDTH;
 
-export type CharacterId = 'ace' | 'moana';
+export type CharacterId = 'ace' | 'ciela';
 export type RideId = 'shoes' | 'bike' | 'scooter' | 'skate';
 export type StageId = 'indoor' | 'arcade' | 'outdoor' | 'sports' | 'jungle' | 'parks';
 export type Season = 'winter' | 'spring' | 'summer' | 'autumn';
 export type RunMode = 'adventure' | 'endless' | 'tutorial';
 
-export const CHARACTERS: CharacterId[] = ['ace', 'moana'];
+export const CHARACTERS: CharacterId[] = ['ace', 'ciela'];
 export const RIDES: RideId[] = ['shoes', 'bike', 'scooter', 'skate'];
 export const STAGES: StageId[] = ['indoor', 'arcade', 'outdoor', 'sports', 'jungle', 'parks'];
 
@@ -70,6 +70,8 @@ export interface AvatarMotion {
   flex: number; // 0..1 muscle-flex pose weight (broccoli / spinach)
   celebrate: number; // 0..1 cheer pose weight (finish line, results)
   menu: boolean; // idle "showing off" pose for menus (no forward travel)
+  /** v1.0.1: warm-up / cool-down pose (menus only). Overrides the idle pose while set. */
+  stretch?: StretchState | null;
 }
 
 export interface TeethState {
@@ -94,6 +96,51 @@ export interface Avatar {
   /** 0..1 opacity of a full-body blink used during invulnerability. */
   setBlink(visible: boolean): void;
   dispose(): void;
+}
+
+
+// ------------------------------------------------------------------ stretches (v1.0.1)
+/** Dynamic warm-up moves (looping, gentle; shown on the character / ride pickers and the place intro). */
+export type WarmupMove =
+  | 'look' // head: gentle look left / right (no neck rolls)
+  | 'nod' // head: gentle nod up / down
+  | 'arm_circles' // arms: circles forwards then backwards
+  | 'arm_swings' // arms: big cross-body / open swings
+  | 'torso_twist' // body: gentle twists side to side
+  | 'side_bend' // body: side bends left / right
+  | 'high_knees' // legs: marching high knees
+  | 'leg_swings' // legs: front-back leg swings (one hand out for balance)
+  | 'hops' // legs: little bunny hops
+  | 'ankle_circles'; // legs: lift a foot and circle the ankle
+/** Static cool-down holds (no bouncing; held still with gentle breathing). */
+export type CooldownMove =
+  | 'reach_sky' // both arms up, tall reach
+  | 'side_reach' // one arm over the head, lean to the side
+  | 'shoulder_stretch' // one arm across the chest, held by the other
+  | 'quad_stretch' // stand on one leg, hold the other foot behind (a little wobbly is fine)
+  | 'calf_stretch' // lunge back, back heel down, hands on front knee
+  | 'toe_touch' // gentle forward reach toward the toes, knees soft
+  | 'butterfly' // sit, soles together, knees out
+  | 'breathe'; // stand tall, slow breathe in / out (chest rises, arms float)
+export type StretchMove = WarmupMove | CooldownMove;
+export const WARMUP_MOVES: WarmupMove[] = ['look', 'nod', 'arm_circles', 'arm_swings', 'torso_twist', 'side_bend', 'high_knees', 'leg_swings', 'hops', 'ankle_circles'];
+export const COOLDOWN_MOVES: CooldownMove[] = ['reach_sky', 'side_reach', 'shoulder_stretch', 'quad_stretch', 'calf_stretch', 'toe_touch', 'butterfly', 'breathe'];
+/** Which body parts glow (warming) while a move plays. */
+export const MOVE_PARTS: Record<StretchMove, AnchorName[]> = {
+  look: ['head'], nod: ['head'],
+  arm_circles: ['armL', 'armR'], arm_swings: ['armL', 'armR', 'chest'],
+  torso_twist: ['chest', 'tummy'], side_bend: ['chest', 'tummy'],
+  high_knees: ['legL', 'legR'], leg_swings: ['legL', 'legR'], hops: ['legL', 'legR', 'feet'], ankle_circles: ['feet'],
+  reach_sky: ['armL', 'armR', 'chest'], side_reach: ['armR', 'tummy'], shoulder_stretch: ['armL', 'chest'],
+  quad_stretch: ['legR'], calf_stretch: ['legL', 'feet'], toe_touch: ['legL', 'legR', 'back'], butterfly: ['legL', 'legR'],
+  breathe: ['chest'],
+};
+/** Avatar stretch state (menus only). t = seconds since the move started; the avatar loops dynamic moves
+ *  and eases into / holds static ones. side picks left/right variants for one-sided moves. */
+export interface StretchState {
+  move: StretchMove;
+  t: number;
+  side?: 1 | -1;
 }
 
 // ------------------------------------------------------------------ food

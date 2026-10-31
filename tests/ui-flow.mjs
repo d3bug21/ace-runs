@@ -48,7 +48,7 @@ async function fresh(opts = {}, saveJson = null) {
   check('Enter on title Play -> character', (await state(p)) === 'character');
   await p.keyboard.press('ArrowRight');
   await wait(p, 200);
-  check('ArrowRight on character picker selects Moana', (await p.evaluate(() => window.__aceRuns.app.save.state.character)) === 'moana');
+  check('ArrowRight on character picker selects Ciela', (await p.evaluate(() => window.__aceRuns.app.save.state.character)) === 'ciela');
   await p.keyboard.press('ArrowLeft');
   await wait(p, 200);
   check('ArrowLeft selects Ace', (await p.evaluate(() => window.__aceRuns.app.save.state.character)) === 'ace');
@@ -158,6 +158,120 @@ async function fresh(opts = {}, saveJson = null) {
   const s2 = await p2.evaluate(() => window.__aceRuns.app.save.state);
   check('partial save sanitised (clamped volumes, next place opened, unknown food dropped)', s2.settings.music === 1 && s2.settings.voice === 0 && s2.stages.arcade.unlocked && !s2.foods.fake && s2.foods.carrot.count === 2);
   await c2.close();
+}
+
+// 6. ride re-pick between places (keyboard), place intro, auto-start
+{
+  const { ctx, p } = await fresh({}, JSON.stringify({ tutorialDone: true, ride: 'shoes', stage: 'indoor' }));
+  await p.evaluate(() => window.__aceRuns.app.debugScreen('stage'));
+  await wait(p, 500);
+  await p.evaluate(() => document.querySelector('.stages .stage-dock .btn.primary')?.focus());
+  await p.keyboard.press('Enter');
+  await wait(p, 500);
+  const rp = await p.evaluate(() => ({ s: window.__aceRuns.app.state, repick: document.querySelector('.ride')?.classList.contains('repick'), ride: window.__aceRuns.app.save.state.ride, go: document.querySelector('.ride .ride-go')?.textContent?.trim() }));
+  check('stage select Go -> ride re-pick', rp.s === 'ride' && rp.repick, JSON.stringify(rp));
+  check('last ride preselected with one-tap "Same ride!"', rp.ride === 'shoes' && /Same ride/.test(rp.go || ''), rp.go);
+  await p.evaluate(() => document.querySelector('.ride .ride-card.selected')?.focus());
+  await p.keyboard.press('d');
+  await wait(p, 300);
+  const afterD = await p.evaluate(() => ({ ride: window.__aceRuns.app.save.state.ride, go: document.querySelector('.ride .ride-go')?.textContent?.trim() }));
+  check('D picks the next ride ("Let\'s go!")', afterD.ride === 'bike' && /Let's go/.test(afterD.go || ''), JSON.stringify(afterD));
+  await p.keyboard.press('a');
+  await wait(p, 300);
+  check('A picks it back ("Same ride!")', (await p.evaluate(() => window.__aceRuns.app.save.state.ride)) === 'shoes' && /Same ride/.test((await p.locator('.ride .ride-go').textContent()) || ''));
+  await p.keyboard.press('Enter');
+  await wait(p, 500);
+  const it = await p.evaluate(() => ({ s: window.__aceRuns.app.state, name: document.querySelector('.intro .intro-name')?.textContent }));
+  check('Enter on the picked ride -> place intro', it.s === 'intro' && it.name === 'Indoor playground', JSON.stringify(it));
+  await p.keyboard.press('Escape');
+  await wait(p, 450);
+  check('Esc on intro -> back to the ride re-pick', (await state(p)) === 'ride' && (await p.evaluate(() => document.querySelector('.ride').classList.contains('repick'))));
+  await p.locator('.ride .ride-go').click();
+  await wait(p, 400);
+  check('mouse: "Same ride!" -> intro', (await state(p)) === 'intro');
+  await p.waitForFunction(() => window.__aceRuns.app.state === 'run', null, { timeout: 9000 }).catch(() => {});
+  check('intro auto-starts the run', (await state(p)) === 'run');
+  await ctx.close();
+}
+
+// 7. results "Next place" goes through the ride re-pick; touch "Same ride!"
+{
+  const { ctx, p } = await fresh({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true }, JSON.stringify({ tutorialDone: true, ride: 'scooter' }));
+  await p.evaluate(() => window.__aceRuns.app.debugResults({ stage: 'indoor', mode: 'adventure', character: 'ciela', ride: 'scooter', distance: 1500, goal: 1500, finished: true, timeSec: 90, score: 1, healthy: { carrot: 2 }, junk: {}, healthyTotal: 2, junkTotal: 0, nearMisses: 0, bumps: 0, bestGlowLevel: 2, happyAndHealthy: 0, sectionsSeen: [], seasonsSeen: [], stars: 2 }));
+  await wait(p, 1200);
+  await p.locator('.results .btn.accent').tap();
+  await wait(p, 500);
+  const r = await p.evaluate(() => ({ s: window.__aceRuns.app.state, pend: window.__aceRuns.app.pendingRun(), go: document.querySelector('.ride .ride-go')?.textContent?.trim() }));
+  check('results "Next place" -> ride re-pick for the next place', r.s === 'ride' && r.pend?.stage === 'arcade' && /Same ride/.test(r.go || ''), JSON.stringify(r));
+  await p.locator('.ride .ride-go').tap();
+  await wait(p, 450);
+  check('touch: "Same ride!" -> intro', (await state(p)) === 'intro');
+  await p.locator('.intro .intro-go').tap();
+  await wait(p, 900);
+  check('touch: intro Go -> run', (await state(p)) === 'run');
+  await ctx.close();
+}
+
+// 8. warm-up overlay + guided routine + cool-down + settings toggle (fake engine only)
+{
+  const { ctx, p } = await fresh({}, JSON.stringify({ tutorialDone: true }));
+  const isFake = await p.evaluate(() => !!window.__aceRuns.fake);
+  if (isFake) {
+    await p.evaluate(() => window.__aceRuns.app.debugScreen('character'));
+    await wait(p, 500);
+    const idle = await p.evaluate(() => window.__aceRuns.fake.menuMove);
+    check('warm-up idle loop plays a glowing move on the pickers', !!idle.move && idle.glow, JSON.stringify(idle));
+    await p.locator('.character .stretch-btn').click();
+    await wait(p, 2300);
+    const g = await p.evaluate(() => ({ panel: !document.querySelector('.character .count-panel').classList.contains('hidden'), move: window.__aceRuns.fake.menuMove.move, btn: document.querySelector('.character .stretch-btn').textContent.trim() }));
+    check('"Stretch with me!" starts the count-along', g.panel && g.move === 'look' && g.btn === 'Stop', JSON.stringify(g));
+    await p.locator('.character .kid-card.ciela').click();
+    await wait(p, 300);
+    check('choosing still works during the routine', (await p.evaluate(() => window.__aceRuns.app.save.state.character)) === 'ciela' && (await p.evaluate(() => window.__aceRuns.app.warmGuided())));
+    await p.locator('.character .dock .btn').click();
+    await wait(p, 500);
+    check('routine carries on to the ride picker', (await state(p)) === 'ride' && (await p.evaluate(() => !document.querySelector('.ride .count-panel').classList.contains('hidden'))));
+    await p.locator('.ride .stretch-btn').click();
+    await wait(p, 300);
+    check('Stop ends the routine any time', !(await p.evaluate(() => window.__aceRuns.app.warmGuided())) && (await p.evaluate(() => document.querySelector('.ride .count-panel').classList.contains('hidden'))));
+    // cool-down after a finished run, Skip -> results
+    await p.evaluate(async () => {
+      await window.__aceRuns.app.startRunDirect({ stage: 'indoor', mode: 'adventure', character: 'ace', ride: 'shoes', skipCountdown: true });
+      window.__aceRuns.fake.finish({ finished: true, stars: 3 });
+    });
+    await p.waitForFunction(() => window.__aceRuns.app.state === 'cooldown', null, { timeout: 5000 }).catch(() => {});
+    check('finish -> cool-down', (await state(p)) === 'cooldown');
+    await wait(p, 2200);
+    check('cool-down holds a stretch', (await p.evaluate(() => window.__aceRuns.fake.menuMove.move)) === 'reach_sky');
+    await p.locator('.cooldown .cool-skip').click();
+    await wait(p, 500);
+    check('Skip -> results', (await state(p)) === 'results');
+    // auto-advance
+    await p.evaluate(() => window.__aceRuns.app.debugCooldown({ stage: 'indoor', mode: 'adventure', character: 'ace', ride: 'shoes', distance: 1500, goal: 1500, finished: true, timeSec: 90, score: 1, healthy: {}, junk: {}, healthyTotal: 0, junkTotal: 0, nearMisses: 0, bumps: 0, bestGlowLevel: 0, happyAndHealthy: 0, sectionsSeen: [], seasonsSeen: [], stars: 1 }, 5));
+    await p.waitForFunction(() => window.__aceRuns.app.state === 'results', null, { timeout: 14000 }).catch(() => {});
+    check('cool-down auto-advances to results', (await state(p)) === 'results');
+    // settings: stretches off -> plain idle, no cool-down
+    await p.evaluate(() => window.__aceRuns.app.debugScreen('title'));
+    await p.evaluate(() => window.__aceRuns.app.debugScreen('settings'));
+    await wait(p, 450);
+    const tg = p.locator('.settings .toggle-row', { hasText: 'stretches' });
+    check('settings toggle defaults ON', (await tg.getAttribute('aria-checked')) === 'true');
+    await tg.click();
+    await wait(p, 200);
+    check('toggle persists OFF in the save', (await p.evaluate(() => JSON.parse(localStorage.getItem('ace-runs-save-v1')).settings.stretches)) === false);
+    await p.keyboard.press('Escape');
+    await p.evaluate(() => window.__aceRuns.app.debugScreen('character'));
+    await wait(p, 500);
+    const off = await p.evaluate(() => ({ move: window.__aceRuns.fake.menuMove.move, hidden: document.querySelector('.character .warm').classList.contains('hidden') }));
+    check('stretches off: plain idle, no warm-up widget', off.move === null && off.hidden, JSON.stringify(off));
+    await p.evaluate(async () => {
+      await window.__aceRuns.app.startRunDirect({ stage: 'indoor', mode: 'adventure', character: 'ace', ride: 'shoes', skipCountdown: true });
+      window.__aceRuns.fake.finish({ finished: true });
+    });
+    await p.waitForFunction(() => window.__aceRuns.app.state === 'results', null, { timeout: 5000 }).catch(() => {});
+    check('stretches off: finish goes straight to results', (await state(p)) === 'results');
+  }
+  await ctx.close();
 }
 
 await browser.close();

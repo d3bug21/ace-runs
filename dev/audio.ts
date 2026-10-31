@@ -57,7 +57,7 @@ button(ctl, 'duck 0.5', (b) => {
 button(ctl, 'suspend', () => am.suspend());
 button(ctl, 'resume', () => am.resume());
 
-for (const sp of ['ace', 'moana', 'narrator'] as Speaker[]) {
+for (const sp of ['ace', 'ciela', 'narrator'] as Speaker[]) {
   const row = section(`voice: ${sp}`);
   for (const g of am.voiceGroupsOf(sp)) button(row, g, () => am.playVoice(sp, g, { priority: true }));
 }

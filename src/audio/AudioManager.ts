@@ -12,7 +12,7 @@ import manifestJson from './manifest.json';
 //   timer-free, and unaffected by suspend()/background tabs.
 
 export type Bus = 'music' | 'voice' | 'sfx';
-export type Speaker = 'ace' | 'moana' | 'narrator';
+export type Speaker = 'ace' | 'ciela' | 'narrator';
 export type AudioKind = 'voice' | 'sfx' | 'ambience' | 'music';
 
 export interface AudioEntry {
@@ -424,7 +424,7 @@ export class AudioManager {
     }
     const head = sel.slice(0, colon);
     const re = globToRegExp(sel.slice(colon + 1) || '*');
-    const isSpeaker = head === 'ace' || head === 'moana' || head === 'narrator';
+    const isSpeaker = head === 'ace' || head === 'ciela' || head === 'narrator';
     const isKind = head === 'sfx' || head === 'music' || head === 'ambience' || head === 'voice';
     for (const e of this.entries.values()) {
       if (isSpeaker) {
@@ -702,7 +702,7 @@ export class AudioManager {
       this.narratorQueue = [];
       this.narratorBusy = false;
       this.narratorToken++;
-      for (const s of ['ace', 'moana', 'narrator'] as Speaker[]) this.stopSpeaker(s);
+      for (const s of ['ace', 'ciela', 'narrator'] as Speaker[]) this.stopSpeaker(s);
     } catch {
       /* ignore */
     }

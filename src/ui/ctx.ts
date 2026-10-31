@@ -3,6 +3,7 @@ import type { CharacterId, RideId, RunMode, StageId } from '../contracts';
 import type { SaveData } from '../app/Save';
 import type { DeviceInfo } from '../app/Device';
 import type { AudioPort, Speaker } from '../app/types';
+import type { WarmupView } from './Stretch';
 
 export type UiSound = 'click' | 'back' | 'select' | 'unlock' | 'page' | 'star';
 
@@ -27,4 +28,10 @@ export interface AppApi {
   startTutorial(): void;
   startStage(stage: StageId, mode: RunMode): void;
   quitApp(): void;
+  /** v1.0.1 warm-up: a new view wired to the shared warm-up controller. */
+  newWarmView(): WarmupView;
+  /** Guided "Stretch with me!" routine is running. */
+  warmGuided(): boolean;
+  /** A place picked on the stage select / "Next place", waiting for the ride re-pick + intro. */
+  pendingRun(): { stage: StageId; mode: RunMode } | null;
 }

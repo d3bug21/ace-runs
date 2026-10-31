@@ -127,6 +127,13 @@ export class Face {
   private whites!: THREE.Mesh;
   private hidden = false;
   private brows: THREE.Mesh[] = [];
+  /** Max brow-local raise so the brow tops stay under the fringe (null = no fringe). */
+  private browRoom: number | null = null;
+  /** Brow base top height in head space (for the guard + debug checks). */
+  static readonly BROW_Y = 0.092;
+  static readonly BROW_HALF = 0.027;
+  static readonly BROW_TOP = 0.092 + 0.004 + 0.0125;
+  private happy: FaceParams;
   private cheeks: THREE.Mesh[] = [];
   private cur: FaceParams = { ...BASE };
   private tgt: FaceParams = { ...BASE };
@@ -149,7 +156,14 @@ export class Face {
   private toothTop = new Float32Array(TEETH * (K_TOOTH + 1));
   private rnd: () => number;
 
-  constructor(private spec: CharSpec, head: THREE.Group, headParts: Parts, seed: number) {
+  /**
+   * @param browCeil head-space height (relative to the head centre) that the brows must stay under,
+   *   e.g. the bottom of a fringe. Expressions are clamped so brows never touch it.
+   */
+  constructor(private spec: CharSpec, head: THREE.Group, headParts: Parts, seed: number, browCeil: number | null = null) {
+    // Ciela's everyday face is a warm, slightly bigger smile with smiling eyes
+    this.happy = spec.id === 'ciela' ? { ...EXPR.happy, hw: 0.06, c: 0.031, o: 0.007, lid: 0.12, cheek: 1.05, browY: 0.002 } : EXPR.happy;
+    if (browCeil !== null) this.browRoom = browCeil - 0.007 - Face.BROW_TOP;
     const m = sharedMats();
     let s = seed >>> 0;
     this.rnd = () => {
@@ -164,8 +178,8 @@ export class Face {
       surf(side * EYE.x, EYE.y, -0.011, pos, q);
       // sclera (static, merged into the head)
       whites.addQ(U.sphere(14, 10), 0xffffff, pos, q, [EYE.w, EYE.h, EYE.d]);
-      // Moana: little lash flicks at the outer top corner
-      if (spec.id === 'moana') {
+      // Ciela: little lash flicks at the outer top corner
+      if (spec.id === 'ciela') {
         for (let i = 0; i < 2; i++) {
           const lp = new THREE.Vector3(side * (EYE.w * (0.78 + i * 0.16)), EYE.h * (0.62 - i * 0.28), -EYE.d * 0.6).applyQuaternion(q).add(pos);
           const lq = q.clone().multiply(new THREE.Quaternion().setFromEuler(new THREE.Euler(0, 0, side * (-0.9 - i * 0.35))));
@@ -228,7 +242,7 @@ export class Face {
       bg.position.copy(pos);
       bg.quaternion.copy(q);
       head.add(bg);
-      const thick = spec.id === 'moana' ? 0.0125 : 0.011;
+      const thick = spec.id === 'ciela' ? 0.0125 : 0.011;
       const b = new Parts()
         .limb(spec.brow, [-0.027, -0.003, 0], [0, 0.004, -0.002], thick, 0, 8)
         .limb(spec.brow, [0, 0.004, -0.002], [0.027, -0.003, 0], thick, 0, 8)
@@ -371,7 +385,7 @@ export class Face {
   }
 
   update(dt: number, t: number, expr: Expression): void {
-    const base = EXPR[expr];
+    const base = expr === 'happy' ? this.happy : EXPR[expr];
     const tg = this.tgt;
     for (const k of KEYS) tg[k] = base[k];
     // Teeth effects: everyday smile becomes a toothy one so the effect reads.
@@ -468,7 +482,13 @@ export class Face {
       const b = this.brows[i];
       const side = i === 0 ? -1 : 1;
       const tilt = cur.browTilt * (side > 0 ? 1 : -0.4);
-      b.position.y = cur.browY + tilt + (lidClose > 0.9 && sq < 0.5 ? -0.004 : 0);
+      let by = cur.browY + tilt + (lidClose > 0.9 && sq < 0.5 ? -0.004 : 0);
+      if (this.browRoom !== null) {
+        // fringe guard: the raised inner end (rotation) also counts toward the brow top
+        const lift = Face.BROW_HALF * Math.abs(Math.sin(cur.browA));
+        by = Math.min(by, this.browRoom - lift);
+      }
+      b.position.y = by;
       b.rotation.z = -side * cur.browA;
     }
     // ----- cheeks
@@ -476,6 +496,13 @@ export class Face {
     // ----- mouth
     this.updateMouth(t);
     if (this.hidden) for (const o of this.meshes) o.visible = false;
+  }
+
+  /** Debug: highest brow top (head space, relative to the head centre) right now. */
+  browTop(): number {
+    let m = -1;
+    for (const b of this.brows) m = Math.max(m, Face.BROW_TOP + b.position.y + Face.BROW_HALF * Math.abs(Math.sin(b.rotation.z)));
+    return m;
   }
 
   /** Full-body blink support: hides every face mesh until shown again. */

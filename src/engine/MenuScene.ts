@@ -1,6 +1,7 @@
 // 3D backdrop behind the menus: the kids on a sunny podium with floating food friends.
 import * as THREE from 'three';
-import type { Avatar, AvatarMotion, CharacterId, RideId, StageId } from '../contracts';
+import type { AnchorName, Avatar, AvatarMotion, CharacterId, RideId, StageId, StretchMove } from '../contracts';
+import { MOVE_PARTS } from '../contracts';
 import { blobShadow, damp, geo, mat, PAL } from '../kit/kit';
 import type { MenuSceneOptions } from './api';
 import { createAvatar, createFoodModel } from './modules';
@@ -50,6 +51,12 @@ export class MenuScene {
   private confettiState: { p: THREE.Vector3; v: THREE.Vector3; r: number }[] = [];
   private dummy = new THREE.Object3D();
   aspect = 1;
+  /** Optional pose override for cover-art captures (e.g. { flex: 1 }). */
+  poseOverride: Partial<AvatarMotion> | null = null;
+  private stretch: { move: StretchMove; t0: number; glow: boolean; side: 1 | -1 } | null = null;
+  private glows: THREE.Sprite[] = [];
+  private glowTex: THREE.CanvasTexture | null = null;
+  private tmpGlowDir = new THREE.Vector3();
 
   constructor() {
     this.bgCanvas.width = 4;
@@ -144,7 +151,7 @@ export class MenuScene {
     const prevView = this.opts.view;
     this.opts = o;
     const both = o.view === 'title' || o.view === 'character';
-    const other: CharacterId = o.character === 'ace' ? 'moana' : 'ace';
+    const other: CharacterId = o.character === 'ace' ? 'ciela' : 'ace';
     const main = this.ensure(o.character, o.view === 'title' || o.view === 'character' ? 'shoes' : o.ride);
     main.target.set(both ? (o.character === 'ace' ? -0.95 : 0.95) : 0, 0, both ? 0.35 : 0);
     main.targetRot = both ? (o.character === 'ace' ? 0.25 : -0.25) : 0;
@@ -173,6 +180,37 @@ export class MenuScene {
     this.bgTarget = [new THREE.Color(top), new THREE.Color(bottom)];
   }
 
+  /** Play a stretch on the visible kids (null = idle). Restarts the move clock. */
+  setMove(move: StretchMove | null, opts: { glow?: boolean; side?: 1 | -1 } = {}): void {
+    this.stretch = move ? { move, t0: this.t, glow: opts.glow !== false, side: opts.side ?? 1 } : null;
+  }
+
+  private glowSprite(i: number): THREE.Sprite {
+    if (!this.glowTex) {
+      const c = document.createElement('canvas');
+      c.width = c.height = 64;
+      const g = c.getContext('2d')!;
+      const grd = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+      grd.addColorStop(0, 'rgba(255,214,120,0.95)');
+      grd.addColorStop(0.45, 'rgba(255,170,90,0.45)');
+      grd.addColorStop(1, 'rgba(255,150,80,0)');
+      g.fillStyle = grd;
+      g.fillRect(0, 0, 64, 64);
+      this.glowTex = new THREE.CanvasTexture(c);
+      this.glowTex.colorSpace = THREE.SRGBColorSpace;
+    }
+    let sp = this.glows[i];
+    if (!sp) {
+      // Depth-tested and placed just behind the body part, so it reads as a soft warm rim (halo) around the
+      // kid's silhouette and never washes over the face or body.
+      sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: this.glowTex, transparent: true, depthWrite: false, depthTest: true, blending: THREE.AdditiveBlending }));
+      sp.renderOrder = 0;
+      this.scene.add(sp);
+      this.glows[i] = sp;
+    }
+    return sp;
+  }
+
   /** Celebrate with confetti. */
   burst(): void {
     for (const c of this.confettiState) {
@@ -197,9 +235,34 @@ export class MenuScene {
       const rot = turntable ? Math.PI + Math.sin(t * 0.45) * 0.7 : Math.PI + s.targetRot;
       r.rotation.y = damp(r.rotation.y, rot, 4, dt);
       s.celebrate = damp(s.celebrate, s.celebrateTarget, 4, dt);
-      s.avatar.update(idleMotion(t, dt, s.celebrate));
+      const base = idleMotion(t, dt, s.celebrate);
+      if (this.stretch) base.stretch = { move: this.stretch.move, t: t - this.stretch.t0, side: this.stretch.side };
+      s.avatar.update(this.poseOverride ? { ...base, ...this.poseOverride } : base);
       s.shadow.position.set(r.position.x, 0.06, r.position.z);
     }
+    // Warm glow on the body parts a warm-up / cool-down move is working.
+    let gi = 0;
+    const glowDir = this.tmpGlowDir;
+    if (this.stretch && this.stretch.glow) {
+      const parts = MOVE_PARTS[this.stretch.move] as AnchorName[];
+      const pulse = 0.75 + 0.25 * Math.sin(t * 4);
+      const fadeIn = Math.min(1, (t - this.stretch.t0) / 0.6);
+      for (const sl of this.slots.values()) {
+        if (!sl.avatar.root.visible) continue;
+        for (const part of parts) {
+          const sp = this.glowSprite(gi++);
+          sl.avatar.anchor(part).getWorldPosition(sp.position);
+          // Push the halo away from the camera (behind the part) so the kid stays crisp in front of it.
+          glowDir.copy(sp.position).sub(this.camera.position).normalize();
+          sp.position.addScaledVector(glowDir, part === 'head' ? 0.42 : 0.3);
+          const size = part === 'head' ? 1.4 : part === 'chest' || part === 'tummy' || part === 'back' ? 0.95 : 0.7;
+          sp.scale.setScalar(size * pulse);
+          (sp.material as THREE.SpriteMaterial).opacity = 0.7 * fadeIn;
+          sp.visible = true;
+        }
+      }
+    }
+    for (; gi < this.glows.length; gi++) this.glows[gi].visible = false;
     for (const f of this.foods) {
       const a = f.a + t * f.s;
       // A gentle ellipse BEHIND the kids so food friends never swing up to the camera.
@@ -244,7 +307,7 @@ export class MenuScene {
         pos.set(-1.4, 1.7, 5.4);
         look.set(-0.9, 0.85, 0);
       }
-    } else if (v === 'results') {
+    } else if (v === 'results' || v === 'cooldown') {
       if (portrait) {
         // Results sheet fills the lower ~70%: frame the cheering kid in the top band.
         pos.set(0, 2.3, 8.2);

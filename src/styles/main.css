@@ -133,7 +133,7 @@ html.kbd .btn:focus, html.kbd .btn:focus-visible { outline: 4px solid var(--sea)
 .boot-logo .logo { width: min(440px, 78vw, calc(var(--app-h) * 0.62)); height: auto; filter: drop-shadow(0 8px 0 rgba(36, 48, 74, 0.12)) drop-shadow(0 14px 22px rgba(36, 48, 74, 0.2)); }
 .boot-kids { display: flex; gap: 14px; }
 .kid-bubble { width: clamp(64px, 14vmin, 104px); height: clamp(64px, 14vmin, 104px); border-radius: 50%; background: var(--paper); box-shadow: var(--shadow-s); padding: 6px; overflow: hidden; animation: bob 2.4s ease-in-out infinite; }
-.kid-bubble.ace { border: 4px solid var(--teal); } .kid-bubble.moana { border: 4px solid var(--coral); animation-delay: -1.2s; }
+.kid-bubble.ace { border: 4px solid var(--teal); } .kid-bubble.ciela { border: 4px solid var(--lilac); animation-delay: -1.2s; }
 @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
 .boot-load { display: flex; flex-direction: column; align-items: center; gap: 10px; min-height: 76px; }
 .loadbar { width: min(300px, 70vw); height: 16px; border-radius: 99px; background: rgba(255, 255, 255, 0.6); box-shadow: inset 0 2px 4px rgba(36, 48, 74, 0.14); overflow: hidden; }
@@ -181,7 +181,10 @@ html.landscape.vh-short .title-dock .row { flex-wrap: nowrap; }
 /* character: landscape flanks the two kids in the 3D backdrop; portrait = cards below them */
 .kids { justify-content: space-between; align-items: center; padding: 0 1%; }
 .kid-card { width: clamp(130px, 22vw, 13rem); }
-.kid-card.ace { --accent: var(--teal); } .kid-card.moana { --accent: var(--coral); }
+.pick-card .pick-art { position: relative; }
+.kid-shoe { position: absolute; right: -13%; bottom: -10%; width: 34%; aspect-ratio: 1; padding: 3%; border-radius: 50%; background: color-mix(in srgb, var(--accent) 24%, #fff); border: 3px solid #fff; box-shadow: 0 3px 8px rgba(36, 48, 74, 0.18); transform: rotate(-8deg); }
+.kid-card.selected .kid-shoe { animation: wiggle 0.5s var(--ease-pop) 0.1s; }
+.kid-card.ace { --accent: var(--teal); } .kid-card.ciela { --accent: #9b7fe0; }
 html.portrait .kids { align-items: flex-end; justify-content: center; gap: 16px; }
 html.portrait .kid-card { width: min(170px, 42vw, calc(var(--app-h) * 0.22)); }
 html.landscape.vh-short .kid-card { width: min(170px, calc(var(--app-h) * 0.44)); padding: 8px 10px; }
@@ -706,3 +709,143 @@ html.landscape.vh-short .dock { padding-top: 6px; }
 html.reduced *, html.reduced *::before, html.reduced *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
 html.reduced .rf { opacity: 1; transform: none; }
 .best-adv { color: var(--ink-2); }
+
+/* ================================================================== v1.0.1 warm-up / ride re-pick / intro / cool-down */
+/* --- warm-up widget (sun meter + ready badge + "Stretch with me!") and the count-along panel */
+.warm { position: absolute; inset: 0; pointer-events: none; }
+.warm-widget { position: absolute; right: var(--pr); top: calc(var(--pt) + 62px); display: flex; align-items: center; gap: 6px; padding: 4px 4px 4px 6px; border-radius: 99px; background: rgba(255, 252, 244, 0.88); box-shadow: var(--shadow-s); pointer-events: none; }
+html.landscape .warm-widget { top: var(--pt); }
+.warm-widget .btn { pointer-events: auto; }
+.warm-sun { width: 42px; height: 42px; display: block; --warm: 0; }
+.warm-sun .sun { width: 100%; height: 100%; transform: rotate(-90deg); }
+.warm-sun .sun-track { fill: none; stroke: #efe6d6; stroke-width: 5; }
+.warm-sun .sun-fill { fill: none; stroke: #ff9a3c; stroke-width: 5; stroke-linecap: round; transition: stroke-dashoffset 0.3s linear; }
+.warm-sun .sun-core { fill: color-mix(in srgb, #ffc94a calc(var(--warm) * 100%), #f3e6cc); transition: fill 0.3s; }
+.warm-sun .sun-face { stroke: #a5600f; transform: rotate(90deg); transform-origin: 24px 24px; }
+.ready-badge { display: inline-flex; align-items: center; gap: 4px; padding-right: 4px; font-weight: 700; color: #a5600f; font-size: 0.95rem; }
+.ready-badge .bolt { width: 40px; height: 40px; filter: drop-shadow(0 0 8px rgba(255, 201, 74, 0.8)); }
+.ready-badge.pop { animation: starPop 0.6s var(--ease-pop); }
+.btn.stretch-btn { min-height: 48px; padding: 0.4em 0.95em 0.4em 0.75em; font-size: 0.95rem; background: var(--mint); color: #13574f; box-shadow: 0 4px 0 #4fb8a0, 0 6px 12px rgba(36, 48, 74, 0.14); }
+.btn.stretch-btn.on { background: var(--paper); color: var(--ink); box-shadow: 0 4px 0 #e3d4b9; }
+.btn.stretch-btn .g { width: 1.2em; height: 1.2em; }
+.count-panel {
+  position: absolute; left: 0; right: 0; margin-inline: auto; width: max-content; max-width: min(430px, calc(100% - 24px));
+  top: calc(var(--pt) + 120px); pointer-events: none; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; grid-template-areas: 'fig main count' 'prog prog prog';
+  align-items: center; gap: 2px 10px; padding: 8px 14px 8px 8px; border-radius: 24px; background: rgba(255, 252, 244, 0.92); box-shadow: var(--shadow); animation: bubbleIn 0.35s var(--ease-pop) both;
+}
+html.landscape .count-panel { top: calc(var(--pt) + 64px); }
+.cp-fig { grid-area: fig; width: 50px; height: 50px; display: block; }
+.cp-fig .part-fig, .cp-fig .bolt { width: 100%; height: 100%; }
+.cp-main { grid-area: main; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.cp-name { font-weight: 700; font-size: 1.05rem; line-height: 1.1; }
+.cp-dots { display: flex; gap: 6px; }
+.cp-dots i { width: 14px; height: 14px; border-radius: 50%; background: #e9dfcc; transition: background 0.2s, transform 0.2s var(--ease-pop); }
+.cp-dots i.on { background: var(--sun); transform: scale(1.15); box-shadow: 0 0 0 2px #fff, 0 0 8px rgba(255, 201, 74, 0.8); }
+.cp-count { grid-area: count; min-width: 1.4em; text-align: center; font-size: 2.6rem; font-weight: 700; line-height: 1; color: var(--coral); text-shadow: 0 3px 0 var(--coral-d); }
+.cp-count.tick { animation: cdPop 0.5s var(--ease-pop); }
+.cp-prog { grid-area: prog; display: flex; gap: 4px; justify-content: center; padding-top: 4px; }
+.cp-prog i { width: 22px; height: 6px; border-radius: 3px; background: #e9dfcc; }
+.cp-prog i.now { background: var(--sun); }
+.cp-prog i.done { background: var(--teal); }
+/* keep the panel between the flanking kid cards (landscape character) / beside the ride cards */
+html.landscape .character .count-panel { max-width: min(430px, calc(100% - 2 * clamp(130px, 22vw, 13rem) - 72px)); }
+html.landscape.vh-short .character .count-panel { max-width: min(430px, calc(100% - 2 * min(170px, calc(var(--app-h) * 0.44)) - 72px)); }
+html.landscape .ride .count-panel { left: auto; right: var(--pr); margin: 0; max-width: min(400px, calc(100% - min(400px, 46vw) - 64px)); }
+html.landscape.vh-short .ride .count-panel { max-width: min(400px, calc(100% - min(360px, 44vw) - 56px)); }
+html.landscape .intro .count-panel { right: auto; left: var(--pl); margin: 0; max-width: min(400px, calc(100% - min(46%, 27rem) - 64px)); }
+html.landscape.vh-short .count-panel { padding: 5px 12px 5px 6px; gap: 0 8px; }
+html.landscape.vh-short .cp-fig { width: 40px; height: 40px; }
+html.landscape.vh-short .cp-count { font-size: 2rem; }
+html.landscape.vh-short .cp-name { font-size: 0.95rem; }
+html.vw-narrow .btn.stretch-btn { font-size: 0.88rem; padding-left: 0.6em; padding-right: 0.7em; }
+html.reduced .count-panel, html.reduced .cp-count.tick { animation: none; }
+
+/* --- ride re-pick: destination chip + big one-tap "Same ride!" */
+.ride-dock { flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 10px 12px; }
+.dest { display: inline-flex; align-items: center; gap: 8px; padding: 4px 14px 4px 4px; border-radius: 99px; background: rgba(255, 252, 244, 0.92); box-shadow: var(--shadow-s); font-weight: 600; pointer-events: none !important; max-width: 100%; }
+.dest-art { width: 48px; aspect-ratio: 3 / 2; border-radius: 12px; overflow: hidden; border: 2px solid var(--accent); flex: none; }
+.dest-art .scene { width: 100%; height: 100%; }
+.dest-name { display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dest-name .g { color: var(--teal-d); }
+.btn.ride-go .go-ride { width: 1.7em; height: 1.7em; display: block; margin: -0.2em 0; }
+.btn.ride-go .go-ride .ico { width: 100%; height: 100%; }
+.btn.ride-go.same { animation: sameGlow 1.8s ease-in-out infinite; }
+@keyframes sameGlow { 0%, 100% { box-shadow: 0 5px 0 var(--sun-d), 0 10px 20px rgba(200, 130, 20, 0.28), 0 0 0 0 rgba(255, 201, 74, 0); } 50% { box-shadow: 0 5px 0 var(--sun-d), 0 10px 20px rgba(200, 130, 20, 0.28), 0 0 0 8px rgba(255, 201, 74, 0.35); } }
+html.landscape .picker.ride .ride-dock { justify-content: flex-start; width: min(400px, 46vw); padding-left: 0 !important; }
+html.landscape.vh-short .picker.ride .ride-dock { width: min(360px, 44vw); flex-wrap: nowrap; }
+html.landscape.vh-short .picker.ride.repick .dest { display: none; }
+html.landscape .picker.ride.repick .dock { padding-left: 0; }
+html.landscape.vh-short .btn.ride-go.huge { min-height: 54px; font-size: 1.25rem; padding: 0.4em 1.2em; }
+html.portrait .picker.ride .ride-dock .dest { flex: 1 1 100%; justify-content: center; max-width: max-content; }
+html.vw-narrow .btn.ride-go.huge { font-size: 1.3rem; }
+
+/* --- place intro */
+.intro { justify-content: space-between; align-items: center; }
+.intro-card { pointer-events: auto; margin-top: auto; display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-areas: 'art info' 'go go'; align-items: center; gap: 12px 14px; width: min(560px, 100%); padding: 14px; border-radius: 30px; background: var(--paper); border: 4px solid #fff; box-shadow: var(--shadow); animation: popIn 0.4s var(--ease-pop) both; }
+.intro-art { grid-area: art; display: block; width: clamp(110px, 32vw, 180px); aspect-ratio: 3 / 2; border-radius: 18px; overflow: hidden; border: 3px solid var(--accent, var(--teal)); }
+.intro-art .scene { width: 100%; height: 100%; }
+.intro-info { grid-area: info; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.intro-name { margin: 0; font-size: 1.6rem; line-height: 1.05; }
+.intro-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.intro-chips .chip { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 99px; background: var(--cream); font-weight: 600; font-size: 0.9rem; }
+.intro-chips .chip .g { width: 1.05em; height: 1.05em; color: var(--sun-d); }
+.chip-ic { width: 26px; height: 26px; display: block; }
+.btn.intro-go { grid-area: go; position: relative; overflow: hidden; width: 100%; }
+.auto-bar { position: absolute; left: 0; bottom: 0; height: 6px; width: 100%; background: rgba(61, 42, 8, 0.25); transform-origin: left; transform: scaleX(0); }
+html.landscape .intro { align-items: flex-end; justify-content: center; }
+html.landscape .intro .topbar { position: absolute; left: var(--pl); right: var(--pr); top: var(--pt); }
+html.landscape .intro-card { margin-top: 0; width: min(46%, 27rem); grid-template-columns: 1fr; grid-template-areas: 'art' 'info' 'go'; }
+html.landscape .intro-art { width: 100%; max-height: calc(var(--app-h) * 0.32); }
+html.landscape.vh-short .intro-card { grid-template-columns: auto minmax(0, 1fr); grid-template-areas: 'art info' 'go go'; padding: 10px; gap: 8px 10px; margin-top: 54px; }
+html.landscape.vh-short .intro-art { width: min(130px, 18vw); }
+html.landscape.vh-short .intro-name { font-size: 1.25rem; }
+
+/* --- cool-down card (framed like results: landscape right, portrait bottom sheet) */
+.cooldown { justify-content: flex-end; align-items: center; }
+html.landscape .cooldown { justify-content: center; align-items: flex-end; }
+.cool-card { pointer-events: auto; display: flex; flex-direction: column; gap: 8px; width: min(520px, 100%); padding: 14px 16px 12px; border-radius: 30px; background: var(--paper); border: 4px solid #fff; box-shadow: var(--shadow); --soft: 0; --beat: 0.34s; --bendy: 0; animation: popIn 0.4s var(--ease-pop) both; }
+html.landscape .cool-card { width: min(46%, 30rem); }
+.cool-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.cool-title { margin: 0; display: flex; align-items: center; gap: 6px; font-size: 1.35rem; color: var(--teal-d); }
+.cool-title .g { color: var(--sun-d); }
+.cool-steps { display: flex; gap: 5px; }
+.cool-steps i { width: 12px; height: 12px; border-radius: 50%; background: #e9dfcc; }
+.cool-steps i.now { background: var(--sun); box-shadow: 0 0 0 3px rgba(255, 201, 74, 0.35); }
+.cool-steps i.done { background: var(--teal); }
+.cool-body { display: flex; align-items: center; justify-content: center; gap: 16px; }
+.hold { position: relative; width: clamp(96px, 16vmin, 132px); aspect-ratio: 1; flex: none; }
+.hold-ring { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg); }
+.hold-ring circle { fill: none; stroke-width: 9; }
+.hold-ring .hr-bg { stroke: #ece3d2; fill: #fff; }
+.hold-ring .hr-fg { stroke: var(--teal); stroke-linecap: round; }
+.hold-fig { position: absolute; inset: 18%; transition: opacity 0.3s; }
+.hold-fig .part-fig { width: 100%; height: 100%; }
+.breathe-bubble { position: absolute; inset: 14%; display: grid; place-items: center; opacity: 0; transition: opacity 0.4s; pointer-events: none; }
+.breathe-bubble i { position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(circle at 40% 35%, #e6fbf5, #7fdcc0); box-shadow: 0 0 0 4px rgba(127, 220, 192, 0.35); transform: scale(0.7); transition: transform 2.5s ease-in-out; }
+.breathe-bubble span { position: relative; font-weight: 700; font-size: 0.9rem; color: #13574f; text-align: center; line-height: 1.05; }
+.breathe-bubble.on { opacity: 1; }
+.breathe-bubble.on.in i { transform: scale(1.12); }
+.breathe-bubble.on.out i { transform: scale(0.72); }
+.hold:has(.breathe-bubble.on) .hold-fig { opacity: 0; }
+.benefits { display: flex; gap: 10px; }
+.ben { display: flex; flex-direction: column; align-items: center; gap: 2px; width: 64px; }
+.ben small { font-size: 0.72rem; color: var(--ink-2); text-align: center; line-height: 1.05; }
+.ben-ic { width: 46px; height: 46px; display: grid; place-items: center; border-radius: 16px; background: #fff; box-shadow: 0 3px 0 #ece2cf; }
+.ben-ic svg { width: 34px; height: 34px; }
+.b-heart .ben-ic svg { animation: beat var(--beat) ease-in-out infinite; }
+@keyframes beat { 0%, 100% { transform: scale(1); } 30% { transform: scale(1.18); } 55% { transform: scale(0.96); } }
+.b-muscle .m-tight { opacity: calc(1 - var(--soft)); transition: opacity 0.6s; }
+.b-muscle .m-soft { opacity: var(--soft); transition: opacity 0.6s; }
+.b-bendy .ben-ic { color: var(--sun-d); }
+.b-bendy .ben-ic svg { transform: scale(calc(0.45 + var(--bendy) * 0.7)) rotate(calc(var(--bendy) * 90deg)); opacity: calc(0.35 + var(--bendy) * 0.65); transition: transform 0.6s var(--ease-pop), opacity 0.6s; }
+.cool-card.calm .ben-ic { box-shadow: 0 3px 0 #ece2cf, 0 0 0 3px rgba(127, 220, 192, 0.5); }
+.cool-foot { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.cool-move { margin: 0; flex: 1; min-width: 0; text-align: left; font-weight: 700; font-size: 1.15rem; min-height: 1.3em; line-height: 1.15; }
+.cool-dock { flex-direction: row; justify-content: flex-end; padding-top: 0; flex: none; }
+html.landscape.vh-short .cool-card { padding: 10px 12px 8px; gap: 4px; }
+html.landscape.vh-short .hold { width: min(90px, calc(var(--app-h) * 0.27)); }
+html.landscape.vh-short .ben { width: 54px; }
+html.landscape.vh-short .ben-ic { width: 40px; height: 40px; }
+html.landscape.vh-short .cool-move { font-size: 1rem; }
+html.vw-narrow .benefits { gap: 6px; }
+html.vw-narrow .ben { width: 56px; }

@@ -192,30 +192,67 @@ export const STAGE_COLOR: Record<StageId, string> = {
 
 // ------------------------------------------------------------------ kid portraits (character cards)
 export const KID_ART: Record<CharacterId, string> = {
+  // Ace: matches his 3D look - teal cap (tilted back), brown tufts, mustard hoodie with drawstrings.
   ace: I(`
-    <circle cx="32" cy="34" r="19" fill="#f3c29b"/>
-    <path d="M13.5 30c0-11 8-18 18.5-18s18.5 7 18.5 18c-3-5-7-7.5-11-8 1 2 1 4 0 5-4-4-11-6-17-4-4 1.6-7 4-9 7z" fill="#6b4226"/>
-    <path d="M28 12c1-3 4-5 7-4-2 1-3 2-3 4" fill="#6b4226"/>
-    <ellipse cx="13.5" cy="36" rx="3" ry="4" fill="#eab38c"/><ellipse cx="50.5" cy="36" rx="3" ry="4" fill="#eab38c"/>
-    <circle cx="25" cy="35" r="3.2" fill="${INK}"/><circle cx="39" cy="35" r="3.2" fill="${INK}"/><circle cx="26" cy="34" r="1.1" fill="#fff"/><circle cx="40" cy="34" r="1.1" fill="#fff"/>
-    <ellipse cx="20" cy="42" rx="3.6" ry="2.2" fill="#ff9a8a" opacity=".6"/><ellipse cx="44" cy="42" rx="3.6" ry="2.2" fill="#ff9a8a" opacity=".6"/>
-    <path d="M25 43c3.6 4.4 10.4 4.4 14 0z" fill="#b3473f"/><path d="M27 43.4h10" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-    <path d="M14 64c2-8 9-11 18-11s16 3 18 11z" fill="#2fb5a8"/>`, 'ico kid'),
-  moana: I(`
-    <circle cx="32" cy="13" r="10" fill="#3b2418"/><circle cx="25" cy="15" r="6" fill="#3b2418"/><circle cx="39" cy="15" r="6" fill="#3b2418"/>
-    <circle cx="40.5" cy="10" r="3.6" fill="#f0564a"/><circle cx="40.5" cy="10" r="1.3" fill="#ffe066"/>
-    <circle cx="32" cy="36" r="18.5" fill="#b9805a"/>
-    <path d="M13.5 34c0-9 7-15.5 18.5-15.5S50.5 25 50.5 34c-4-4-9-6-14-6.4-3 3-8 4.4-13 4.4-4 0-7 .6-10 2z" fill="#3b2418"/>
-    <ellipse cx="14" cy="38" rx="2.8" ry="3.8" fill="#a8714d"/><ellipse cx="50" cy="38" rx="2.8" ry="3.8" fill="#a8714d"/>
-    <circle cx="25" cy="37" r="3.2" fill="${INK}"/><circle cx="39" cy="37" r="3.2" fill="${INK}"/><circle cx="26" cy="36" r="1.1" fill="#fff"/><circle cx="40" cy="36" r="1.1" fill="#fff"/>
-    <path d="M21.5 32.6l3-1.6M42.5 32.6l-3-1.6" stroke="${INK}" stroke-width="1.4" stroke-linecap="round"/>
-    <ellipse cx="20" cy="44" rx="3.6" ry="2.2" fill="#ff8a7a" opacity=".55"/><ellipse cx="44" cy="44" rx="3.6" ry="2.2" fill="#ff8a7a" opacity=".55"/>
-    <path d="M25 45c3.6 4.4 10.4 4.4 14 0z" fill="#9c3a35"/><path d="M27 45.4h10" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-    <path d="M14 64c2-8 9-10.5 18-10.5S48 56 50 64z" fill="#ff7a6b"/><path d="M26 54l6 5 6-5" stroke="#2fb5a8" stroke-width="2.6" fill="none"/>`, 'ico kid'),
+    <path d="M11 64c2-8.5 9.5-11.5 21-11.5S51 55.5 53 64z" fill="#eebb58"/>
+    <path d="M20.5 55.2c3-2.2 7-3.2 11.5-3.2s8.5 1 11.5 3.2c-2.6 3.4-6.8 5.2-11.5 5.2s-8.9-1.8-11.5-5.2z" fill="#d3a24a"/>
+    <path d="M28.4 58.6l-.8 4.6M35.6 58.6l.8 4.6" stroke="#f6efe2" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="27.5" cy="63.6" r="1.3" fill="#f6efe2"/><circle cx="36.5" cy="63.6" r="1.3" fill="#f6efe2"/>
+    <ellipse cx="14.2" cy="39" rx="3" ry="3.9" fill="#e9b494"/><ellipse cx="49.8" cy="39" rx="3" ry="3.9" fill="#e9b494"/>
+    <circle cx="32" cy="37.5" r="17.6" fill="#f3caa6"/>
+    <path d="M15.2 33.5c.4 3 1.4 4.6 3 5.6.2-2.4.9-4 2.2-5.2zM48.8 33.5c-.4 3-1.4 4.6-3 5.6-.2-2.4-.9-4-2.2-5.2z" fill="#7a4f34"/>
+    <path d="M13.8 31.5C13.8 18.6 22 11 32 11s18.2 7.6 18.2 20.5z" fill="#5f9f99"/>
+    <path d="M32 11.2v20.3M22.5 14.6c-2.6 4.6-3.4 10.6-3.2 16.9M41.5 14.6c2.6 4.6 3.4 10.6 3.2 16.9" stroke="#4d8a84" stroke-width="1.3" fill="none"/>
+    <circle cx="32" cy="11.4" r="2.2" fill="#4d8a84"/>
+    <path d="M13.2 30.6c5.6-2.8 12-3.9 18.8-3.9s13.2 1.1 18.8 3.9c.9.5.6 2.6-.6 2.6-5.8-1.6-11.8-2.3-18.2-2.3s-12.4.7-18.2 2.3c-1.2 0-1.5-2.1-.6-2.6z" fill="#4d8a84"/>
+    <path d="M21.6 35.6q3.4-1.8 6.4-.3M42.4 35.6q-3.4-1.8-6.4-.3" stroke="#6b4530" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+    <circle cx="25" cy="39.6" r="3.2" fill="${INK}"/><circle cx="39" cy="39.6" r="3.2" fill="${INK}"/><circle cx="26.1" cy="38.5" r="1.15" fill="#fff"/><circle cx="40.1" cy="38.5" r="1.15" fill="#fff"/>
+    <ellipse cx="19.6" cy="45.4" rx="3.5" ry="2.1" fill="#f0a296" opacity=".7"/><ellipse cx="44.4" cy="45.4" rx="3.5" ry="2.1" fill="#f0a296" opacity=".7"/>
+    <path d="M24.6 45.4c3.8 5 11 5 14.8 0z" fill="#b3473f"/><path d="M26.8 45.8h10.4" stroke="#fff" stroke-width="2" stroke-linecap="round"/>`, 'ico kid'),
+  // Ciela: black straight bob with a full straight fringe (above the eyes), warm smile,
+  // lilac sporty tee with puff sleeves, white collar trim and a little bow.
+  ciela: I(`
+    <path d="M9.6 47.5V30.5C9.6 16.6 19.4 9.6 32 9.6s22.4 7 22.4 20.9v17c0 1.6-1.1 2.5-2.6 2.5H12.2c-1.5 0-2.6-.9-2.6-2.5z" fill="#221a1e"/>
+    <path d="M12 64c1.6-7.6 9-10.6 20-10.6S50.4 56.4 52 64z" fill="#b59cf0"/>
+    <circle cx="15.6" cy="59.2" r="5.4" fill="#c7b4f6"/><circle cx="48.4" cy="59.2" r="5.4" fill="#c7b4f6"/>
+    <path d="M11.4 62.4c2.6 1.4 5.8 1.4 8.4 0M44.2 62.4c2.6 1.4 5.8 1.4 8.4 0" stroke="#fff" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+    <path d="M23.6 54.6c2.2 3.6 5.2 5.4 8.4 5.4s6.2-1.8 8.4-5.4" stroke="#fff" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <path d="M32 59.2l-4.6-2.6v5.2zM32 59.2l4.6-2.6v5.2z" fill="#ff7ab6"/><circle cx="32" cy="59.2" r="1.7" fill="#e85d8a"/>
+    <circle cx="32" cy="36.6" r="17" fill="#b07552"/>
+    <path d="M14.6 30.4C14.6 19 22.4 13.6 32 13.6S49.4 19 49.4 30.4c0 .5-.4.9-.9.9h-33c-.5 0-.9-.4-.9-.9z" fill="#221a1e"/>
+    <path d="M21 18.4c-1.8 3.4-2.4 7.6-2.2 12.2M27 15.4c-1 4.4-1.2 9.4-.8 15.2M37 15.4c1 4.4 1.2 9.4.8 15.2M43 18.4c1.8 3.4 2.4 7.6 2.2 12.2" stroke="#3a3036" stroke-width="1.1" fill="none" stroke-linecap="round"/>
+    <path d="M18 17.6c3.8-3.6 8.6-5 14-5" stroke="#4a3f47" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+    <path d="M10.4 34v13.6M53.6 34v13.6" stroke="#3a3036" stroke-width="1.1" stroke-linecap="round"/>
+    <path d="M21.8 34.6q3.2-1.4 6 .1M42.2 34.6q-3.2-1.4-6 .1" stroke="#221612" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+    <circle cx="25" cy="38.6" r="3.2" fill="${INK}"/><circle cx="39" cy="38.6" r="3.2" fill="${INK}"/><circle cx="26.1" cy="37.5" r="1.15" fill="#fff"/><circle cx="40.1" cy="37.5" r="1.15" fill="#fff"/>
+    <path d="M21.6 37.2l-1.4-1M42.4 37.2l1.4-1" stroke="${INK}" stroke-width="1.2" stroke-linecap="round"/>
+    <ellipse cx="19.8" cy="44.4" rx="3.5" ry="2.1" fill="#e98a7c" opacity=".7"/><ellipse cx="44.2" cy="44.4" rx="3.5" ry="2.1" fill="#e98a7c" opacity=".7"/>
+    <path d="M24.4 44.2c3.9 5.2 11.3 5.2 15.2 0z" fill="#9c3a35"/><path d="M26.6 44.6h10.8" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+    <path d="M28.4 48.1q3.6 1.3 7.2 0" stroke="#e8746a" stroke-width="1.4" stroke-linecap="round" fill="none"/>`, 'ico kid'),
 };
 
-export const KID_NAME: Record<CharacterId, string> = { ace: 'Ace', moana: 'Moana' };
-export const KID_COLOR: Record<CharacterId, string> = { ace: '#2fb5a8', moana: '#ff7a6b' };
+const sneaker = (upper: string, toe: string, sole: string, stripe: string, extra: string) =>
+  I(`
+    <path d="M7 41c0-8 4-14 10-16.5l8.5-4c2.4 4.4 7 6.4 12.5 6l5.5.4c8.5 1.3 13.5 6.6 14 14.6z" fill="${upper}"/>
+    <path d="M25.5 20.5c2.4 4.4 7 6.4 12.5 6l-1.4 6.6c-6 .5-11-2.4-13.8-7.6z" fill="${toe}"/>
+    <path d="M13 37c8-4.5 18-5 27-1.5" stroke="${stripe}" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M27.5 24.5l4-2.4M30.5 27.5l4-2.6M34 29.8l3.6-2.4" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/>
+    ${extra}
+    <rect x="5" y="40" width="54" height="10" rx="5" fill="${sole}"/>
+    <path d="M9 45.4h46" stroke="#000" stroke-opacity=".08" stroke-width="2.2" stroke-linecap="round"/>`, 'ico shoe');
+const flower = (x: number, y: number) =>
+  `<g fill="#fff">${[0, 72, 144, 216, 288].map((a) => `<circle cx="${(x + Math.cos((a * Math.PI) / 180) * 1.7).toFixed(2)}" cy="${(y + Math.sin((a * Math.PI) / 180) * 1.7).toFixed(2)}" r="1.25"/>`).join('')}</g><circle cx="${x}" cy="${y}" r="0.9" fill="#ffe066"/>`;
+
+/** Each kid's own sneakers (shown on the character cards). Ciela's: bright pink with little flowers
+ *  and a tiny original explorer patch (a round badge with a sun + compass star - no characters). */
+export const KID_SHOE: Record<CharacterId, string> = {
+  ace: sneaker('#f7f3ec', '#ffffff', '#4fa39c', '#e2a94e', ''),
+  ciela: sneaker('#ff4f9a', '#ff8cc0', '#fff4e0', '#ffd1e6',
+    `${flower(15, 33)}${flower(44, 34.5)}${flower(52, 39)}<circle cx="31" cy="35.6" r="4.6" fill="#fff4e0" stroke="#7fdcc0" stroke-width="1.4"/><path d="M31 32.2l.9 2.5 2.5.9-2.5.9-.9 2.5-.9-2.5-2.5-.9 2.5-.9z" fill="#3f9fd8"/>`),
+};
+
+export const KID_NAME: Record<CharacterId, string> = { ace: 'Ace', ciela: 'Ciela' };
+export const KID_COLOR: Record<CharacterId, string> = { ace: '#2fb5a8', ciela: '#9b7fe0' };
 
 /** Section picture for a stage section id (sport or season), or null. */
 export function sectionIcon(id: string, season?: Season): string | null {

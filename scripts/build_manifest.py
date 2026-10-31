@@ -92,9 +92,10 @@ lines(A, 'new_food', 'A new food friend!', 'Ooh, a new food for my book!')
 lines(A, 'unlock', 'A new place to explore!')
 lines(A, 'idle', 'Ready when you are!', 'Which way shall we go?', "Come on, let's run, eh?")
 
-# ===================================================================== Moana (cheerful Kiwi girl)
-M = 'moana'
-lines(M, 'hello', "Kia ora! I'm Moana!", "Hi! Moana here! Let's have some fun!")
+# ===================================================================== Ciela (cheerful Kiwi girl; say "SYEH-lah")
+# Renamed from Moana in v1.0.1. Her request-only pronunciation respelling lives in generate_audio.mjs.
+M = 'ciela'
+lines(M, 'hello', "Kia ora! I'm Ciela!", "Hi! Ciela here! Let's have some fun!")
 lines(M, 'ride_shoes', 'Running shoes on! Fast feet!')
 lines(M, 'ride_bike', 'Bike ride! Ring, ring!')
 lines(M, 'ride_scooter', 'My scooter! Push and glide!')
@@ -133,7 +134,7 @@ lines(N, 'title', 'Ace Runs!')
 lines(N, 'welcome', 'Kia ora! Welcome to Ace Runs!', 'Kia ora, friend! Ready for a healthy adventure?')
 lines(N, 'pick_character', "Who's going to run today?")
 lines(N, 'char_ace', 'Ace!')
-lines(N, 'char_moana', 'Moana!')
+lines(N, 'char_ciela', 'Ciela!')
 lines(N, 'pick_ride', 'How will you travel?')
 lines(N, 'ride_shoes', 'Running shoes!')
 lines(N, 'ride_bike', 'The bike!')
@@ -189,6 +190,47 @@ lines(N, 'book', 'Your food friends book!')
 lines(N, 'paused', 'Paused. Take a breather!')
 lines(N, 'endless', 'Endless run! How far can you go?')
 lines(N, 'last_season', 'You ran through every season!')
+
+# ===================================================================== Warm-up / cool-down stretches (v1.0.1)
+# Character lines avoid saying Ciela's name (no respelling needed).
+lines(A, 'warmup_go', "Let's warm up!", 'Warm-up time, eh!')
+lines(A, 'stretch_cheer', "Sweet as, I'm all warm!", 'Ka pai!', 'Choice, my muscles are ready!')
+lines(A, 'ready', 'Ready to go!', "All warmed up! Let's go!")
+lines(A, 'cooldown_go', 'Time to cool down!')
+lines(A, 'cooldown_done', 'Ahh, I feel all bendy!', 'Nice and relaxed. Sweet as!')
+
+lines(M, 'warmup_go', 'Warm-up time!', "Let's get our bodies ready, eh!")
+lines(M, 'stretch_cheer', "Heaps good, I'm all warm!", 'Ka pai!', "Good as gold! I'm warm now!")
+lines(M, 'ready', "I'm ready to go!", "Warm muscles! Let's run!")
+lines(M, 'cooldown_go', "Let's cool down now!")
+lines(M, 'cooldown_done', 'Ahh, so stretchy and calm!', 'My body feels happy!')
+
+lines(N, 'warmup_intro', "Let's warm up our bodies!", 'Warm-up time! Wiggle and move with me!')
+lines(N, 'stretch_with_me', 'Stretch with me! Copy the moves!')
+for n, word in enumerate(['One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight'], 1):
+    lines(N, f'count_{n}', f'{word}!')
+MOVE_LINES = [
+    # warm-up (dynamic)
+    ('look', 'Look left... and right!'), ('nod', 'Nod your head, up and down!'), ('arm_circles', 'Arm circles!'),
+    ('arm_swings', 'Big arm swings!'), ('torso_twist', 'Twist your body, side to side!'), ('side_bend', 'Bend to the side!'),
+    ('high_knees', 'High knees!'), ('leg_swings', 'Leg swings!'), ('hops', 'Little hops!'), ('ankle_circles', 'Circle your ankles!'),
+    # cool-down (static holds)
+    ('reach_sky', 'Reach up to the sky!'), ('side_reach', 'Reach over to the side!'), ('shoulder_stretch', 'Hug your arm across your chest!'),
+    ('quad_stretch', 'Hold your foot behind you!'), ('calf_stretch', 'Step back and stretch your calf!'), ('toe_touch', 'Reach down to your toes!'),
+    ('butterfly', 'Sit like a butterfly!'), ('breathe', 'Breathe in... and out.'),
+]
+for move, txt in MOVE_LINES:
+    lines(N, f'move_{move}', txt)
+lines(N, 'ready', 'Warm muscles! Ready to go!')
+lines(N, 'cooldown_intro', "Great running! Let's cool down.")
+lines(N, 'breathe_in', 'Breathe in...')
+line(N, 'breathe_out', '...and out.', tts='And out...')
+lines(N, 'stretch_happy', 'Stretching keeps your body happy!', 'Stretchy muscles are happy muscles!')
+lines(N, 'hold', 'Hold it... nice and still.')
+
+sfx('stretch_whoosh', 'soft slow airy whoosh, like a gentle stretch, calm', 0.7, 'stretch', volume=0.5)
+sfx('hold_chime', 'gentle soft single chime, warm and calm, a hold is complete', 1.0, 'stretch', volume=0.6)
+sfx('ready_sparkle', 'short bright magical sparkle with a tiny rising twinkle, ready to go', 1.0, 'stretch', volume=0.7)
 
 # ===================================================================== SFX: UI
 sfx('ui_click', 'soft rounded UI click like tapping a wooden toy block, very short', 0.3, 'ui', volume=0.7)

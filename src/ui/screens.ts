@@ -1,5 +1,6 @@
 // Menu screens: boot, title, character picker, ride picker, stage select.
-import { CHARACTERS, RIDES, STAGES, type CharacterId, type RideId, type StageId } from '../contracts';
+import { CHARACTERS, RIDES, STAGES, type CharacterId, type RideId, type RunMode, type StageId } from '../contracts';
+import type { WarmupView } from './Stretch';
 import { HEALTHY } from '../content/foods';
 import type { AppApi } from './ctx';
 import { button, el, fmtDist, Screen } from './dom';
@@ -9,6 +10,7 @@ import {
   KID_ART,
   KID_COLOR,
   KID_NAME,
+  KID_SHOE,
   RIDE_ICON,
   RIDE_NAME,
   STAGE_ART,
@@ -46,7 +48,7 @@ export class BootScreen extends Screen {
       <div class="boot-sky" aria-hidden="true">${foods.map((f, i) => `<span class="float f${i}">${foodPic(f, 'food-pic')}</span>`).join('')}</div>
       <div class="boot-inner">
         <div class="boot-logo">${logoSVG()}</div>
-        <div class="boot-kids" aria-hidden="true"><span class="kid-bubble ace">${KID_ART.ace}</span><span class="kid-bubble moana">${KID_ART.moana}</span></div>
+        <div class="boot-kids" aria-hidden="true"><span class="kid-bubble ace">${KID_ART.ace}</span><span class="kid-bubble ciela">${KID_ART.ciela}</span></div>
         <div class="boot-load"><div class="loadbar"><i></i></div><p class="boot-status">Packing healthy snacks…</p></div>
       </div>`;
     this.bar = this.el.querySelector('.loadbar i')!;
@@ -99,14 +101,16 @@ export class TitleScreen extends Screen {
 // ------------------------------------------------------------------ character picker
 export class CharacterScreen extends Screen {
   private cards = new Map<CharacterId, HTMLButtonElement>();
+  readonly warm: WarmupView;
   constructor(private app: AppApi) {
     super('picker character');
     this.el.append(topBar("Who's running?", () => this.back()));
+    this.warm = app.newWarmView();
     const wrap = el('div', 'pick-cards kids');
     for (const c of CHARACTERS) {
       const b = button({
         cls: `pick-card kid-card ${c}`,
-        html: `<span class="pick-art">${KID_ART[c]}</span><span class="pick-name">${KID_NAME[c]}</span><span class="tick">${glyph.check}</span>`,
+        html: `<span class="pick-art">${KID_ART[c]}<span class="kid-shoe">${KID_SHOE[c]}</span></span><span class="pick-name">${KID_NAME[c]}</span><span class="tick">${glyph.check}</span>`,
         label: KID_NAME[c],
         onClick: () => this.choose(c, true),
       });
@@ -121,7 +125,7 @@ export class CharacterScreen extends Screen {
     const dock = el('div', 'dock');
     const next = button({ cls: 'primary big', html: `<span>Next</span>${glyph.next}`, label: 'Next', onClick: () => { app.sound('select'); app.goRide(); } });
     dock.append(next);
-    this.el.append(wrap, dock);
+    this.el.append(wrap, dock, this.warm.el);
   }
   private choose(c: CharacterId, announce: boolean): void {
     this.app.selectCharacter(c, announce);
@@ -148,26 +152,42 @@ export class CharacterScreen extends Screen {
 // ------------------------------------------------------------------ ride picker
 export class RideScreen extends Screen {
   private cards = new Map<RideId, HTMLButtonElement>();
+  private goBtn: HTMLButtonElement;
+  private dest: HTMLElement;
+  private entryRide: RideId = 'shoes';
+  readonly warm: WarmupView;
   constructor(private app: AppApi) {
     super('picker ride');
     this.el.append(topBar('How will you go?', () => this.back()));
+    this.warm = app.newWarmView();
     const wrap = el('div', 'pick-cards rides');
     for (const r of RIDES) {
       const b = button({
         cls: `pick-card ride-card ${r}`,
         html: `<span class="pick-art">${RIDE_ICON[r]}</span><span class="pick-name">${RIDE_NAME[r]}</span><span class="tick">${glyph.check}</span>`,
         label: RIDE_NAME[r],
-        onClick: () => this.choose(r, true),
+        onClick: (e) => {
+          // Enter / Space on the ride that is already picked = go (arrows/A/D pick, Enter goes).
+          if (e.detail === 0 && this.app.save.state.ride === r) return this.go();
+          this.choose(r, true);
+        },
       });
+      b.addEventListener('dblclick', () => this.app.save.state.ride === r && this.go());
       b.addEventListener('focus', () => {
         if (document.documentElement.classList.contains('kbd') && this.app.save.state.ride !== r) this.choose(r, true);
       });
       this.cards.set(r, b);
       wrap.append(b);
     }
-    const dock = el('div', 'dock');
-    dock.append(button({ cls: 'primary big', html: `<span>Let's go!</span>${glyph.next}`, label: "Let's go", onClick: () => { app.sound('select'); app.afterRide(); } }));
-    this.el.append(wrap, dock);
+    const dock = el('div', 'dock ride-dock');
+    this.dest = el('div', 'dest hidden');
+    this.goBtn = button({ cls: 'primary big ride-go', html: `<span>Let's go!</span>${glyph.next}`, label: "Let's go", onClick: () => this.go() });
+    dock.append(this.dest, this.goBtn);
+    this.el.append(wrap, dock, this.warm.el);
+  }
+  private go(): void {
+    this.app.sound('select');
+    this.app.afterRide();
   }
   private choose(r: RideId, announce: boolean): void {
     this.app.selectRide(r, announce);
@@ -179,14 +199,98 @@ export class RideScreen extends Screen {
       b.classList.toggle('selected', r === cur);
       b.setAttribute('aria-pressed', String(r === cur));
     }
+    const pending = this.app.pendingRun();
+    this.el.classList.toggle('repick', !!pending);
+    const same = !!pending && cur === this.entryRide;
+    this.goBtn.className = `btn primary ride-go ${pending ? 'huge' : 'big'} ${same ? 'same' : ''}`;
+    this.goBtn.innerHTML = same ? `<span class="go-ride">${RIDE_ICON[cur]}</span><span>Same ride!</span>${glyph.play}` : `<span>Let's go!</span>${glyph.next}`;
+    const label = same ? `Same ride: ${RIDE_NAME[cur]}` : "Let's go";
+    this.goBtn.setAttribute('aria-label', label);
+    this.goBtn.title = label;
   }
   protected override onShow(): void {
+    this.entryRide = this.app.save.state.ride;
+    const pending = this.app.pendingRun();
+    this.dest.classList.toggle('hidden', !pending);
+    if (pending) {
+      this.dest.innerHTML = `<span class="dest-art">${STAGE_ART[pending.stage]}</span><span class="dest-name">${pending.mode === 'endless' ? glyph.infinity : ''}<span>${STAGE_NAME[pending.stage]}</span></span>`;
+      this.dest.style.setProperty('--accent', STAGE_COLOR[pending.stage]);
+    }
     this.sync();
-    this.cards.get(this.app.save.state.ride)?.focus({ preventScroll: true });
+    (pending ? this.goBtn : this.cards.get(this.app.save.state.ride))?.focus({ preventScroll: true });
   }
   override back(): boolean {
     this.app.sound('back');
-    this.app.goCharacter();
+    if (this.app.pendingRun()) this.app.goStages();
+    else this.app.goCharacter();
+    return true;
+  }
+}
+
+// ------------------------------------------------------------------ place intro (brief, auto-advancing)
+export class IntroScreen extends Screen {
+  readonly warm: WarmupView;
+  private art: HTMLElement;
+  private name: HTMLElement;
+  private chips: HTMLElement;
+  private goBtn: HTMLButtonElement;
+  private bar: HTMLElement;
+  private timer = 0;
+  private left = 0;
+  static readonly AUTO_S = 5;
+
+  constructor(private app: AppApi, private act: { go(): void; back(): void }) {
+    super('intro');
+    this.el.append(topBar('Get ready!', () => this.back()));
+    this.warm = app.newWarmView();
+    const card = el('div', 'intro-card');
+    this.art = el('span', 'intro-art');
+    this.name = el('h2', 'intro-name');
+    this.chips = el('div', 'intro-chips');
+    this.goBtn = button({ cls: 'primary huge intro-go', html: `${glyph.play}<span>Go!</span><i class="auto-bar"></i>`, label: 'Go', onClick: () => this.go() });
+    this.goBtn.dataset.autofocus = '';
+    this.bar = this.goBtn.querySelector('.auto-bar')!;
+    const info = el('div', 'intro-info');
+    info.append(this.name, this.chips);
+    card.append(this.art, info, this.goBtn);
+    this.el.append(card, this.warm.el);
+  }
+
+  present(stage: StageId, mode: RunMode, ride: RideId): void {
+    this.art.innerHTML = STAGE_ART[stage];
+    this.art.style.setProperty('--accent', STAGE_COLOR[stage]);
+    this.name.textContent = STAGE_NAME[stage];
+    this.chips.innerHTML = `<span class="chip">${mode === 'endless' ? `${glyph.infinity}<span>Endless</span>` : `${glyph.star}<span>Adventure</span>`}</span><span class="chip ride-chip"><span class="chip-ic">${RIDE_ICON[ride]}</span><span>${RIDE_NAME[ride]}</span></span>`;
+  }
+
+  private go(): void {
+    clearInterval(this.timer);
+    this.app.sound('select');
+    this.act.go();
+  }
+
+  protected override onShow(): void {
+    clearInterval(this.timer);
+    this.left = IntroScreen.AUTO_S;
+    this.bar.style.transform = 'scaleX(0)';
+    this.timer = window.setInterval(() => {
+      if (!this.shown) return clearInterval(this.timer);
+      // A running "Stretch with me!" routine holds the auto-start until it's done.
+      if (this.app.warmGuided()) return;
+      this.left -= 0.1;
+      this.bar.style.transform = `scaleX(${Math.min(1, 1 - this.left / IntroScreen.AUTO_S).toFixed(3)})`;
+      if (this.left <= 0) this.go();
+    }, 100);
+  }
+
+  protected override onHide(): void {
+    clearInterval(this.timer);
+  }
+
+  override back(): boolean {
+    clearInterval(this.timer);
+    this.app.sound('back');
+    this.act.back();
     return true;
   }
 }

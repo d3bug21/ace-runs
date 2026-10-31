@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-31T08:16:37.546Z",
+  "checked_at": "2026-10-31T17:16:10.410Z",
   "model": "scribe_v2",
   "threshold": 0.6,
   "first_pass": {
@@ -15,10 +15,11 @@
       "final_heard": "Kia ora. I'm Ace"
     },
     {
-      "id": "moana_hello_1",
+      "id": "ciela_hello_1",
       "first_heard": "Kiara, I'm Moana",
       "fix": "request text \"Kia ora... I'm Moana!\" (pause); best of 4",
-      "final_heard": "Kia ora. I'm Moana"
+      "final_heard": "Kia ora. I'm Moana",
+      "note_v1_0_1": "superseded by the Moana -> Ciela rename (see ciela_rename below)"
     },
     {
       "id": "ace_yum_4",
@@ -27,9 +28,9 @@
       "final_heard": "Cha!"
     },
     {
-      "id": "moana_yum_4",
+      "id": "ciela_yum_4",
       "first_heard": "Sure",
-      "fix": "Moana's voice rendered a bare 'Chur!' as 'Sure' in 23 of 33 experimental takes across 12 tag/punctuation/context variants (the rest were mostly fragments like Ch-r or Choo choo), so the manifest line was changed to 'Good as gold!' (Ace keeps 'Chur!')",
+      "fix": "The girl voice (Moana, now Ciela) rendered a bare 'Chur!' as 'Sure' in 23 of 33 experimental takes across 12 tag/punctuation/context variants (the rest were mostly fragments like Ch-r or Choo choo), so the manifest line was changed to 'Good as gold!' (Ace keeps 'Chur!')",
       "final_heard": "Good as gold"
     },
     {
@@ -45,19 +46,19 @@
       "final_heard": "Germs bounce off"
     },
     {
-      "id": "moana_near_miss_1",
+      "id": "ciela_near_miss_1",
       "first_heard": "[sneezing]",
       "fix": "tag [relieved] instead of [excited]; best of 4",
       "final_heard": "Phew!"
     },
     {
-      "id": "moana_start_2",
+      "id": "ciela_start_2",
       "first_heard": "Here we go. Ha",
       "fix": "tag [cheerful]; best of 4",
       "final_heard": "Here we go, eh"
     },
     {
-      "id": "moana_teeth_1",
+      "id": "ciela_teeth_1",
       "first_heard": "[giggles] Ooh, sticky teeth",
       "fix": "regenerated (borderline 0.67)",
       "final_heard": "[laughs] Uh, sticky teeth"
@@ -69,7 +70,7 @@
       "final_heard": "Hup!"
     },
     {
-      "id": "moana_jump_3",
+      "id": "ciela_jump_3",
       "first_heard": "Up",
       "fix": "regenerated best of 4",
       "final_heard": "Hop"
@@ -81,16 +82,36 @@
       "final_heard": "Yeah"
     },
     {
-      "id": "ace_jump_2, moana_jump_2",
+      "id": "ace_jump_2, ciela_jump_2",
       "first_heard": "Wee!",
       "fix": "none needed: 'Wheee' vs 'Wee' is a spelling difference (scorer now treats wh~w)",
       "final_heard": "Wee!"
     }
   ],
+  "ciela_rename": {
+    "version": "1.0.1",
+    "renamed": "66 girl lines moana_* -> ciela_* (files renamed, audio unchanged; their STT results carried over)",
+    "regenerated": [
+      "ciela_hello_1",
+      "ciela_hello_2",
+      "narrator_char_ciela_1"
+    ],
+    "removed": [
+      "moana_hello_1",
+      "moana_hello_2",
+      "narrator_char_moana_1"
+    ],
+    "name_check": "verify_voice_stt.mjs cuts the name out of each line that says Ciela and reads it 3x with Scribe forced to Mandarin (one character per syllable). Pass = 谢啦/谢拉 (xie la, /ɕjɛ la/) in >= 2 of 3 reads, or an English transcript of exactly 'Ciela'/'Cielo'. Details in scripts/voices.json -> ciela.pronunciation.",
+    "results": {
+      "narrator_char_ciela_1": "English: 谢啦 | Mandarin: 谢啦 x3",
+      "ciela_hello_1": "English: Kia ora. I'm Siela | Mandarin: 谢啦 x3",
+      "ciela_hello_2": "English: Hi, Ciela here. Let's have some fun | Mandarin: 希拉, 希拉, Siela (two syllables)"
+    }
+  },
   "summary": {
-    "checked": 213,
+    "checked": 269,
     "flagged": 0,
-    "mean_similarity": 0.988
+    "mean_similarity": 0.99
   },
   "results": [
     {
@@ -105,14 +126,46 @@
       "checked_at": "2026-10-31T08:15:06.143Z"
     },
     {
-      "id": "moana_teeth_1",
-      "speaker": "moana",
+      "id": "ciela_teeth_1",
+      "speaker": "ciela",
       "expected": "Ugh, sticky teeth!",
       "heard": "[laughs] Uh, sticky teeth",
       "similarity": 0.67,
       "missing_keywords": [],
       "flag": false,
       "checked_at": "2026-10-31T08:15:36.059Z"
+    },
+    {
+      "id": "ciela_hello_1",
+      "speaker": "ciela",
+      "expected": "Kia ora! I'm Ciela!",
+      "heard": "Kia ora. I'm Siela",
+      "similarity": 0.75,
+      "missing_keywords": [],
+      "name_check": {
+        "word": "Siela",
+        "start": 2.72,
+        "end": 3.22,
+        "mandarin_readings": [
+          "谢啦。",
+          "谢啦。",
+          "谢啦。"
+        ],
+        "xie_la": 3,
+        "pass": true
+      },
+      "flag": false,
+      "checked_at": "2026-10-31T16:59:06.634Z",
+      "history": [
+        {
+          "heard": "Kia ora. I'm Siela",
+          "similarity": 0.75
+        },
+        {
+          "heard": "Kia ora. I'm Scylla",
+          "similarity": 0.75
+        }
+      ]
     },
     {
       "id": "narrator_benefit_shield_1",
@@ -145,8 +198,8 @@
       "checked_at": "2026-10-31T08:16:02.535Z"
     },
     {
-      "id": "moana_muscles_2",
-      "speaker": "moana",
+      "id": "ciela_muscles_2",
+      "speaker": "ciela",
       "expected": "Flex! Look how strong I am!",
       "heard": "Flicks, look how strong I am",
       "similarity": 0.83,
@@ -176,8 +229,8 @@
       "checked_at": "2026-10-31T08:16:15.307Z"
     },
     {
-      "id": "moana_slow_2",
-      "speaker": "moana",
+      "id": "ciela_slow_2",
+      "speaker": "ciela",
       "expected": "My legs feel so heavy...",
       "heard": "Ah, my legs feel so heavy",
       "similarity": 0.91,
@@ -836,28 +889,8 @@
       "checked_at": "2026-10-31T08:15:15.157Z"
     },
     {
-      "id": "moana_hello_1",
-      "speaker": "moana",
-      "expected": "Kia ora! I'm Moana!",
-      "heard": "Kia ora, I'm Moana",
-      "similarity": 1,
-      "missing_keywords": [],
-      "flag": false,
-      "checked_at": "2026-10-31T08:15:15.738Z"
-    },
-    {
-      "id": "moana_hello_2",
-      "speaker": "moana",
-      "expected": "Hi! Moana here! Let's have some fun!",
-      "heard": "Hi, Moana here. Let's have some fun",
-      "similarity": 1,
-      "missing_keywords": [],
-      "flag": false,
-      "checked_at": "2026-10-31T08:15:16.268Z"
-    },
-    {
-      "id": "moana_ride_shoes_1",
-      "speaker": "moana",
+      "id": "ciela_ride_shoes_1",
+      "speaker": "ciela",
       "expected": "Running shoes on! Fast feet!",
       "heard": "Running shoes on. Fast feet",
       "similarity": 1,
@@ -866,8 +899,8 @@
       "checked_at": "2026-10-31T08:15:16.818Z"
     },
     {
-      "id": "moana_ride_bike_1",
-      "speaker": "moana",
+      "id": "ciela_ride_bike_1",
+      "speaker": "ciela",
       "expected": "Bike ride! Ring, ring!",
       "heard": "Bike ride. Ring, ring",
       "similarity": 1,
@@ -876,8 +909,8 @@
       "checked_at": "2026-10-31T08:15:17.452Z"
     },
     {
-      "id": "moana_ride_scooter_1",
-      "speaker": "moana",
+      "id": "ciela_ride_scooter_1",
+      "speaker": "ciela",
       "expected": "My scooter! Push and glide!",
       "heard": "My scooter! Push and glide",
       "similarity": 1,
@@ -886,8 +919,8 @@
       "checked_at": "2026-10-31T08:15:17.968Z"
     },
     {
-      "id": "moana_ride_skate_1",
-      "speaker": "moana",
+      "id": "ciela_ride_skate_1",
+      "speaker": "ciela",
       "expected": "Skateboard! Let's carve it up!",
       "heard": "Skateboard. Let's carve it up",
       "similarity": 1,
@@ -896,8 +929,8 @@
       "checked_at": "2026-10-31T08:15:18.551Z"
     },
     {
-      "id": "moana_start_1",
-      "speaker": "moana",
+      "id": "ciela_start_1",
+      "speaker": "ciela",
       "expected": "Let's go!",
       "heard": "Let's go!",
       "similarity": 1,
@@ -906,8 +939,8 @@
       "checked_at": "2026-10-31T08:15:19.076Z"
     },
     {
-      "id": "moana_start_2",
-      "speaker": "moana",
+      "id": "ciela_start_2",
+      "speaker": "ciela",
       "expected": "Here we go, eh!",
       "heard": "Here we go, eh",
       "similarity": 1,
@@ -916,8 +949,8 @@
       "checked_at": "2026-10-31T08:15:19.570Z"
     },
     {
-      "id": "moana_start_3",
-      "speaker": "moana",
+      "id": "ciela_start_3",
+      "speaker": "ciela",
       "expected": "Ready, steady, run!",
       "heard": "Ready, steady, run!",
       "similarity": 1,
@@ -926,8 +959,8 @@
       "checked_at": "2026-10-31T08:15:20.116Z"
     },
     {
-      "id": "moana_yum_1",
-      "speaker": "moana",
+      "id": "ciela_yum_1",
+      "speaker": "ciela",
       "expected": "Yum yum!",
       "heard": "Yum, yum",
       "similarity": 1,
@@ -936,8 +969,8 @@
       "checked_at": "2026-10-31T08:15:20.897Z"
     },
     {
-      "id": "moana_yum_2",
-      "speaker": "moana",
+      "id": "ciela_yum_2",
+      "speaker": "ciela",
       "expected": "Sweet as!",
       "heard": "Sweet as",
       "similarity": 1,
@@ -946,8 +979,8 @@
       "checked_at": "2026-10-31T08:15:21.384Z"
     },
     {
-      "id": "moana_yum_3",
-      "speaker": "moana",
+      "id": "ciela_yum_3",
+      "speaker": "ciela",
       "expected": "Ka pai!",
       "heard": "Ka pai!",
       "similarity": 1,
@@ -956,8 +989,8 @@
       "checked_at": "2026-10-31T08:15:21.908Z"
     },
     {
-      "id": "moana_yum_4",
-      "speaker": "moana",
+      "id": "ciela_yum_4",
+      "speaker": "ciela",
       "expected": "Good as gold!",
       "heard": "Good as gold",
       "similarity": 1,
@@ -966,8 +999,8 @@
       "checked_at": "2026-10-31T08:15:22.364Z"
     },
     {
-      "id": "moana_yum_5",
-      "speaker": "moana",
+      "id": "ciela_yum_5",
+      "speaker": "ciela",
       "expected": "Mmm, juicy!",
       "heard": "Mm, juicy",
       "similarity": 1,
@@ -976,8 +1009,8 @@
       "checked_at": "2026-10-31T08:15:22.867Z"
     },
     {
-      "id": "moana_yum_6",
-      "speaker": "moana",
+      "id": "ciela_yum_6",
+      "speaker": "ciela",
       "expected": "So yummy!",
       "heard": "So yummy!",
       "similarity": 1,
@@ -986,8 +1019,8 @@
       "checked_at": "2026-10-31T08:15:23.426Z"
     },
     {
-      "id": "moana_yum_7",
-      "speaker": "moana",
+      "id": "ciela_yum_7",
+      "speaker": "ciela",
       "expected": "Heaps good!",
       "heard": "Heaps good!",
       "similarity": 1,
@@ -996,8 +1029,8 @@
       "checked_at": "2026-10-31T08:15:23.942Z"
     },
     {
-      "id": "moana_yum_8",
-      "speaker": "moana",
+      "id": "ciela_yum_8",
+      "speaker": "ciela",
       "expected": "Choice!",
       "heard": "Choice",
       "similarity": 1,
@@ -1006,8 +1039,8 @@
       "checked_at": "2026-10-31T08:15:24.520Z"
     },
     {
-      "id": "moana_vision_1",
-      "speaker": "moana",
+      "id": "ciela_vision_1",
+      "speaker": "ciela",
       "expected": "Ooh, everything's so bright!",
       "heard": "Ooh, everything's so bright",
       "similarity": 1,
@@ -1016,8 +1049,8 @@
       "checked_at": "2026-10-31T08:15:24.978Z"
     },
     {
-      "id": "moana_vision_2",
-      "speaker": "moana",
+      "id": "ciela_vision_2",
+      "speaker": "ciela",
       "expected": "Sparkly eyes! I can see heaps!",
       "heard": "Sparkly eyes. I can see heaps",
       "similarity": 1,
@@ -1026,8 +1059,8 @@
       "checked_at": "2026-10-31T08:15:25.535Z"
     },
     {
-      "id": "moana_muscles_1",
-      "speaker": "moana",
+      "id": "ciela_muscles_1",
+      "speaker": "ciela",
       "expected": "Strong as!",
       "heard": "Strong as",
       "similarity": 1,
@@ -1036,8 +1069,8 @@
       "checked_at": "2026-10-31T08:15:26.062Z"
     },
     {
-      "id": "moana_bones_1",
-      "speaker": "moana",
+      "id": "ciela_bones_1",
+      "speaker": "ciela",
       "expected": "Strong bones and teeth!",
       "heard": "Strong bones and teeth",
       "similarity": 1,
@@ -1046,8 +1079,8 @@
       "checked_at": "2026-10-31T08:15:27.498Z"
     },
     {
-      "id": "moana_bones_2",
-      "speaker": "moana",
+      "id": "ciela_bones_2",
+      "speaker": "ciela",
       "expected": "Ting! Shiny teeth!",
       "heard": "Ting! Shiny teeth",
       "similarity": 1,
@@ -1056,8 +1089,8 @@
       "checked_at": "2026-10-31T08:15:28.083Z"
     },
     {
-      "id": "moana_shield_1",
-      "speaker": "moana",
+      "id": "ciela_shield_1",
+      "speaker": "ciela",
       "expected": "Bubble shield! Germs, go away!",
       "heard": "Bubble shield! Germs, go away!",
       "similarity": 1,
@@ -1066,8 +1099,8 @@
       "checked_at": "2026-10-31T08:15:28.714Z"
     },
     {
-      "id": "moana_shield_2",
-      "speaker": "moana",
+      "id": "ciela_shield_2",
+      "speaker": "ciela",
       "expected": "No germs on me!",
       "heard": "No germs on me",
       "similarity": 1,
@@ -1076,8 +1109,8 @@
       "checked_at": "2026-10-31T08:15:29.247Z"
     },
     {
-      "id": "moana_energy_1",
-      "speaker": "moana",
+      "id": "ciela_energy_1",
+      "speaker": "ciela",
       "expected": "Zoom, zoom!",
       "heard": "Zoom, zoom!",
       "similarity": 1,
@@ -1086,8 +1119,8 @@
       "checked_at": "2026-10-31T08:15:29.866Z"
     },
     {
-      "id": "moana_energy_2",
-      "speaker": "moana",
+      "id": "ciela_energy_2",
+      "speaker": "ciela",
       "expected": "Whee, so speedy!",
       "heard": "Whee! So speedy",
       "similarity": 1,
@@ -1096,8 +1129,8 @@
       "checked_at": "2026-10-31T08:15:30.502Z"
     },
     {
-      "id": "moana_refresh_1",
-      "speaker": "moana",
+      "id": "ciela_refresh_1",
+      "speaker": "ciela",
       "expected": "Ahh, that's better!",
       "heard": "Ah, that's better",
       "similarity": 1,
@@ -1106,8 +1139,8 @@
       "checked_at": "2026-10-31T08:15:31.045Z"
     },
     {
-      "id": "moana_refresh_2",
-      "speaker": "moana",
+      "id": "ciela_refresh_2",
+      "speaker": "ciela",
       "expected": "Splash! So refreshing!",
       "heard": "Splash! So refreshing",
       "similarity": 1,
@@ -1116,8 +1149,8 @@
       "checked_at": "2026-10-31T08:15:31.695Z"
     },
     {
-      "id": "moana_grow_1",
-      "speaker": "moana",
+      "id": "ciela_grow_1",
+      "speaker": "ciela",
       "expected": "Growing strong!",
       "heard": "Growing strong",
       "similarity": 1,
@@ -1126,8 +1159,8 @@
       "checked_at": "2026-10-31T08:15:32.207Z"
     },
     {
-      "id": "moana_grow_2",
-      "speaker": "moana",
+      "id": "ciela_grow_2",
+      "speaker": "ciela",
       "expected": "Food friends, fly to me!",
       "heard": "Food Friends, fly to me",
       "similarity": 1,
@@ -1136,8 +1169,8 @@
       "checked_at": "2026-10-31T08:15:32.722Z"
     },
     {
-      "id": "moana_tummy_happy_1",
-      "speaker": "moana",
+      "id": "ciela_tummy_happy_1",
+      "speaker": "ciela",
       "expected": "My tummy's smiling!",
       "heard": "My tummy's smiling",
       "similarity": 1,
@@ -1146,8 +1179,8 @@
       "checked_at": "2026-10-31T08:15:33.189Z"
     },
     {
-      "id": "moana_tummy_happy_2",
-      "speaker": "moana",
+      "id": "ciela_tummy_happy_2",
+      "speaker": "ciela",
       "expected": "Happy tummy, happy me!",
       "heard": "Happy tummy, happy me",
       "similarity": 1,
@@ -1156,8 +1189,8 @@
       "checked_at": "2026-10-31T08:15:33.841Z"
     },
     {
-      "id": "moana_sugar_1",
-      "speaker": "moana",
+      "id": "ciela_sugar_1",
+      "speaker": "ciela",
       "expected": "Wheee, so fizzy!... Now I'm sleepy...",
       "heard": "Whee, so fizzy! Now I'm sleepy",
       "similarity": 1,
@@ -1166,8 +1199,8 @@
       "checked_at": "2026-10-31T08:15:34.797Z"
     },
     {
-      "id": "moana_sugar_2",
-      "speaker": "moana",
+      "id": "ciela_sugar_2",
+      "speaker": "ciela",
       "expected": "Too much sugar... I need a nap...",
       "heard": "Too much sugar. I need a nap",
       "similarity": 1,
@@ -1176,8 +1209,8 @@
       "checked_at": "2026-10-31T08:15:35.450Z"
     },
     {
-      "id": "moana_teeth_2",
-      "speaker": "moana",
+      "id": "ciela_teeth_2",
+      "speaker": "ciela",
       "expected": "Oh no, my teeth feel all gluey!",
       "heard": "[giggles] Oh no, my teeth feel all gluey",
       "similarity": 1,
@@ -1186,8 +1219,8 @@
       "checked_at": "2026-10-31T08:15:36.638Z"
     },
     {
-      "id": "moana_freeze_1",
-      "speaker": "moana",
+      "id": "ciela_freeze_1",
+      "speaker": "ciela",
       "expected": "Ooh, brain freeze! Brrr!",
       "heard": "[giggles] Ooh, brain freeze. Brr.",
       "similarity": 1,
@@ -1196,8 +1229,8 @@
       "checked_at": "2026-10-31T08:15:37.272Z"
     },
     {
-      "id": "moana_slow_1",
-      "speaker": "moana",
+      "id": "ciela_slow_1",
+      "speaker": "ciela",
       "expected": "Ohh, I'm so slow...",
       "heard": "[sighs] Oh, I'm so slow",
       "similarity": 1,
@@ -1206,8 +1239,8 @@
       "checked_at": "2026-10-31T08:15:37.729Z"
     },
     {
-      "id": "moana_tummy_1",
-      "speaker": "moana",
+      "id": "ciela_tummy_1",
+      "speaker": "ciela",
       "expected": "Oh no, my tummy!",
       "heard": "[laughs] Oh no, my tummy",
       "similarity": 1,
@@ -1216,8 +1249,8 @@
       "checked_at": "2026-10-31T08:15:38.719Z"
     },
     {
-      "id": "moana_tummy_2",
-      "speaker": "moana",
+      "id": "ciela_tummy_2",
+      "speaker": "ciela",
       "expected": "Uh oh, grumbly tummy!",
       "heard": "[laughs] Uh-oh, grumbly tummy",
       "similarity": 1,
@@ -1226,8 +1259,8 @@
       "checked_at": "2026-10-31T08:15:39.270Z"
     },
     {
-      "id": "moana_bounce_back_1",
-      "speaker": "moana",
+      "id": "ciela_bounce_back_1",
+      "speaker": "ciela",
       "expected": "Yay, I feel better!",
       "heard": "Yay, I feel better",
       "similarity": 1,
@@ -1236,8 +1269,8 @@
       "checked_at": "2026-10-31T08:15:39.737Z"
     },
     {
-      "id": "moana_bounce_back_2",
-      "speaker": "moana",
+      "id": "ciela_bounce_back_2",
+      "speaker": "ciela",
       "expected": "All better! Good as gold!",
       "heard": "All better. Good as gold",
       "similarity": 1,
@@ -1246,8 +1279,8 @@
       "checked_at": "2026-10-31T08:15:40.191Z"
     },
     {
-      "id": "moana_bump_1",
-      "speaker": "moana",
+      "id": "ciela_bump_1",
+      "speaker": "ciela",
       "expected": "Oopsie!",
       "heard": "[laughs] Oopsie",
       "similarity": 1,
@@ -1256,8 +1289,8 @@
       "checked_at": "2026-10-31T08:15:40.685Z"
     },
     {
-      "id": "moana_bump_2",
-      "speaker": "moana",
+      "id": "ciela_bump_2",
+      "speaker": "ciela",
       "expected": "Whoops!",
       "heard": "[laughs] Whoops.",
       "similarity": 1,
@@ -1266,8 +1299,8 @@
       "checked_at": "2026-10-31T08:15:41.272Z"
     },
     {
-      "id": "moana_bump_3",
-      "speaker": "moana",
+      "id": "ciela_bump_3",
+      "speaker": "ciela",
       "expected": "I'm okay!",
       "heard": "[giggles] I'm okay",
       "similarity": 1,
@@ -1276,8 +1309,8 @@
       "checked_at": "2026-10-31T08:15:41.895Z"
     },
     {
-      "id": "moana_near_miss_1",
-      "speaker": "moana",
+      "id": "ciela_near_miss_1",
+      "speaker": "ciela",
       "expected": "Phew!",
       "heard": "Phew!",
       "similarity": 1,
@@ -1286,8 +1319,8 @@
       "checked_at": "2026-10-31T08:15:42.405Z"
     },
     {
-      "id": "moana_near_miss_2",
-      "speaker": "moana",
+      "id": "ciela_near_miss_2",
+      "speaker": "ciela",
       "expected": "Close one!",
       "heard": "Close one",
       "similarity": 1,
@@ -1296,8 +1329,8 @@
       "checked_at": "2026-10-31T08:15:42.922Z"
     },
     {
-      "id": "moana_near_miss_3",
-      "speaker": "moana",
+      "id": "ciela_near_miss_3",
+      "speaker": "ciela",
       "expected": "Ooh, that was close!",
       "heard": "Ooh, that was close",
       "similarity": 1,
@@ -1306,8 +1339,8 @@
       "checked_at": "2026-10-31T08:15:43.440Z"
     },
     {
-      "id": "moana_jump_1",
-      "speaker": "moana",
+      "id": "ciela_jump_1",
+      "speaker": "ciela",
       "expected": "Hup!",
       "heard": "Hup!",
       "similarity": 1,
@@ -1316,8 +1349,8 @@
       "checked_at": "2026-10-31T08:15:44.191Z"
     },
     {
-      "id": "moana_jump_2",
-      "speaker": "moana",
+      "id": "ciela_jump_2",
+      "speaker": "ciela",
       "expected": "Wheee!",
       "heard": "Wee!",
       "similarity": 1,
@@ -1326,8 +1359,8 @@
       "checked_at": "2026-10-31T08:15:44.906Z"
     },
     {
-      "id": "moana_jump_3",
-      "speaker": "moana",
+      "id": "ciela_jump_3",
+      "speaker": "ciela",
       "expected": "Hop!",
       "heard": "Hop",
       "similarity": 1,
@@ -1336,8 +1369,8 @@
       "checked_at": "2026-10-31T08:15:45.388Z"
     },
     {
-      "id": "moana_glow_full_1",
-      "speaker": "moana",
+      "id": "ciela_glow_full_1",
+      "speaker": "ciela",
       "expected": "Healthy and happy!",
       "heard": "Healthy and happy",
       "similarity": 1,
@@ -1346,8 +1379,8 @@
       "checked_at": "2026-10-31T08:15:45.897Z"
     },
     {
-      "id": "moana_glow_full_2",
-      "speaker": "moana",
+      "id": "ciela_glow_full_2",
+      "speaker": "ciela",
       "expected": "I'm all glowy! Sweet as!",
       "heard": "I'm all glowy. Sweet as",
       "similarity": 1,
@@ -1356,8 +1389,8 @@
       "checked_at": "2026-10-31T08:15:46.392Z"
     },
     {
-      "id": "moana_shield_block_1",
-      "speaker": "moana",
+      "id": "ciela_shield_block_1",
+      "speaker": "ciela",
       "expected": "Ha! Bounced right off!",
       "heard": "Ha, bounced right off",
       "similarity": 1,
@@ -1366,8 +1399,8 @@
       "checked_at": "2026-10-31T08:15:46.965Z"
     },
     {
-      "id": "moana_finish_1",
-      "speaker": "moana",
+      "id": "ciela_finish_1",
+      "speaker": "ciela",
       "expected": "We did it! Yay!",
       "heard": "We did it. Yay!",
       "similarity": 1,
@@ -1376,8 +1409,8 @@
       "checked_at": "2026-10-31T08:15:47.806Z"
     },
     {
-      "id": "moana_finish_2",
-      "speaker": "moana",
+      "id": "ciela_finish_2",
+      "speaker": "ciela",
       "expected": "Finish line! Choice!",
       "heard": "Finish line. Choice",
       "similarity": 1,
@@ -1386,8 +1419,8 @@
       "checked_at": "2026-10-31T08:15:48.663Z"
     },
     {
-      "id": "moana_results_great_1",
-      "speaker": "moana",
+      "id": "ciela_results_great_1",
+      "speaker": "ciela",
       "expected": "Wow, look at all our food friends!",
       "heard": "Wow, look at all our food friends",
       "similarity": 1,
@@ -1396,8 +1429,8 @@
       "checked_at": "2026-10-31T08:15:49.179Z"
     },
     {
-      "id": "moana_results_great_2",
-      "speaker": "moana",
+      "id": "ciela_results_great_2",
+      "speaker": "ciela",
       "expected": "That was the best! Heaps good!",
       "heard": "That was the best. Heaps good",
       "similarity": 1,
@@ -1406,8 +1439,8 @@
       "checked_at": "2026-10-31T08:15:49.720Z"
     },
     {
-      "id": "moana_results_ok_1",
-      "speaker": "moana",
+      "id": "ciela_results_ok_1",
+      "speaker": "ciela",
       "expected": "Let's have another go!",
       "heard": "Let's have another go",
       "similarity": 1,
@@ -1416,8 +1449,8 @@
       "checked_at": "2026-10-31T08:15:50.321Z"
     },
     {
-      "id": "moana_results_ok_2",
-      "speaker": "moana",
+      "id": "ciela_results_ok_2",
+      "speaker": "ciela",
       "expected": "Nice try! Let's go again!",
       "heard": "Nice try. Let's go again",
       "similarity": 1,
@@ -1426,8 +1459,8 @@
       "checked_at": "2026-10-31T08:15:50.988Z"
     },
     {
-      "id": "moana_new_food_1",
-      "speaker": "moana",
+      "id": "ciela_new_food_1",
+      "speaker": "ciela",
       "expected": "A new food friend!",
       "heard": "A new food friend",
       "similarity": 1,
@@ -1436,8 +1469,8 @@
       "checked_at": "2026-10-31T08:15:51.567Z"
     },
     {
-      "id": "moana_new_food_2",
-      "speaker": "moana",
+      "id": "ciela_new_food_2",
+      "speaker": "ciela",
       "expected": "Ooh, someone new for our book!",
       "heard": "Ooh, someone new for our book",
       "similarity": 1,
@@ -1446,8 +1479,8 @@
       "checked_at": "2026-10-31T08:15:52.061Z"
     },
     {
-      "id": "moana_unlock_1",
-      "speaker": "moana",
+      "id": "ciela_unlock_1",
+      "speaker": "ciela",
       "expected": "Ooh, a new place to explore!",
       "heard": "Ooh, a new place to explore",
       "similarity": 1,
@@ -1456,8 +1489,8 @@
       "checked_at": "2026-10-31T08:15:52.766Z"
     },
     {
-      "id": "moana_idle_1",
-      "speaker": "moana",
+      "id": "ciela_idle_1",
+      "speaker": "ciela",
       "expected": "Let's go on an adventure!",
       "heard": "Let's go on an adventure",
       "similarity": 1,
@@ -1466,8 +1499,8 @@
       "checked_at": "2026-10-31T08:15:53.237Z"
     },
     {
-      "id": "moana_idle_2",
-      "speaker": "moana",
+      "id": "ciela_idle_2",
+      "speaker": "ciela",
       "expected": "Pick a ride, eh!",
       "heard": "Pick a ride, eh?",
       "similarity": 1,
@@ -1476,8 +1509,8 @@
       "checked_at": "2026-10-31T08:15:53.689Z"
     },
     {
-      "id": "moana_idle_3",
-      "speaker": "moana",
+      "id": "ciela_idle_3",
+      "speaker": "ciela",
       "expected": "I love fruit and veggies!",
       "heard": "I love fruit and veggies",
       "similarity": 1,
@@ -1534,16 +1567,6 @@
       "missing_keywords": [],
       "flag": false,
       "checked_at": "2026-10-31T08:15:56.941Z"
-    },
-    {
-      "id": "narrator_char_moana_1",
-      "speaker": "narrator",
-      "expected": "Moana!",
-      "heard": "Moana",
-      "similarity": 1,
-      "missing_keywords": [],
-      "flag": false,
-      "checked_at": "2026-10-31T08:15:57.589Z"
     },
     {
       "id": "narrator_pick_ride_1",
@@ -2224,6 +2247,610 @@
       "missing_keywords": [],
       "flag": false,
       "checked_at": "2026-10-31T08:16:37.546Z"
+    },
+    {
+      "id": "narrator_char_ciela_1",
+      "speaker": "narrator",
+      "expected": "Ciela!",
+      "heard": "谢啦",
+      "similarity": 1,
+      "missing_keywords": [],
+      "name_check": {
+        "word": "谢 啦",
+        "start": 0.24,
+        "end": 0.64,
+        "mandarin_readings": [
+          "谢啦。",
+          "谢啦。",
+          "谢啦。"
+        ],
+        "xie_la": 3,
+        "pass": true
+      },
+      "flag": false,
+      "checked_at": "2026-10-31T16:59:06.016Z"
+    },
+    {
+      "id": "ciela_hello_2",
+      "speaker": "ciela",
+      "expected": "Hi! Ciela here! Let's have some fun!",
+      "heard": "Hi, Ciela here. Let's have some fun",
+      "similarity": 1,
+      "missing_keywords": [],
+      "name_check": {
+        "word": "Ciela",
+        "start": 0.78,
+        "end": 1.5,
+        "mandarin_readings": [
+          "希拉。",
+          "希拉。",
+          "Siela"
+        ],
+        "xie_la": 0,
+        "pass": true
+      },
+      "flag": false,
+      "checked_at": "2026-10-31T16:59:05.397Z"
+    },
+    {
+      "id": "ace_warmup_go_1",
+      "speaker": "ace",
+      "expected": "Let's warm up!",
+      "heard": "Let's warm up",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:15:37.227Z"
+    },
+    {
+      "id": "ace_warmup_go_2",
+      "speaker": "ace",
+      "expected": "Warm-up time, eh!",
+      "heard": "Warm up time, eh?",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:15:37.292Z"
+    },
+    {
+      "id": "ace_stretch_cheer_1",
+      "speaker": "ace",
+      "expected": "Sweet as, I'm all warm!",
+      "heard": "Sweet as! I'm all warm",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:15:37.361Z"
+    },
+    {
+      "id": "ace_stretch_cheer_2",
+      "speaker": "ace",
+      "expected": "Ka pai!",
+      "heard": "Ka Pai!",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:15:37.841Z"
+    },
+    {
+      "id": "ace_stretch_cheer_3",
+      "speaker": "ace",
+      "expected": "Choice, my muscles are ready!",
+      "heard": "Choice! My muscles are ready",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:15:38.483Z"
+    },
+    {
+      "id": "ace_ready_1",
+      "speaker": "ace",
+      "expected": "Ready to go!",
+      "heard": "Ready to go",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:15:39.015Z"
+    },
+    {
+      "id": "ace_ready_2",
+      "speaker": "ace",
+      "expected": "All warmed up! Let's go!",
+      "heard": "All warmed up? Let's go",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:15:39.611Z"
+    },
+    {
+      "id": "ace_cooldown_go_1",
+      "speaker": "ace",
+      "expected": "Time to cool down!",
+      "heard": "Time to cool down",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:15:40.359Z"
+    },
+    {
+      "id": "ace_cooldown_done_1",
+      "speaker": "ace",
+      "expected": "Ahh, I feel all bendy!",
+      "heard": "Ah, I feel all bendy",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:15:40.909Z"
+    },
+    {
+      "id": "ace_cooldown_done_2",
+      "speaker": "ace",
+      "expected": "Nice and relaxed. Sweet as!",
+      "heard": "Nice and relaxed. Sweet as",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:15:41.502Z"
+    },
+    {
+      "id": "ciela_warmup_go_1",
+      "speaker": "ciela",
+      "expected": "Warm-up time!",
+      "heard": "Warm-up time",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:15:42.148Z"
+    },
+    {
+      "id": "ciela_warmup_go_2",
+      "speaker": "ciela",
+      "expected": "Let's get our bodies ready, eh!",
+      "heard": "Let's get our bodies ready, eh?",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:15:42.711Z"
+    },
+    {
+      "id": "ciela_stretch_cheer_1",
+      "speaker": "ciela",
+      "expected": "Heaps good, I'm all warm!",
+      "heard": "Heaps good. I'm all warm",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:15:43.537Z"
+    },
+    {
+      "id": "ciela_stretch_cheer_2",
+      "speaker": "ciela",
+      "expected": "Ka pai!",
+      "heard": "Ka pai!",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:15:44.189Z"
+    },
+    {
+      "id": "ciela_stretch_cheer_3",
+      "speaker": "ciela",
+      "expected": "Good as gold! I'm warm now!",
+      "heard": "Good as gold. I'm warm now",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:15:44.669Z"
+    },
+    {
+      "id": "ciela_ready_1",
+      "speaker": "ciela",
+      "expected": "I'm ready to go!",
+      "heard": "I'm ready to go",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:15:45.150Z"
+    },
+    {
+      "id": "ciela_ready_2",
+      "speaker": "ciela",
+      "expected": "Warm muscles! Let's run!",
+      "heard": "Warm muscles. Let's run",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:15:45.714Z"
+    },
+    {
+      "id": "ciela_cooldown_go_1",
+      "speaker": "ciela",
+      "expected": "Let's cool down now!",
+      "heard": "Let's cool down now",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:15:46.235Z"
+    },
+    {
+      "id": "ciela_cooldown_done_1",
+      "speaker": "ciela",
+      "expected": "Ahh, so stretchy and calm!",
+      "heard": "Ah, so stretchy and calm",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:15:46.823Z"
+    },
+    {
+      "id": "ciela_cooldown_done_2",
+      "speaker": "ciela",
+      "expected": "My body feels happy!",
+      "heard": "My body feels happy",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:15:47.376Z"
+    },
+    {
+      "id": "narrator_warmup_intro_1",
+      "speaker": "narrator",
+      "expected": "Let's warm up our bodies!",
+      "heard": "Let's warm up our bodies",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:15:48.126Z"
+    },
+    {
+      "id": "narrator_warmup_intro_2",
+      "speaker": "narrator",
+      "expected": "Warm-up time! Wiggle and move with me!",
+      "heard": "Warm-up time. Wiggle and move with me",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:15:48.663Z"
+    },
+    {
+      "id": "narrator_stretch_with_me_1",
+      "speaker": "narrator",
+      "expected": "Stretch with me! Copy the moves!",
+      "heard": "Stretch with me. Copy the moves",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:15:49.353Z"
+    },
+    {
+      "id": "narrator_count_1_1",
+      "speaker": "narrator",
+      "expected": "One!",
+      "heard": "One",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:15:49.978Z"
+    },
+    {
+      "id": "narrator_count_2_1",
+      "speaker": "narrator",
+      "expected": "Two!",
+      "heard": "Two",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:15:50.617Z"
+    },
+    {
+      "id": "narrator_count_3_1",
+      "speaker": "narrator",
+      "expected": "Three!",
+      "heard": "Three",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:15:51.104Z"
+    },
+    {
+      "id": "narrator_count_4_1",
+      "speaker": "narrator",
+      "expected": "Four!",
+      "heard": "Four",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:15:51.721Z"
+    },
+    {
+      "id": "narrator_count_5_1",
+      "speaker": "narrator",
+      "expected": "Five!",
+      "heard": "Five",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:15:52.216Z"
+    },
+    {
+      "id": "narrator_count_6_1",
+      "speaker": "narrator",
+      "expected": "Six!",
+      "heard": "Six",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:15:52.752Z"
+    },
+    {
+      "id": "narrator_count_7_1",
+      "speaker": "narrator",
+      "expected": "Seven!",
+      "heard": "Seven",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:15:53.418Z"
+    },
+    {
+      "id": "narrator_count_8_1",
+      "speaker": "narrator",
+      "expected": "Eight!",
+      "heard": "Eight",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:15:53.923Z"
+    },
+    {
+      "id": "narrator_move_look_1",
+      "speaker": "narrator",
+      "expected": "Look left... and right!",
+      "heard": "Look left and right",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:15:54.492Z"
+    },
+    {
+      "id": "narrator_move_nod_1",
+      "speaker": "narrator",
+      "expected": "Nod your head, up and down!",
+      "heard": "Nod your head up and down",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:15:55.090Z"
+    },
+    {
+      "id": "narrator_move_arm_circles_1",
+      "speaker": "narrator",
+      "expected": "Arm circles!",
+      "heard": "Arm circles",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:15:55.697Z"
+    },
+    {
+      "id": "narrator_move_arm_swings_1",
+      "speaker": "narrator",
+      "expected": "Big arm swings!",
+      "heard": "Big arm swings",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:15:56.324Z"
+    },
+    {
+      "id": "narrator_move_torso_twist_1",
+      "speaker": "narrator",
+      "expected": "Twist your body, side to side!",
+      "heard": "Twist your body side to side",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:15:56.954Z"
+    },
+    {
+      "id": "narrator_move_side_bend_1",
+      "speaker": "narrator",
+      "expected": "Bend to the side!",
+      "heard": "Bend to the side",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:15:57.620Z"
+    },
+    {
+      "id": "narrator_move_high_knees_1",
+      "speaker": "narrator",
+      "expected": "High knees!",
+      "heard": "High knees",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:15:58.249Z"
+    },
+    {
+      "id": "narrator_move_leg_swings_1",
+      "speaker": "narrator",
+      "expected": "Leg swings!",
+      "heard": "Leg swings",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:15:58.766Z"
+    },
+    {
+      "id": "narrator_move_hops_1",
+      "speaker": "narrator",
+      "expected": "Little hops!",
+      "heard": "Little hops",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:15:59.282Z"
+    },
+    {
+      "id": "narrator_move_ankle_circles_1",
+      "speaker": "narrator",
+      "expected": "Circle your ankles!",
+      "heard": "Circle your ankles",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:15:59.908Z"
+    },
+    {
+      "id": "narrator_move_reach_sky_1",
+      "speaker": "narrator",
+      "expected": "Reach up to the sky!",
+      "heard": "Reach up to the sky",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:16:00.522Z"
+    },
+    {
+      "id": "narrator_move_side_reach_1",
+      "speaker": "narrator",
+      "expected": "Reach over to the side!",
+      "heard": "Reach over to the side",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:16:01.106Z"
+    },
+    {
+      "id": "narrator_move_shoulder_stretch_1",
+      "speaker": "narrator",
+      "expected": "Hug your arm across your chest!",
+      "heard": "Hug your arm across your chest",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:16:01.698Z"
+    },
+    {
+      "id": "narrator_move_quad_stretch_1",
+      "speaker": "narrator",
+      "expected": "Hold your foot behind you!",
+      "heard": "Hold your foot behind you",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:16:02.376Z"
+    },
+    {
+      "id": "narrator_move_calf_stretch_1",
+      "speaker": "narrator",
+      "expected": "Step back and stretch your calf!",
+      "heard": "Step back and stretch your calf",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:16:02.936Z"
+    },
+    {
+      "id": "narrator_move_toe_touch_1",
+      "speaker": "narrator",
+      "expected": "Reach down to your toes!",
+      "heard": "Reach down to your toes",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:16:03.433Z"
+    },
+    {
+      "id": "narrator_move_butterfly_1",
+      "speaker": "narrator",
+      "expected": "Sit like a butterfly!",
+      "heard": "Sit like a butterfly",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:16:04.218Z"
+    },
+    {
+      "id": "narrator_move_breathe_1",
+      "speaker": "narrator",
+      "expected": "Breathe in... and out.",
+      "heard": "Breathe in and out",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:16:05.668Z"
+    },
+    {
+      "id": "narrator_ready_1",
+      "speaker": "narrator",
+      "expected": "Warm muscles! Ready to go!",
+      "heard": "Warm muscles ready to go",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:16:06.243Z"
+    },
+    {
+      "id": "narrator_cooldown_intro_1",
+      "speaker": "narrator",
+      "expected": "Great running! Let's cool down.",
+      "heard": "Great running. Let's cool down",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:16:06.914Z"
+    },
+    {
+      "id": "narrator_breathe_in_1",
+      "speaker": "narrator",
+      "expected": "Breathe in...",
+      "heard": "Breathe in",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:16:07.536Z"
+    },
+    {
+      "id": "narrator_breathe_out_1",
+      "speaker": "narrator",
+      "expected": "And out...",
+      "heard": "and out",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:16:08.178Z"
+    },
+    {
+      "id": "narrator_stretch_happy_1",
+      "speaker": "narrator",
+      "expected": "Stretching keeps your body happy!",
+      "heard": "Stretching keeps your body happy",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:16:08.910Z"
+    },
+    {
+      "id": "narrator_stretch_happy_2",
+      "speaker": "narrator",
+      "expected": "Stretchy muscles are happy muscles!",
+      "heard": "Stretchy muscles are happy muscles",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:16:09.845Z"
+    },
+    {
+      "id": "narrator_hold_1",
+      "speaker": "narrator",
+      "expected": "Hold it... nice and still.",
+      "heard": "Hold it nice and still",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T17:16:10.410Z"
     }
   ]
 }

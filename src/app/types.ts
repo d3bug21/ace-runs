@@ -1,7 +1,7 @@
 // The audio surface the app uses. Structurally identical to the documented AudioManager API
 // (src/audio/AudioManager.ts) so the app layer and the dev harness can run with either.
 export type Bus = 'music' | 'voice' | 'sfx';
-export type Speaker = 'ace' | 'moana' | 'narrator';
+export type Speaker = 'ace' | 'ciela' | 'narrator';
 
 export interface LoopHandle {
   setVolume(v: number): void;

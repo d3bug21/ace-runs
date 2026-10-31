@@ -4,6 +4,8 @@ import type { Bus } from '../app/types';
 import { button, el, Screen } from './dom';
 import { glyph } from './icons';
 
+const STRETCH_GLYPH = `<svg class="g" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.6" r="2.2" fill="currentColor"/><path d="M4 7.5l8 2.5 8-2.5M12 10v5M12 15l-4 6M12 15l4 6"/></svg>`;
+
 export class PauseModal extends Screen {
   constructor(
     private app: AppApi,
@@ -34,7 +36,7 @@ export class PauseModal extends Screen {
 
 export interface SettingsHooks {
   onVolume(bus: Bus, v: number, commit: boolean): void;
-  onToggle(key: 'hints' | 'reducedMotion', v: boolean): void;
+  onToggle(key: 'hints' | 'reducedMotion' | 'stretches', v: boolean): void;
   toggleFullscreen(): Promise<boolean>;
   isFullscreen(): boolean;
   resetProgress(): void;
@@ -82,7 +84,7 @@ export class SettingsModal extends Screen {
       volBox.append(row);
     }
     const togBox = el('div', 'set-group toggles');
-    const mkToggle = (key: 'hints' | 'reducedMotion', ic: string, label: string) => {
+    const mkToggle = (key: 'hints' | 'reducedMotion' | 'stretches', ic: string, label: string) => {
       const b = button({
         cls: 'set-row toggle-row',
         html: `<span class="set-ic">${ic}</span><span class="set-label">${label}</span><span class="switch"><i></i></span>`,
@@ -100,6 +102,7 @@ export class SettingsModal extends Screen {
     };
     mkToggle('hints', glyph.hint, 'Hints');
     mkToggle('reducedMotion', glyph.motion, 'Calm motion');
+    mkToggle('stretches', STRETCH_GLYPH, 'Warm-up & cool-down stretches');
     if (app.device.canFullscreen) {
       this.fsBtn = button({
         cls: 'set-row toggle-row',
@@ -115,7 +118,7 @@ export class SettingsModal extends Screen {
       togBox.append(this.fsBtn);
     }
     this.resetRow = el('div', 'set-group reset');
-    body.append(volBox, togBox, this.resetRow, el('p', 'version', `Ace Runs! v${typeof __APP_VERSION__ === 'string' ? __APP_VERSION__ : '1.0.0'} · made with kai and aroha`));
+    body.append(volBox, togBox, this.resetRow, el('p', 'version', `Ace Runs! v${typeof __APP_VERSION__ === 'string' ? __APP_VERSION__ : '1.0.1'} · made with kai and aroha`));
     card.append(head, body);
     this.el.append(card);
   }
@@ -154,6 +157,7 @@ export class SettingsModal extends Screen {
     }
     this.toggles.get('hints')?.setAttribute('aria-checked', String(s.hints));
     this.toggles.get('reducedMotion')?.setAttribute('aria-checked', String(s.reducedMotion));
+    this.toggles.get('stretches')?.setAttribute('aria-checked', String(s.stretches));
     this.fsBtn?.setAttribute('aria-checked', String(this.hooks.isFullscreen()));
     this.confirming = false;
     this.renderReset();

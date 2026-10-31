@@ -12,6 +12,8 @@ export interface Settings {
   sfx: number;
   hints: boolean;
   reducedMotion: boolean;
+  /** v1.0.1: warm-up on the pickers + cool-down after a finish (default on). */
+  stretches: boolean;
 }
 
 export interface StageProgress {
@@ -58,7 +60,7 @@ export interface RunOutcome {
   starsBefore: number;
 }
 
-export const DEFAULT_SETTINGS: Settings = { music: 0.6, voice: 0.95, sfx: 0.8, hints: true, reducedMotion: false };
+export const DEFAULT_SETTINGS: Settings = { music: 0.6, voice: 0.95, sfx: 0.8, hints: true, reducedMotion: false, stretches: true };
 
 function freshStage(i: number): StageProgress {
   return { unlocked: i === 0, cleared: false, bestDistance: 0, bestEndless: 0, stars: 0, plays: 0 };
@@ -85,9 +87,64 @@ const num = (v: unknown, d: number, a = 0, b = Number.MAX_SAFE_INTEGER): number 
   typeof v === 'number' && Number.isFinite(v) ? Math.min(b, Math.max(a, v)) : d;
 const oneOf = <T extends string>(v: unknown, list: readonly T[], d: T): T => (list.includes(v as T) ? (v as T) : d);
 
+/** Ids renamed between releases: v1.0.1 renamed the girl runner Moana -> Ciela. */
+export const RENAMED_IDS: Readonly<Record<string, string>> = { moana: 'ciela' };
+
+function renameString(v: string): string {
+  for (const [from, to] of Object.entries(RENAMED_IDS)) {
+    if (v.toLowerCase() === from) return to;
+    // per-character ids such as 'moana_hello' / 'moana:bike' / 'moana-skate'
+    const m = new RegExp(`^${from}(?=[_:.\\-])`, 'i');
+    if (m.test(v)) return v.replace(m, to);
+  }
+  return v;
+}
+
+/**
+ * Rewrite legacy ids anywhere in a parsed save (values AND object keys, at any depth), so an old
+ * save that picked 'moana' loads as 'ciela' with all progress intact. `changed` tells the caller
+ * to re-save. Also maps legacy field names (lastCharacter/lastRide/lastStage).
+ */
+export function migrateRaw(raw: unknown): { value: unknown; changed: boolean } {
+  let changed = false;
+  const walk = (v: unknown, depth: number): unknown => {
+    if (depth > 12) return v;
+    if (typeof v === 'string') {
+      const r = renameString(v);
+      if (r !== v) changed = true;
+      return r;
+    }
+    if (Array.isArray(v)) return v.map((x) => walk(x, depth + 1));
+    if (isObj(v)) {
+      const out: Record<string, unknown> = {};
+      for (const [k, x] of Object.entries(v)) {
+        const nk = renameString(k);
+        if (nk !== k) changed = true;
+        // if both the old and the new key exist, keep the new one
+        if (nk !== k && nk in v) continue;
+        out[nk] = walk(x, depth + 1);
+      }
+      return out;
+    }
+    return v;
+  };
+  const value = walk(raw, 0);
+  if (isObj(value)) {
+    for (const [legacy, cur] of [['lastCharacter', 'character'], ['lastRide', 'ride'], ['lastStage', 'stage']] as const) {
+      if (legacy in value) {
+        if (!(cur in value)) value[cur] = value[legacy];
+        delete value[legacy];
+        changed = true;
+      }
+    }
+  }
+  return { value, changed };
+}
+
 /** Rebuild a valid save from any parsed JSON (unknown fields dropped, bad values defaulted). */
-export function sanitize(raw: unknown): SaveState {
+export function sanitize(input: unknown): SaveState {
   const s = freshSave();
+  const raw = migrateRaw(input).value;
   if (!isObj(raw)) return s;
   const st = isObj(raw.settings) ? raw.settings : {};
   s.settings = {
@@ -96,6 +153,7 @@ export function sanitize(raw: unknown): SaveState {
     sfx: num(st.sfx, DEFAULT_SETTINGS.sfx, 0, 1),
     hints: st.hints !== false,
     reducedMotion: st.reducedMotion === true,
+    stretches: st.stretches !== false,
   };
   s.character = oneOf(raw.character, CHARACTERS, 'ace');
   s.ride = oneOf(raw.ride, RIDES, 'shoes');
@@ -148,7 +206,10 @@ export class SaveData {
     } catch {
       raw = null; // corrupted JSON: start fresh but keep playing
     }
-    this.state = sanitize(raw);
+    const migrated = migrateRaw(raw);
+    this.state = sanitize(migrated.value);
+    // Persist the migrated save straight away so no legacy ids linger in storage.
+    if (migrated.changed) this.write();
   }
 
   static defaultStorage(): Storage | null {

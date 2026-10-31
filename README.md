@@ -1,20 +1,22 @@
 # Ace Runs!
 
-A joyful, kid-friendly endless runner. Pick **Ace** or **Moana**, pick how you travel, and dash through six
+A joyful, kid-friendly endless runner. Pick **Ace** or **Ciela**, pick how you travel, and dash through six
 places collecting **healthy food** instead of coins. Every healthy bite powers you up in a way you can *see*;
 junk food slows you down for a little while. Treats are "sometimes foods" — everyday healthy food makes you strong!
 
 Plays on Windows, macOS and Linux (desktop app) and in any modern web browser, including phones and tablets
 (portrait or landscape), and works offline.
 
-![Title screen](docs/screenshots/01-title.png)
+![Ace and Ciela](docs/screenshots/00-cover-title.png)
+
+A short gameplay clip of Ciela: [docs/preview-ciela.webm](docs/preview-ciela.webm)
 
 ## Meet the runners
 
 | | |
 |---|---|
 | **Ace** | A cheerful Kiwi boy who is always up for a run. "Sweet as!" |
-| **Moana** | A cheerful Kiwi girl with a big curly hair puff and a flower clip. "Ka pai!" |
+| **Ciela** (say "SYEH-lah") | A cheerful, smiley girl with a black bob and fringe, a lilac sporty tee with a little bow, and bright pink flower sneakers. "Ka pai!" |
 
 Both have their own look, animations, reactions and New Zealand voice.
 
@@ -37,6 +39,20 @@ Finish a place to open the next one (and unlock its Endless run):
 4. **Sports place** – rugby, football, netball, basketball, cricket, tennis, hockey, athletics, swimming and cycling
 5. **Jungle** – swinging monkeys, ambling elephants, slow sloths, hopping frogs and parrots
 6. **Parks and botanical gardens** – run through winter, spring, summer and autumn
+
+## Warm up, cool down
+
+Before a run, Ace and Ciela do a calm **dynamic warm-up** on the picker screens: looking left and right, nods,
+arm circles, big arm swings, twists, side bends, high knees, leg swings, little hops and ankle circles. The body
+part that is moving glows warm, and a little sun fills up until a "Ready to go!" badge pops. Tap **Stretch with
+me!** for a short guided count-along (skip any time).
+
+After crossing the finish line there is a short **static cool-down**: reach for the sky, side reach, shoulder
+stretch, a (slightly wobbly) quad stretch, toe touch and a slow breathe in and out. A hold-timer ring, a heart
+that slows down and muscles that go soft and wavy show why it helps. Grown-ups can switch stretches off in
+Settings ("Warm-up & cool-down stretches").
+
+Between places you can swap your ride: "Next place" shows the ride picker with a one-tap **Same ride!** button.
 
 ## Food friends and what they do
 
@@ -79,24 +95,28 @@ The desktop app also supports `F11` for full screen.
 | | |
 |---|---|
 | ![Pick who runs](docs/screenshots/02-character-select.png) | ![Pick your ride](docs/screenshots/03-ride-select.png) |
-| ![Tutorial](docs/screenshots/04-tutorial.png) | ![Stage select](docs/screenshots/05-stage-select.png) |
+| ![Warm-up: Stretch with me!](docs/screenshots/03b-warmup-move.png) | ![Tutorial](docs/screenshots/04-tutorial.png) |
+| ![Stage select](docs/screenshots/05-stage-select.png) | ![Ride re-pick between places](docs/screenshots/05b-ride-repick-after-stage.png) |
 | ![Indoor playground](docs/screenshots/06-stage-indoor-playground.png) | ![Indoor arcade](docs/screenshots/07-stage-arcade.png) |
 | ![Outdoor playground](docs/screenshots/08-stage-outdoor-playground.png) | ![Sports place](docs/screenshots/09-stage-sports-rugby.png) |
 | ![Jungle](docs/screenshots/11-stage-jungle.png) | ![Parks in winter](docs/screenshots/12-parks-winter.png) |
 | ![Spring](docs/screenshots/13-parks-spring.png) | ![Summer](docs/screenshots/14-parks-summer.png) |
 | ![Autumn](docs/screenshots/15-parks-autumn.png) | ![A food benefit](docs/screenshots/16-food-benefit.png) |
-| ![Results](docs/screenshots/18-results.png) | ![Food Friends book](docs/screenshots/19-food-friends-book.png) |
+| ![Cool-down hold](docs/screenshots/18a-cooldown-hold.png) | ![Results](docs/screenshots/18-results.png) |
+| ![Food Friends book](docs/screenshots/19-food-friends-book.png) | ![Ciela on the bike](docs/screenshots/listing-ride-select-ciela-bike.png) |
+| ![Carrot power](docs/screenshots/listing-indoor-carrot-power-ciela.png) | ![Rugby slide](docs/screenshots/listing-sports-rugby-slide-ciela.png) |
+| ![Healthy and happy glow](docs/screenshots/listing-arcade-glow.png) | ![Jungle shield](docs/screenshots/listing-jungle-ace-skate-shield.png) |
 
 All captures are 1920x1080 from the real game.
 
 ## Install and play
 
 - **Desktop:** download the package for your system (see *Packaging* to build them yourself):
-  - macOS: `AceRuns-1.0.0-mac-arm64.dmg` (Apple silicon) or `AceRuns-1.0.0-mac-x64.dmg` (Intel). The app is not
+  - macOS: `AceRuns-1.0.1-mac-arm64.dmg` (Apple silicon) or `AceRuns-1.0.1-mac-x64.dmg` (Intel). The app is not
     notarised, so the first time right-click the app and choose **Open**.
-  - Windows: `AceRuns-1.0.0-win-x64.exe` installer or the portable `AceRuns-1.0.0-win-x64.zip`.
+  - Windows: `AceRuns-1.0.1-win-x64.exe` installer or the portable `AceRuns-1.0.1-win-x64.zip`.
     (Unsigned, so Windows SmartScreen may ask you to confirm.)
-  - Linux: `AceRuns-1.0.0-linux-x86_64.AppImage` (make it executable and run) or the `.tar.gz`.
+  - Linux: `AceRuns-1.0.1-linux-x86_64.AppImage` (make it executable and run) or the `.tar.gz`.
 - **Web:** serve the built `dist/` folder from any static web host. It can be embedded in an `<iframe>`, adds to
   the home screen as an app, and keeps working offline after the first visit.
 
@@ -137,6 +157,8 @@ node tests/controls-matrix.mjs http://localhost:4173     # A/D/W/S + arrows on e
 node tests/occlusion.mjs --url http://localhost:4173/     # every button reachable on phone/tablet sizes
 node tests/hud-overlap.mjs http://localhost:4173 390 844 m sports  # no HUD pieces overlap during a live run
 node tests/menu-overlap.mjs http://localhost:4173          # floating menu foods never cover the kids
+node tests/save-migration.mjs --url http://localhost:4173/index.html  # old saves load as Ciela
+node tests/ui-flow.mjs --url http://localhost:4173/index.html     # menus, ride re-pick, warm-up, cool-down
 node tests/capture.mjs http://localhost:4173 docs/screenshots-new  # drives the whole game and screenshots it
 node tests/electron-smoke.mjs <path-to-packaged-executable> out.png
 ```
@@ -144,7 +166,7 @@ node tests/electron-smoke.mjs <path-to-packaged-executable> out.png
 ## Audio
 
 All voices, sound effects, ambience and music were generated with [ElevenLabs](https://elevenlabs.io) and are bundled
-in `public/audio/`, so the game never needs the network to play. Voices have New Zealand accents: Ace and Moana
+in `public/audio/`, so the game never needs the network to play. Voices have New Zealand accents: Ace and Ciela
 (designed voices) and a warm Kiwi narrator.
 
 To regenerate audio you need your own ElevenLabs API key in an environment variable (never commit it):
@@ -164,7 +186,7 @@ src/
   app/               flow (screens state machine), saves, device + viewport handling
   ui/                title, pickers, stage select, HUD, pause, settings, results, Food Friends book
   engine/            runner simulation, track streaming, input, camera, menu backdrop
-  avatar/            Ace and Moana with their rides and animations
+  avatar/            Ace and Ciela with their rides and animations
   stages/            the six places (scenery, themed obstacles, animals, seasons)
   food/              food models, thumbnails and benefit pictures
   fx/                food effect animations (sparkles, shields, splashes, glow...)
@@ -177,6 +199,11 @@ scripts/             ElevenLabs audio generation tools
 tests/               browser checks (directional controls, layout occlusion, screenshots)
 docs/screenshots/    1920x1080 captures
 ```
+
+## Changelog
+
+- **1.0.1** - Meet Ciela! The girl runner is redesigned (black bob with a fringe, lilac sporty outfit, pink flower sneakers) and renamed; saved games that picked the previous girl runner carry over automatically. New warm-up and cool-down stretches with voices, a ride re-pick between places, merged food pickups with a count, and HUD pieces that never overlap.
+- **1.0.0** - First release.
 
 ## License
 

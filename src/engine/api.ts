@@ -10,6 +10,7 @@ import type {
   Season,
   StageId,
   StageSection,
+  StretchMove,
 } from '../contracts';
 
 export interface RunOptions {
@@ -88,7 +89,7 @@ export interface HudState {
   tutorialStep: TutorialStep | null;
 }
 
-export type MenuView = 'title' | 'character' | 'ride' | 'stage' | 'results' | 'book' | 'settings';
+export type MenuView = 'title' | 'character' | 'ride' | 'stage' | 'results' | 'book' | 'settings' | 'cooldown';
 
 export interface MenuSceneOptions {
   view: MenuView;
@@ -123,4 +124,7 @@ export interface Engine {
   setSettings(s: EngineSettings): void;
   /** Keyboard + swipe gameplay input enable (disabled while menus overlay). */
   setInputEnabled(on: boolean): void;
+  /** v1.0.1: play a stretch on the menu kids (null = back to idle). glow = warm glow on the moving body parts.
+   *  side alternates one-sided moves. Restarts the move clock each call. */
+  setMenuMove(move: StretchMove | null, opts?: { glow?: boolean; side?: 1 | -1 }): void;
 }

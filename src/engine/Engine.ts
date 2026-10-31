@@ -11,6 +11,7 @@ import type {
   RideId,
   StageModule,
   StageSection,
+  StretchMove,
 } from '../contracts';
 import { LANE_WIDTH, PLATFORM_TOP, laneX } from '../contracts';
 import { FOOD_BY_ID } from '../content/foods';
@@ -25,7 +26,7 @@ import { Track, type FoodItem, type Obstacle } from './Track';
 /** Structural audio interface (implemented by src/audio/AudioManager). */
 export interface AudioLike {
   playSfx(id: string, opts?: { volume?: number; rate?: number; pan?: number; delay?: number }): void;
-  playVoice(speaker: 'ace' | 'moana' | 'narrator', group: string, opts?: { priority?: boolean; minGap?: number; interrupt?: boolean; delay?: number }): number;
+  playVoice(speaker: 'ace' | 'ciela' | 'narrator', group: string, opts?: { priority?: boolean; minGap?: number; interrupt?: boolean; delay?: number }): number;
   playMusic(id: string | null, fade?: number): void;
   playAmbience(id: string | null, fade?: number): void;
   loop(key: string, id: string | null, volume?: number): { setVolume(v: number): void; setRate(r: number): void; stop(fade?: number): void } | null;
@@ -241,6 +242,10 @@ class GameEngine implements Engine {
     if (!on) this.input.clear();
   }
   private wantInput = false;
+
+  setMenuMove(move: StretchMove | null, opts?: { glow?: boolean; side?: 1 | -1 }): void {
+    this.menu.setMove(move, opts);
+  }
 
   showMenu(o: MenuSceneOptions): void {
     if (this.runActive && this.phase !== 'over') this.quitRun();

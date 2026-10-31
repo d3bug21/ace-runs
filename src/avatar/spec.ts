@@ -69,10 +69,16 @@ export interface CharSpec {
   sole: number;
   stripe: number;
   lace: number;
-  /** Long sleeves (Ace's hoodie) vs short sleeves (Moana's tee). */
+  /** Long sleeves (Ace's hoodie) vs short sleeves (Ciela's tee). */
   longSleeves: boolean;
   /** Leg covering: shorts above the knee or 3/4 leggings. */
   leggings: boolean;
+  /** Skort colour over the leggings (Ciela), or null. */
+  skirt: number | null;
+  /** Hair bow colour (Ciela), or null. */
+  bow: number | null;
+  /** Original explorer-girl badge + flower prints on the sneakers (Ciela). */
+  shoePatch: boolean;
   rides: Record<Exclude<RideId, 'shoes'>, RideColours>;
   p: Personality;
 }
@@ -102,6 +108,9 @@ export const ACE: CharSpec = {
   lace: 0xf0e6d2,
   longSleeves: true,
   leggings: false,
+  skirt: null,
+  bow: null,
+  shoePatch: false,
   rides: {
     bike: { frame: 0x3f8fd0, accent: 0xffc94a, accent2: 0xf6efe2, seat: 0x3b4652, grip: 0xffc94a, tyre: 0x3a4048, rim: 0xe9eef2, wheel: 0xffc94a, metal: 0xc9d2da },
     scooter: { frame: 0x2fb5a8, accent: 0xffc94a, accent2: 0xf6efe2, seat: 0x2b3440, grip: 0xe2a94e, tyre: 0x3a4048, rim: 0xe9eef2, wheel: 0xffe066, metal: 0xcfd6dc },
@@ -110,37 +119,40 @@ export const ACE: CharSpec = {
   p: { bounce: 1.25, sway: 0.6, arms: 1.12, cadence: 1.06, stance: 1, duckSide: -1 },
 };
 
-export const MOANA: CharSpec = {
-  id: 'moana',
-  name: 'Moana',
-  height: 1.55,
-  skin: 0xa86e4b,
-  lid: 0x9a6343,
-  blush: 0xd9786a,
-  nose: 0x9c6343,
-  hair: 0x2a1c17,
-  hairHi: 0x3a2820,
-  brow: 0x221612,
-  iris: 0x3d2617,
-  lash: 0x1d1411,
-  top: 0x2fb5a8, // teal sporty tee
-  topDark: 0x27978d,
-  trim: 0xff7a6b, // coral raglan sleeves + hem
-  bottom: 0x4b4f80, // indigo 3/4 leggings
-  bottomTrim: 0xff8f7f,
-  sock: 0xfbf7ef,
-  shoe: 0xff8676,
-  sole: 0xfbf7ef,
-  stripe: 0xffe066,
-  lace: 0xfff4e0,
+export const CIELA: CharSpec = {
+  id: 'ciela',
+  name: 'Ciela',
+  height: 1.44,
+  skin: 0xecb994,
+  lid: 0xe0a984,
+  blush: 0xf4949a,
+  nose: 0xe2a682,
+  hair: 0x1d1b23, // black straight bob
+  hairHi: 0x343142,
+  brow: 0x1b1920,
+  iris: 0x3b2618,
+  lash: 0x17151b,
+  top: 0xb7a0ee, // lilac sporty tee
+  topDark: 0x9c85d9,
+  trim: 0xfdfbff, // white collar + sleeve trim
+  bottom: 0x4b4485, // leggings
+  bottomTrim: 0xfdfbff,
+  sock: 0xfdfbff,
+  shoe: 0xff4f9e, // bright pink sneakers
+  sole: 0xfdfbff,
+  stripe: 0xffffff,
+  lace: 0xfff4fa,
   longSleeves: false,
   leggings: true,
+  skirt: 0x7c62c9, // grape skort over the leggings
+  bow: 0xff5fa8,
+  shoePatch: true,
   rides: {
-    bike: { frame: 0xff7a6b, accent: 0x2fb5a8, accent2: 0xffe066, seat: 0xf6efe2, grip: 0x2fb5a8, tyre: 0x3a4048, rim: 0xf2f4f6, wheel: 0x2fb5a8, metal: 0xd0d6dc },
-    scooter: { frame: 0xb59cf0, accent: 0xff7a6b, accent2: 0xfff4e0, seat: 0x2b3440, grip: 0xff7a6b, tyre: 0x3a4048, rim: 0xf2f4f6, wheel: 0x7fdcc0, metal: 0xe3e8ee },
-    skate: { frame: 0xff7a6b, accent: 0xffe066, accent2: 0x7fdcc0, seat: 0x2f3640, grip: 0x353c45, tyre: 0x3a4048, rim: 0xf2f4f6, wheel: 0xb59cf0, metal: 0xc6cfd8 },
+    bike: { frame: 0xa98ae8, accent: 0xff6fae, accent2: 0xfdfbff, seat: 0xfdfbff, grip: 0xff6fae, tyre: 0x3a4048, rim: 0xf2f4f6, wheel: 0xff6fae, metal: 0xd0d6dc },
+    scooter: { frame: 0xff6fae, accent: 0xa98ae8, accent2: 0xfdfbff, seat: 0x2b3440, grip: 0xa98ae8, tyre: 0x3a4048, rim: 0xf2f4f6, wheel: 0xc9b6f5, metal: 0xe3e8ee },
+    skate: { frame: 0xa98ae8, accent: 0xff6fae, accent2: 0xfdfbff, seat: 0x2f3640, grip: 0x3a3646, tyre: 0x3a4048, rim: 0xf2f4f6, wheel: 0xff8cc0, metal: 0xc6cfd8 },
   },
-  p: { bounce: 0.85, sway: 1.35, arms: 0.95, cadence: 1.0, stance: -1, duckSide: 1 },
+  p: { bounce: 1.0, sway: 1.15, arms: 1.0, cadence: 1.03, stance: -1, duckSide: 1 },
 };
 
-export const SPECS: Record<CharacterId, CharSpec> = { ace: ACE, moana: MOANA };
+export const SPECS: Record<CharacterId, CharSpec> = { ace: ACE, ciela: CIELA };

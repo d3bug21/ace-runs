@@ -5,41 +5,16 @@
     "name": "Ace Plays - Ace (Kiwi cartoon hero)",
     "source": "Existing designed voice (Voice Design eleven_ttv_v3), reused from Ace Plays!",
     "model_id": "eleven_v3",
-    "voice_settings": { "stability": 0.5, "similarity_boost": 0.8, "use_speaker_boost": true },
-    "pitch_reference": { "sample": "same 24-word Kiwi preview line via eleven_v3", "f0_p25_hz": 302, "f0_median_hz": 333, "f0_p75_hz": 356 }
-  },
-  "moana": {
-    "voice_id": "6d7aSyJonDNTtZ1yx0V7",
-    "name": "Ace Runs - Moana (Kiwi cartoon heroine)",
-    "source": "Voice Design (POST /v1/text-to-voice/design, model eleven_ttv_v3, guidance_scale 5, should_enhance false), preview B_1 saved with POST /v1/text-to-voice",
-    "voice_description": "Very high-pitched, sparkly and squeaky-bright youthful cartoon heroine voice for an animated kids show, with a strong New Zealand accent. Bubbly, upbeat, encouraging and full of giggles, light airy tone, clean studio recording.",
-    "preview_text": "Kia ora! Sweet as, let's go for a run, eh? Ooh, yum, a crunchy carrot! Ka pai! Chur, that was heaps good fun! Choice, let's have another go!",
-    "model_id": "eleven_v3",
-    "voice_settings": { "stability": 0.5, "similarity_boost": 0.8, "use_speaker_boost": true },
-    "selection": {
-      "chosen_preview": "B_1",
-      "f0_p25_hz": 333, "f0_median_hz": 381, "f0_p75_hz": 457,
-      "scribe_transcript": "Kia ora. Sweet as. Let's go for a run, eh? Ooh, yum, a crunchy carrot. Ka pai. Cheer, that was heaps good fun. Choice, let's have another go",
-      "scribe_language_probability_en": 0.926,
-      "why": "Highest median F0 tier (381 Hz vs Ace 333 Hz) with the widest upper range (p75 457 Hz), and one of only a few previews where Scribe heard both 'Kia ora' and 'Ka pai' correctly; lower English-language confidence than most previews is a proxy for a stronger Kiwi accent.",
-      "candidates": [
-        { "preview": "A_0", "f0_median_hz": 372, "note": "'Kia ora' misheard ('Sure are'), 'Ka pai' -> 'Car-pie'" },
-        { "preview": "A_1", "f0_median_hz": 340 },
-        { "preview": "A_2", "f0_median_hz": 372, "note": "'Kia ora' -> 'Jonah'" },
-        { "preview": "B_0", "f0_median_hz": 356 },
-        { "preview": "B_1", "f0_median_hz": 381, "note": "chosen" },
-        { "preview": "B_2", "f0_median_hz": 364 },
-        { "preview": "D_0", "f0_median_hz": 390, "note": "highest pitch but 'Kia ora' -> 'Jora'" },
-        { "preview": "D_1", "f0_median_hz": 327 },
-        { "preview": "D_2", "f0_median_hz": 372, "note": "'Ka pai' -> 'Cap eye'" },
-        { "preview": "F_0", "f0_median_hz": 364 },
-        { "preview": "F_1", "f0_median_hz": 364 },
-        { "preview": "F_2", "f0_median_hz": 381, "note": "'Kia ora' -> 'Kiona'" },
-        { "preview": "G_0", "f0_median_hz": 364 },
-        { "preview": "G_1", "f0_median_hz": 381, "note": "'Chur' -> 'Sure'" },
-        { "preview": "G_2", "f0_median_hz": 356 }
-      ],
-      "refusals": "Voice Design returned 403 blocked_generation for every request whose preview text contained the name 'Moana' and for one description mentioning a 'small and light voice'; the accepted requests used a preview line without the name."
+    "voice_settings": {
+      "stability": 0.5,
+      "similarity_boost": 0.8,
+      "use_speaker_boost": true
+    },
+    "pitch_reference": {
+      "sample": "same 24-word Kiwi preview line via eleven_v3",
+      "f0_p25_hz": 302,
+      "f0_median_hz": 333,
+      "f0_p75_hz": 356
     }
   },
   "narrator": {
@@ -48,6 +23,163 @@
     "source": "Shared voice library (accent: new zealand), used by id",
     "model_id": "eleven_v4",
     "fallback_model_id": "eleven_multilingual_v2",
-    "voice_settings": { "stability": 0.55, "similarity_boost": 0.8 }
+    "voice_settings": {
+      "stability": 0.55,
+      "similarity_boost": 0.8
+    }
+  },
+  "ciela": {
+    "voice_id": "6d7aSyJonDNTtZ1yx0V7",
+    "name": "Ace Runs - Moana (Kiwi cartoon heroine)",
+    "source": "Voice Design (POST /v1/text-to-voice/design, model eleven_ttv_v3, guidance_scale 5, should_enhance false), preview B_1 saved with POST /v1/text-to-voice",
+    "voice_description": "Very high-pitched, sparkly and squeaky-bright youthful cartoon heroine voice for an animated kids show, with a strong New Zealand accent. Bubbly, upbeat, encouraging and full of giggles, light airy tone, clean studio recording.",
+    "preview_text": "Kia ora! Sweet as, let's go for a run, eh? Ooh, yum, a crunchy carrot! Ka pai! Chur, that was heaps good fun! Choice, let's have another go!",
+    "model_id": "eleven_v3",
+    "voice_settings": {
+      "stability": 0.5,
+      "similarity_boost": 0.8,
+      "use_speaker_boost": true
+    },
+    "selection": {
+      "chosen_preview": "B_1",
+      "f0_p25_hz": 333,
+      "f0_median_hz": 381,
+      "f0_p75_hz": 457,
+      "scribe_transcript": "Kia ora. Sweet as. Let's go for a run, eh? Ooh, yum, a crunchy carrot. Ka pai. Cheer, that was heaps good fun. Choice, let's have another go",
+      "scribe_language_probability_en": 0.926,
+      "why": "Highest median F0 tier (381 Hz vs Ace 333 Hz) with the widest upper range (p75 457 Hz), and one of only a few previews where Scribe heard both 'Kia ora' and 'Ka pai' correctly; lower English-language confidence than most previews is a proxy for a stronger Kiwi accent.",
+      "candidates": [
+        {
+          "preview": "A_0",
+          "f0_median_hz": 372,
+          "note": "'Kia ora' misheard ('Sure are'), 'Ka pai' -> 'Car-pie'"
+        },
+        {
+          "preview": "A_1",
+          "f0_median_hz": 340
+        },
+        {
+          "preview": "A_2",
+          "f0_median_hz": 372,
+          "note": "'Kia ora' -> 'Jonah'"
+        },
+        {
+          "preview": "B_0",
+          "f0_median_hz": 356
+        },
+        {
+          "preview": "B_1",
+          "f0_median_hz": 381,
+          "note": "chosen"
+        },
+        {
+          "preview": "B_2",
+          "f0_median_hz": 364
+        },
+        {
+          "preview": "D_0",
+          "f0_median_hz": 390,
+          "note": "highest pitch but 'Kia ora' -> 'Jora'"
+        },
+        {
+          "preview": "D_1",
+          "f0_median_hz": 327
+        },
+        {
+          "preview": "D_2",
+          "f0_median_hz": 372,
+          "note": "'Ka pai' -> 'Cap eye'"
+        },
+        {
+          "preview": "F_0",
+          "f0_median_hz": 364
+        },
+        {
+          "preview": "F_1",
+          "f0_median_hz": 364
+        },
+        {
+          "preview": "F_2",
+          "f0_median_hz": 381,
+          "note": "'Kia ora' -> 'Kiona'"
+        },
+        {
+          "preview": "G_0",
+          "f0_median_hz": 364
+        },
+        {
+          "preview": "G_1",
+          "f0_median_hz": 381,
+          "note": "'Chur' -> 'Sure'"
+        },
+        {
+          "preview": "G_2",
+          "f0_median_hz": 356
+        }
+      ],
+      "refusals": "Voice Design returned 403 blocked_generation for every request whose preview text contained the name 'Moana' and for one description mentioning a 'small and light voice'; the accepted requests used a preview line without the name."
+    },
+    "character": "Ciela (renamed from Moana in v1.0.1; the library voice keeps its original name, unchanged)",
+    "pronunciation": {
+      "target": "SYEH-lah: two syllables, /ˈsjɛ.lə/, starting with a sy-glide (not see-EL-ah)",
+      "method": "No SSML phoneme/alias support on eleven_v3 / eleven_v4 for this use (an IPA <phoneme> tag on eleven_v4 was spoken as 'Seller'), and no pronunciation dictionaries (that would be an account/library change). So request-only respellings, several takes per line, scored with Scribe: (1) the English transcript, (2) the name word cut out with Scribe word timestamps and read 3x by Scribe forced to Mandarin, where each character is one syllable and 谢啦 'xie la' = /ɕjɛ la/ (two syllables, sy-glide, 'eh' vowel). An intensity-peak syllable counter was tried and dropped: across the sonorant 'l' the energy contour is flat, so it gave 1 for every name, Ariella included.",
+      "calibration": "Jessie saying 'See-ella' / 'Celia' / 'Sheila' / 'Stella' / 'Sierra' / 'Ariella' / 'Bella' (14 takes) was always transcribed in Latin letters ('Siela', 'Celia', 'Sheila'...) and never as 谢啦; 'Syeh-lah' came back as 谢啦 even with English forced.",
+      "respellings_tried": [
+        "Ciela",
+        "Syeh-lah",
+        "Syeh-la",
+        "Syela",
+        "Cyela",
+        "Shyela",
+        "Sye-la",
+        "Sye-lah",
+        "Shyeh-lah",
+        "Sjeh-lah",
+        "Syehlah",
+        "Sieh-lah",
+        "Sieh-la",
+        "Cyeh-lah",
+        "Cyeh-la",
+        "Cieh-lah",
+        "<phoneme alphabet=ipa ph=ˈsjɛlɐ>"
+      ],
+      "rejected_patterns": "'Shyela' -> Shyla (eye vowel), 'Shyeh-lah'/'Sjeh-lah' -> Sheila (ee vowel), 'Sye-la'/'Syeh-la' often -> Sailor/Saila (no glide), 'Cieh-lah' -> Cheela, 'Ciela' plain -> Siela (ambiguous with see-EL-ah)",
+      "chosen": {
+        "narrator_char_ciela_1": {
+          "request_text": "Syeh-lah!",
+          "model": "eleven_v4",
+          "takes": 41,
+          "english_scribe": "谢啦",
+          "mandarin_name_reads": [
+            "谢啦",
+            "谢啦",
+            "谢啦"
+          ]
+        },
+        "ciela_hello_1": {
+          "request_text": "[excited] Ki-a o-ra... I'm Sieh-lah!",
+          "model": "eleven_v3",
+          "takes": 59,
+          "english_scribe": "Kia ora. I'm Siela",
+          "mandarin_name_reads": [
+            "谢啦",
+            "谢啦",
+            "谢啦"
+          ]
+        },
+        "ciela_hello_2": {
+          "request_text": "[cheerful] Hi! Syeh-lah... here! Let's have some fun!",
+          "model": "eleven_v3",
+          "takes": 58,
+          "english_scribe": "Hi, Ciela here. Let's have some fun",
+          "mandarin_name_reads": [
+            "希拉",
+            "希拉",
+            "Siela"
+          ],
+          "note": "In this sentence the Ciela voice was the least consistent. The one 6/6 谢啦 take was heard in English as 'Sierra' (r-like), so the take heard as 'Ciela' (Spanish-like sye-la) with two-syllable Mandarin reads was preferred."
+        }
+      }
+    }
   }
 }

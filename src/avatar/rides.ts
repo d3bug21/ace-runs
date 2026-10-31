@@ -283,7 +283,7 @@ export class SkateRide implements RideBase {
   private board = new THREE.Group();
   private spin = 0;
 
-  constructor(c: RideColours, character: 'ace' | 'moana') {
+  constructor(c: RideColours, character: 'ace' | 'ciela') {
     this.group.add(this.board);
     const d = new Parts();
     const y = 0.11;
@@ -368,10 +368,10 @@ export class ShoesRide implements RideBase {
 
 export type Ride = BikeRide | ScooterRide | SkateRide | ShoesRide;
 
-export function buildRide(id: RideId, colours: Record<Exclude<RideId, 'shoes'>, RideColours>, character: 'ace' | 'moana'): Ride {
+export function buildRide(id: RideId, colours: Record<Exclude<RideId, 'shoes'>, RideColours>, character: 'ace' | 'ciela'): Ride {
   switch (id) {
     case 'bike':
-      return new BikeRide(colours.bike, character === 'moana');
+      return new BikeRide(colours.bike, character === 'ciela');
     case 'scooter':
       return new ScooterRide(colours.scooter);
     case 'skate':

@@ -1,19 +1,19 @@
 // Avatar harness: all 8 character x ride combos, every motion state, expression and teeth
 // state, preset cameras (incl. the gameplay camera) and perf / slide-height checks.
-// URL params (for scripted screenshots): char=ace|moana|both ride=shoes|bike|scooter|skate|all
+// URL params (for scripted screenshots): char=ace|ciela|both ride=shoes|bike|scooter|skate|all
 // grid=1 view=game|front|threeq|back|side|face|low|orbit act=run|idle|menu|lanes|leanL|leanR|jump|slide|land|bump
 // speed boost sleepy wobble mood flex celebrate sparkle shine sticky=1 speck=1 expr=<Expression>
 // t=<seconds> (simulate then freeze) spin=<rad/s> clean=1
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import type { Avatar, AvatarMotion, CharacterId, Expression, RideId } from '../src/contracts';
-import { CHARACTERS, RIDES } from '../src/contracts';
-import { createAvatar } from '../src/avatar';
+import type { Avatar, AvatarMotion, CharacterId, Expression, RideId, StretchMove } from '../src/contracts';
+import { CHARACTERS, COOLDOWN_MOVES, RIDES, WARMUP_MOVES } from '../src/contracts';
+import { createAvatar, debugFaceClearance, debugRig } from '../src/avatar';
 import { blobShadow, canvasTexture } from '../src/kit/kit';
 
-type View = 'game' | 'front' | 'threeq' | 'near' | 'back' | 'side' | 'face' | 'low' | 'orbit';
+type View = 'game' | 'front' | 'threeq' | 'menu' | 'near' | 'back' | 'side' | 'face' | 'shoe' | 'low' | 'orbit';
 type Act = 'run' | 'idle' | 'menu' | 'lanes' | 'leanL' | 'leanR' | 'jump' | 'slide' | 'land' | 'bump';
-const VIEWS: View[] = ['game', 'front', 'threeq', 'near', 'back', 'side', 'face', 'low', 'orbit'];
+const VIEWS: View[] = ['game', 'front', 'threeq', 'menu', 'near', 'back', 'side', 'face', 'shoe', 'low', 'orbit'];
 const ACTS: Act[] = ['run', 'idle', 'menu', 'lanes', 'leanL', 'leanR', 'jump', 'slide', 'land', 'bump'];
 const EXPRS: (Expression | 'auto')[] = ['auto', 'happy', 'grin', 'wow', 'yum', 'oops', 'sleepy', 'droopy', 'tummy', 'determined', 'brr', 'cheer'];
 
@@ -40,7 +40,11 @@ const S = {
   spin: num('spin', 0),
   blink: false,
   freezeT: qs.has('t') ? Number(qs.get('t')) : null,
+  move: (qs.get('move') ?? 'none') as StretchMove | 'none',
+  side: (qs.get('side') === '-1' ? -1 : 1) as 1 | -1,
 };
+const MOVES: (StretchMove | 'none')[] = ['none', ...WARMUP_MOVES, ...COOLDOWN_MOVES];
+let moveT0 = 0;
 if (qs.get('clean') === '1') document.body.classList.add('clean');
 
 // ------------------------------------------------------------------ renderer + scene
@@ -163,6 +167,15 @@ function motionAt(t: number, dt: number, s: Slot): AvatarMotion {
   };
   let y = 0;
   let x = s.x0;
+  if (S.move !== 'none') {
+    // stretches play in menus (no forward travel); the clock restarts when a move is picked
+    m.speed = 0;
+    m.menu = true;
+    m.stretch = { move: S.move, t: Math.max(0, t - moveT0), side: S.side };
+    s.a.root.position.set(x, 0, s.z0);
+    s.shadow.position.set(x, 0.012, s.z0);
+    return m;
+  }
   switch (S.act) {
     case 'idle':
       m.speed = 0;
@@ -245,6 +258,12 @@ function placeCamera(): void {
       camera.position.set(cx + 2.0 * far, 1.35 * Math.min(far, 1.6), c.z - 2.5 * far);
       camera.lookAt(cx, 0.75, c.z);
       break;
+    case 'menu':
+      // like MenuScene (front 3/4 at ~6.5 m), slightly narrower lens for review
+      camera.fov = 24;
+      camera.position.set(cx + 2.4, 1.6, c.z - 6.1);
+      camera.lookAt(cx + (STEP[slots[0]?.a.ride ?? 'shoes'] ?? 0) * -0.5, 0.72, c.z);
+      break;
     case 'near':
       camera.position.set(cx + 1.25, 1.2, c.z - 1.75);
       camera.lookAt(cx, 0.78, c.z);
@@ -268,6 +287,11 @@ function placeCamera(): void {
       camera.lookAt(cx, hy - 0.02, c.z);
       break;
     }
+    case 'shoe':
+      camera.fov = 28;
+      camera.position.set(cx + 0.62, 0.3, c.z - 0.5);
+      camera.lookAt(cx + 0.02, 0.07, c.z - 0.04);
+      break;
     case 'orbit':
       if (!orbitInit) {
         camera.position.set(cx + 2, 1.4, c.z - 2.6);
@@ -279,6 +303,8 @@ function placeCamera(): void {
   camera.updateProjectionMatrix();
 }
 let orbitInit = false;
+/** Camera-centre nudge for the kid's step-off on wheeled rides (kid steps to its own left = -X). */
+const STEP: Record<RideId, number> = { shoes: 0, bike: -0.98, scooter: -0.96, skate: -0.8 };
 
 function resize(): void {
   const w = innerWidth;
@@ -327,6 +353,29 @@ w.__breakdown = () =>
     return rows.sort((a, b) => b[1] - a[1]).slice(0, 14).map(([n, t]) => `${n}: ${t}`);
   });
 w.__ready = false;
+/** Fringe guard check: for every expression (and mid-blink / squint), brow top vs fringe bottom. */
+(window as unknown as { __fringe: () => string[] }).__fringe = () => {
+  const out: string[] = [];
+  const exprs: Expression[] = ['happy', 'grin', 'wow', 'yum', 'oops', 'sleepy', 'droopy', 'tummy', 'determined', 'brr', 'cheer'];
+  for (const r of RIDES) {
+    const a = createAvatar('ciela', r);
+    let worst = 1;
+    for (const e of exprs) {
+      a.setExpression(e, 99);
+      let minC = 1;
+      for (let i = 0; i < 240; i++) {
+        a.update({ time: i / 60, dt: 1 / 60, speed: 0, lateral: 0, airborne: false, vy: 0, jumpT: -1, sliding: false, slideT: -1, landT: 999, bumpT: i % 80, boost: 0, sleepy: e === 'sleepy' ? 1 : 0, wobble: 0, mood: 0, flex: 0, celebrate: e === 'cheer' ? 1 : 0, menu: true });
+        const c = debugFaceClearance(a).clearance ?? 1;
+        minC = Math.min(minC, c);
+      }
+      worst = Math.min(worst, minC);
+      if (r === 'shoes') out.push(`${e}: min clearance ${(minC * 1000).toFixed(1)} mm`);
+    }
+    out.push(`ciela/${r}: worst ${(worst * 1000).toFixed(1)} mm`);
+    a.dispose();
+  }
+  return out;
+};
 
 /** Max world height of each combo during slide / run / jump-tuck / menu, by vertex-precise bounds. */
 w.__heights = () => {
@@ -384,6 +433,8 @@ function syncUrl(): void {
   if (S.sticky) p.set('sticky', '1');
   if (S.speck) p.set('speck', '1');
   if (S.expr !== 'auto') p.set('expr', S.expr);
+  if (S.move !== 'none') p.set('move', S.move);
+  if (S.side === -1) p.set('side', '-1');
   history.replaceState(null, '', `?${p.toString()}`);
 }
 function buttons<T extends string>(label: string, opts: readonly T[], get: () => T, set: (v: T) => void): void {
@@ -431,7 +482,7 @@ function slider(label: string, key: 'speed' | 'boost' | 'sleepy' | 'wobble' | 'm
   ui.append(row);
   return row;
 }
-buttons('character', ['ace', 'moana', 'both'] as const, () => S.char, (v) => {
+buttons('character', ['ace', 'ciela', 'both'] as const, () => S.char, (v) => {
   S.char = v;
   S.grid = false;
   rebuild();
@@ -460,6 +511,14 @@ slider('mood', 'mood', -1, 1);
 slider('flex', 'flex', 0, 1);
 slider('celebrate', 'celebrate', 0, 1);
 slider('turntable', 'spin', 0, 2);
+buttons('stretch (warm-up / cool-down)', MOVES, () => S.move, (v) => {
+  S.move = v;
+  moveT0 = simT;
+});
+buttons('stretch side', ['1', '-1'] as const, () => (S.side === 1 ? '1' : '-1'), (v) => {
+  S.side = v === '1' ? 1 : -1;
+  moveT0 = simT;
+});
 buttons('expression', EXPRS, () => S.expr, (v) => {
   S.expr = v;
   applyStatic();
@@ -536,4 +595,105 @@ if (S.freezeT !== null) {
     });
   }
   return out.sort((a, b) => b[1] - a[1]).slice(0, 6).map(([n, y]) => `${n}: ${y.toFixed(3)}`).join('\n');
+};
+
+/**
+ * Stretch clip check: for every kid x ride x move, simulate ~7 s (incl. ease in) and record the worst
+ * hand/elbow-in-head, hand-in-torso, arm-vs-arm, body-below-floor and body-vs-ride intrusions (metres; > 0 = clip).
+ */
+(window as unknown as { __clip: (chars?: CharacterId[], rides?: RideId[]) => string[] }).__clip = (chars = [...CHARACTERS], rides = [...RIDES]) => {
+  const out: string[] = [];
+  const HEAD: Record<CharacterId, { c: THREE.Vector3; r: THREE.Vector3 }> = {
+    ace: { c: new THREE.Vector3(0, 0.27, 0), r: new THREE.Vector3(0.272, 0.272, 0.262) },
+    ciela: { c: new THREE.Vector3(0, 0.254, 0.01), r: new THREE.Vector3(0.292, 0.279, 0.274) },
+  };
+  const tmp = new THREE.Vector3();
+  const segDist = (a: THREE.Vector3, b: THREE.Vector3, c: THREE.Vector3, d: THREE.Vector3): number => {
+    let m = 9;
+    for (let i = 0; i <= 8; i++) {
+      const p = a.clone().lerp(b, i / 8);
+      for (let j = 0; j <= 8; j++) m = Math.min(m, p.distanceTo(c.clone().lerp(d, j / 8)));
+    }
+    return m;
+  };
+  for (const c of chars) {
+    for (const r of rides) {
+      for (const mv of [...WARMUP_MOVES, ...COOLDOWN_MOVES]) {
+        for (const side of [1, -1] as const) {
+          const a = createAvatar(c, r);
+          scene.add(a.root);
+          const H = HEAD[c];
+          const worst = { head: -1, torso: -1, arms: -1, floor: -1, ride: -1, fringe: 1 };
+          // settle in menu idle, then stretch
+          for (let f = 0; f < 7.5 * 30; f++) {
+            const tt = f / 30;
+            const st = tt > 0.5 ? { move: mv, t: tt - 0.5, side } : null;
+            a.update({ time: tt, dt: 1 / 30, speed: 0, lateral: 0, airborne: false, vy: 0, jumpT: -1, sliding: false, slideT: -1, landT: 999, bumpT: 999, boost: 0, sleepy: 0, wobble: 0, mood: 1, flex: 0, celebrate: 0, menu: true, stretch: st });
+            if (tt < 1.3) continue; // judge after the ease-in
+            a.root.updateMatrixWorld(true);
+            const R = debugRig(a);
+            // hands + elbows vs head (+ hair), sphere radius ~0.05
+            for (const p of [...R.hand, ...R.elbow]) {
+              tmp.copy(p);
+              R.head.worldToLocal(tmp);
+              tmp.sub(H.c);
+              const k = Math.sqrt((tmp.x / (H.r.x + 0.045)) ** 2 + (tmp.y / (H.r.y + 0.045)) ** 2 + (tmp.z / (H.r.z + 0.045)) ** 2);
+              worst.head = Math.max(worst.head, (1 - k) * 0.3);
+            }
+            // hands vs torso (rounded-box distance in spine space; hand sphere r 0.045)
+            for (const p of R.hand) {
+              tmp.copy(p);
+              R.spine.worldToLocal(tmp);
+              const rr = 0.075;
+              const qx = Math.abs(tmp.x) - (0.168 - rr);
+              const qy = Math.abs(tmp.y - 0.135) - (0.155 - rr);
+              const qz = Math.abs(tmp.z) - (0.12 - rr);
+              const outside = Math.hypot(Math.max(qx, 0), Math.max(qy, 0), Math.max(qz, 0)) + Math.min(Math.max(qx, qy, qz), 0) - rr;
+              worst.torso = Math.max(worst.torso, 0.045 - outside);
+            }
+            // arms vs each other (forearm / upper arm capsules ~0.05 radius)
+            const dArm = Math.min(
+              segDist(R.shoulder[0], R.elbow[0], R.elbow[1], R.hand[1]),
+              segDist(R.elbow[0], R.hand[0], R.shoulder[1], R.elbow[1]),
+              segDist(R.elbow[0], R.hand[0], R.elbow[1], R.hand[1]),
+            );
+            worst.arms = Math.max(worst.arms, 0.095 - dArm);
+            // floor: soles + pelvis bottom (root at y = 0 is the podium top)
+            for (const p of R.ankle) worst.floor = Math.max(worst.floor, -(p.y - 0.083));
+            worst.floor = Math.max(worst.floor, -(R.pelvis.y - 0.05));
+            // ride: nearest ride vertex to each body joint sphere (every 5th frame, vertex-precise)
+            if (r !== 'shoes' && f % 5 === 0) {
+              const verts: number[] = [];
+              R.ride.traverse((o) => {
+                const me = o as THREE.Mesh;
+                if (!me.isMesh) return;
+                const pa = me.geometry.getAttribute('position');
+                for (let k = 0; k < pa.count; k += 2) {
+                  tmp.fromBufferAttribute(pa, k).applyMatrix4(me.matrixWorld);
+                  verts.push(tmp.x, tmp.y, tmp.z);
+                }
+              });
+              const pts: [THREE.Vector3, number][] = [...R.hand.map((p) => [p, 0.05] as [THREE.Vector3, number]), ...R.elbow.map((p) => [p, 0.05] as [THREE.Vector3, number]), ...R.knee.map((p) => [p, 0.055] as [THREE.Vector3, number]), ...R.ankle.map((p) => [p, 0.07] as [THREE.Vector3, number]), ...R.hip.map((p) => [p, 0.07] as [THREE.Vector3, number]), [R.pelvis, 0.13]];
+              for (const [p, rad] of pts) {
+                let md = 99;
+                for (let k = 0; k < verts.length; k += 3) {
+                  const dx = verts[k] - p.x, dy = verts[k + 1] - p.y, dz = verts[k + 2] - p.z;
+                  const d2 = dx * dx + dy * dy + dz * dz;
+                  if (d2 < md) md = d2;
+                }
+                worst.ride = Math.max(worst.ride, rad - Math.sqrt(md));
+              }
+            }
+            const fc = debugFaceClearance(a).clearance;
+            if (fc !== null) worst.fringe = Math.min(worst.fringe, fc);
+          }
+          a.dispose();
+          const flags = Object.entries(worst).filter(([k, v]) => (k === 'fringe' ? v < 0.005 : v > 0.002)).map(([k, v]) => `${k}=${(v * 1000).toFixed(0)}mm`);
+          if (flags.length) out.push(`${c}/${r}/${mv}/${side}: ${flags.join(' ')}`);
+        }
+      }
+    }
+  }
+  out.push(`checked ${chars.length * rides.length * 18 * 2} runs`);
+  return out;
 };

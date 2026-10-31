@@ -36,7 +36,7 @@ function versionedServiceWorker(): Plugin {
       const template = readFileSync('src/sw-template.js', 'utf8');
       writeFileSync(
         join(outDir, 'sw.js'),
-        template.replace('__ACE_VERSION__', version).replace('"__ACE_PRECACHE__"', JSON.stringify(['./', ...rel])),
+        template.replace('__ACE_VERSION__', `${pkg.version}-${version}`).replace('"__ACE_PRECACHE__"', JSON.stringify(['./', ...rel])),
       );
     },
   };

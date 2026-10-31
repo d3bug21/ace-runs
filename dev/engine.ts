@@ -1,4 +1,4 @@
-// Lead's engine harness: runs the real engine with a silent audio stub. Query: ?stage=jungle&ride=bike&char=moana&mode=adventure
+// Lead's engine harness: runs the real engine with a silent audio stub. Query: ?stage=jungle&ride=bike&char=ciela&mode=adventure
 import { createEngine, type AudioLike } from '../src/engine/Engine';
 import { installProbeIfRequested } from '../src/engine/Probe';
 import type { CharacterId, RideId, RunMode, StageId } from '../src/contracts';

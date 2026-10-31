@@ -11,7 +11,7 @@ for (const [w, h] of sizes) {
   await p.goto(base + '/?ui-test=1');
   await p.waitForFunction(() => window.__aceRuns?.engine);
   for (const view of views) {
-    await p.evaluate((v) => window.__aceRuns.engine.showMenu({ view: v, character: 'moana', ride: 'bike', stage: 'jungle', celebrate: true }), view);
+    await p.evaluate((v) => window.__aceRuns.engine.showMenu({ view: v, character: 'ciela', ride: 'bike', stage: 'jungle', celebrate: true }), view);
     for (let k = 0; k < 10; k++) {
       await p.waitForTimeout(1000);
       const r = await p.evaluate(() => window.__aceRuns.engine.menu.overlapReport());

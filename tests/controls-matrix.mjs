@@ -8,7 +8,7 @@ await page.goto(base + '/?ui-test=1');
 await page.waitForFunction(() => window.__aceRuns?.app);
 const rows = [];
 const combos = [];
-for (const ride of ['shoes', 'bike', 'scooter', 'skate']) for (const [character, stage] of [['ace', 'indoor'], ['moana', 'jungle'], ['ace', 'parks'], ['moana', 'arcade'], ['ace', 'sports'], ['moana', 'outdoor']]) combos.push({ ride, character, stage });
+for (const ride of ['shoes', 'bike', 'scooter', 'skate']) for (const [character, stage] of [['ace', 'indoor'], ['ciela', 'jungle'], ['ace', 'parks'], ['ciela', 'arcade'], ['ace', 'sports'], ['ciela', 'outdoor']]) combos.push({ ride, character, stage });
 for (const c of combos) {
   await page.evaluate((o) => window.__aceRuns.app.startRunDirect({ ...o, mode: 'adventure', seed: 7, skipCountdown: true }), c);
   await page.waitForTimeout(400);

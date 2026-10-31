@@ -20,6 +20,9 @@ export const POSE_KEYS = [
   'fLx', 'fLy', 'fLz', 'fLp', 'fLyaw', 'fLr',
   'fRx', 'fRy', 'fRz', 'fRp', 'fRyaw', 'fRr',
   'bicep',
+  // v1.0.1 stretches: spine-space hand targets (blend weight sp?) and knees pointing outward
+  'sLx', 'sLy', 'sLz', 'sRx', 'sRy', 'sRz', 'spL', 'spR',
+  'kneeOut',
 ] as const;
 
 export type PoseKey = (typeof POSE_KEYS)[number];
@@ -51,6 +54,6 @@ export const FOOT = [
 ] as const;
 
 export const ARM = [
-  { x: 'aLx', y: 'aLy', z: 'aLz', e: 'eL', ik: 'ikL', gx: 'gLx', gy: 'gLy', gz: 'gLz' },
-  { x: 'aRx', y: 'aRy', z: 'aRz', e: 'eR', ik: 'ikR', gx: 'gRx', gy: 'gRy', gz: 'gRz' },
+  { x: 'aLx', y: 'aLy', z: 'aLz', e: 'eL', ik: 'ikL', gx: 'gLx', gy: 'gLy', gz: 'gLz', sx: 'sLx', sy: 'sLy', sz: 'sLz', sp: 'spL' },
+  { x: 'aRx', y: 'aRy', z: 'aRz', e: 'eR', ik: 'ikR', gx: 'gRx', gy: 'gRy', gz: 'gRz', sx: 'sRx', sy: 'sRy', sz: 'sRz', sp: 'spR' },
 ] as const;

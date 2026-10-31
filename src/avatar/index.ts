@@ -1,14 +1,15 @@
-// Ace + Moana avatars on four rides. createAvatar(character, ride) implements the Avatar
+// Ace + Ciela avatars on four rides. createAvatar(character, ride) implements the Avatar
 // contract: a procedural rig (merged vertex-coloured parts per bone, IK legs/arms), per-ride
 // locomotion (run / pedal / kick-push / push-carve), layered overlays (lean, jump, slide,
 // land, bump, boost, sleepy, wobble, mood, flex, celebrate, menu idle) and an expressive face.
 import * as THREE from 'three';
-import type { AnchorName, Avatar, AvatarMotion, CharacterId, Expression, RideId, TeethState } from '../contracts';
-import { buildRig, type Rig } from './body';
+import type { AnchorName, Avatar, AvatarMotion, CharacterId, Expression, RideId, StretchMove, TeethState } from '../contracts';
+import { buildRig, FRINGE_BOTTOM, type Rig } from './body';
 import { solveTwoBone, type TwoBoneResult } from './ik';
 import { ARM, copyPose, FOOT, lerpPose, newPose, type Pose } from './pose';
 import { BIKE, BikeRide, buildRide, type Ride, SCOOTER, SKATE } from './rides';
 import { DIM, SPECS, type CharSpec } from './spec';
+import { stretchPose, type StretchCtx } from './stretch';
 
 export { SPECS } from './spec';
 
@@ -35,6 +36,13 @@ const qC = new THREE.Quaternion();
 const eA = new THREE.Euler();
 const ik: TwoBoneResult = { upper: new THREE.Quaternion(), bend: 0 };
 const mA = new THREE.Matrix4();
+const mB = new THREE.Matrix4();
+const vC = new THREE.Vector3();
+const ONE = new THREE.Vector3(1, 1, 1);
+/** Where the kid steps to (own left, -X) to stretch beside a wheeled ride. */
+const STEP_OFF: Record<RideId, number> = { shoes: 0, bike: -0.56, scooter: -0.54, skate: -0.5 };
+/** ...and, once the kid is clear, the ride is set aside to the kid's right (+X). */
+const PARK: Record<RideId, number> = { shoes: 0, bike: 0.42, scooter: 0.42, skate: 0.3 };
 const IDENT = new THREE.Quaternion();
 const Y_AXIS = new THREE.Vector3(0, 1, 0);
 const X_AXIS = new THREE.Vector3(1, 0, 0);
@@ -62,6 +70,21 @@ class AvatarImpl implements Avatar {
   private P = newPose();
   private Q = newPose();
   private R = newPose();
+  private S = newPose();
+  private S2 = newPose();
+  // stretch state: current + previous move (cross-fade), weight eases in/out of idle
+  private str: { move: StretchMove; t: number; side: 1 | -1 } | null = null;
+  private strPrev: { move: StretchMove; t: number; side: 1 | -1 } | null = null;
+  private strXf = 1;
+  private readonly sctx: StretchCtx = {
+    p: SPECS.ace.p,
+    ace: true,
+    handAt: (Q, i, x, y, z) => {
+      this.toSpine(Q, x, y, z, vC);
+      this.setHandSpine(Q, i, vC.x, vC.y, vC.z);
+    },
+    handSpine: (Q, i, x, y, z) => this.setHandSpine(Q, i, x, y, z),
+  };
 
   // clocks + smoothed motion weights
   private t = 0;
@@ -72,7 +95,7 @@ class AvatarImpl implements Avatar {
   private pushT = -1;
   private speedS = 0;
   private lat = 0;
-  private w = { air: 0, slide: 0, menu: 0, cele: 0, flex: 0, boost: 0, sleepy: 0, wobble: 0, mood: 0, run: 0 };
+  private w = { air: 0, slide: 0, menu: 0, cele: 0, flex: 0, boost: 0, sleepy: 0, wobble: 0, mood: 0, run: 0, str: 0 };
   private m: AvatarMotion | null = null;
 
   // expression
@@ -189,6 +212,7 @@ class AvatarImpl implements Avatar {
     this.speedS = damp(this.speedS, m.menu ? 0 : Math.max(0, m.speed), 6, dt);
     w.run = damp(w.run, m.menu ? 0 : smooth(this.speedS / 2.5), 8, dt);
     this.lat = damp(this.lat, m.lateral, 9, dt);
+    this.trackStretch(m, dt);
 
     const P = this.P;
     this.locomotion(P, dt, m);
@@ -222,6 +246,84 @@ class AvatarImpl implements Avatar {
       else this.menuSkate(Q);
       lerpPose(P, Q, this.w.menu);
     }
+    // warm-up / cool-down stretches (menus)
+    const sw = this.w.str;
+    if (sw > 0.002 && this.str) {
+      const S = this.S;
+      this.sctx.p = this.spec.p;
+      this.sctx.ace = this.character === 'ace';
+      stretchPose(S, this.str.move, this.str.t, this.str.side, this.sctx);
+      if (this.strXf < 1 && this.strPrev) {
+        const S2 = this.S2;
+        stretchPose(S2, this.strPrev.move, this.strPrev.t, this.strPrev.side, this.sctx);
+        lerpPose(S2, S, smooth(this.strXf));
+        copyPose(S, S2);
+      }
+      // on wheeled rides the kid steps off to their left and stretches beside the ride
+      const off = STEP_OFF[ride];
+      S.hx += off;
+      S.fLx += off;
+      S.fRx += off;
+      lerpPose(P, S, smooth(sw));
+      if (off !== 0 && sw < 0.999) {
+        // stepping off / back on: lift the feet over the ride (the bike leg swings over the back)
+        const k = 4 * sw * (1 - sw);
+        if (ride === 'bike') {
+          P.fRy += 0.52 * k;
+          P.fRz += 0.32 * k;
+        } else {
+          const onDeck = ride === 'scooter' ? (this.spec.p.stance === 1 ? 'fLy' : 'fRy') : this.spec.p.stance === 1 ? 'fLy' : 'fRy';
+          P[onDeck] += 0.12 * k;
+          P[onDeck === 'fLy' ? 'fRy' : 'fLy'] += 0.16 * k;
+        }
+      }
+    }
+  }
+
+  /** Track the requested stretch: restart / cross-fade on a new call, ease out when cleared. */
+  private trackStretch(m: AvatarMotion, dt: number): void {
+    const s = m.stretch ?? null;
+    if (s) {
+      const side: 1 | -1 = s.side === -1 ? -1 : 1;
+      const restarted = !this.str || this.str.move !== s.move || this.str.side !== side || s.t + 1e-4 < this.str.t - 0.05;
+      if (restarted) {
+        if (this.str && this.w.str > 0.05) {
+          this.strPrev = this.str;
+          this.strXf = 0;
+        } else this.strXf = 1;
+        this.str = { move: s.move, t: Math.max(0, s.t), side };
+      } else if (this.str) this.str.t = Math.max(0, s.t);
+      this.w.str = damp(this.w.str, 1, 5, dt);
+    } else {
+      if (this.str) this.str.t += dt;
+      this.w.str = damp(this.w.str, 0, 5, dt);
+      if (this.w.str < 0.002) this.str = null;
+    }
+    if (this.strPrev) {
+      this.strPrev.t += dt;
+      this.strXf = Math.min(1, this.strXf + dt / 0.7);
+      if (this.strXf >= 1) this.strPrev = null;
+    }
+  }
+
+  /** rideRoot-space point -> spine space, using the hips/spine fields of pose Q. */
+  private toSpine(Q: Pose, x: number, y: number, z: number, out: THREE.Vector3): THREE.Vector3 {
+    eA.set(-Q.hPitch, Q.hYaw, Q.hRoll, 'YXZ');
+    qA.setFromEuler(eA);
+    mA.compose(vB.set(Q.hx, Q.hy, Q.hz), qA, ONE);
+    eA.set(-Q.sPitch, Q.sYaw, Q.sRoll, 'YXZ');
+    qA.setFromEuler(eA);
+    mB.compose(vB.set(0, DIM.spineY, 0), qA, ONE);
+    mA.multiply(mB).invert();
+    return out.set(x, y, z).applyMatrix4(mA);
+  }
+
+  private setHandSpine(Q: Pose, i: number, x: number, y: number, z: number): void {
+    const A = ARM[i];
+    Q[A.sx] = x;
+    Q[A.sy] = y;
+    Q[A.sz] = z;
+    Q[A.sp] = 1;
   }
 
   private resetPose(P: Pose): void {
@@ -770,6 +872,7 @@ class AvatarImpl implements Avatar {
 
   private overlays(P: Pose, dt: number, m: AvatarMotion): void {
     const w = this.w;
+    const ks = 1 - w.str; // stretches own the pose: other layers fade out (no bounce in holds)
     const ride = this.ride;
     const t = this.t;
     const p = this.spec.p;
@@ -788,7 +891,7 @@ class AvatarImpl implements Avatar {
     if (ride === 'bike' || ride === 'scooter') P.steer += -lean * 0.15;
 
     // ---- mood: perkier or droopier posture
-    const md = w.mood;
+    const md = w.mood * ks;
     if (md < 0) {
       P.nPitch += 0.18 * -md;
       P.sPitch += 0.08 * -md;
@@ -800,21 +903,21 @@ class AvatarImpl implements Avatar {
     }
 
     // ---- sleepy: drooping head, lazy slump (+ yawns from the face)
-    const sl = w.sleepy;
+    const sl = w.sleepy * ks;
     if (sl > 0.002) {
       P.nPitch += sl * (0.24 + 0.07 * Math.sin(t * 1.4));
       P.nRoll += sl * 0.12 * Math.sin(t * 0.7);
       P.sPitch += sl * 0.1;
       P.hy -= sl * 0.015;
     }
-    const yawn = this.rig.face.yawn;
+    const yawn = this.rig.face.yawn * ks;
     if (yawn > 0) {
       P.nPitch -= 0.45 * yawn;
       P.sPitch -= 0.08 * yawn;
     }
 
     // ---- wobble: gentle side-to-side sway (tummy ache), hand on tummy
-    const wb = w.wobble;
+    const wb = w.wobble * ks;
     if (wb > 0.002) {
       const ph = t * 4.6;
       P.hx += 0.035 * Math.sin(ph) * wb;
@@ -859,7 +962,7 @@ class AvatarImpl implements Avatar {
 
     // ---- landing squash (knees bend; never scales the body)
     if (m.landT >= 0 && m.landT < 0.4 && !m.airborne) {
-      const e = Math.exp(-m.landT * 9) * Math.min(1, m.landT * 40 + 0.3);
+      const e = Math.exp(-m.landT * 9) * Math.min(1, m.landT * 40 + 0.3) * ks;
       P.hy -= (ride === 'shoes' ? 0.085 : 0.06) * e;
       P.sPitch += 0.25 * e;
       P.nPitch -= 0.12 * e;
@@ -872,7 +975,7 @@ class AvatarImpl implements Avatar {
     // ---- bump: cute stumble, arms windmill, wobble
     if (m.bumpT >= 0 && m.bumpT < 0.65) {
       const bt = m.bumpT;
-      const e = Math.min(1, bt / 0.06) * (1 - smooth(bt / 0.65)) * (1 - 0.9 * w.slide);
+      const e = Math.min(1, bt / 0.06) * (1 - smooth(bt / 0.65)) * (1 - 0.9 * w.slide) * ks;
       if (this.beginLayer(P, e)) {
         const Q = this.Q;
         const ph = bt * 17;
@@ -901,7 +1004,8 @@ class AvatarImpl implements Avatar {
     }
 
     // ---- flex: double bicep mid-run
-    if (this.beginLayer(P, w.flex)) {
+    const wFlex = w.flex * ks;
+    if (this.beginLayer(P, wFlex)) {
       const Q = this.Q;
       const pump = Math.sin(t * 7);
       Q.aRz = 1.68;
@@ -917,11 +1021,12 @@ class AvatarImpl implements Avatar {
       Q.sPitch -= 0.08;
       Q.nPitch -= 0.08;
       Q.bicep = 1 + 0.12 * pump;
-      this.endLayer(P, w.flex);
+      this.endLayer(P, wFlex);
     }
 
     // ---- celebrate: cheer, jump for joy
-    if (this.beginLayer(P, w.cele)) {
+    const wCele = w.cele * ks;
+    if (this.beginLayer(P, wCele)) {
       const Q = this.Q;
       const ace = this.character === 'ace';
       if (ace) {
@@ -959,7 +1064,7 @@ class AvatarImpl implements Avatar {
       } else {
         Q.hy += 0.04 * hop;
       }
-      this.endLayer(P, w.cele);
+      this.endLayer(P, wCele);
     }
 
     void dt;
@@ -1182,6 +1287,13 @@ class AvatarImpl implements Avatar {
     g.position.copy(ride.pivot).sub(vA);
     g.position.y += P.rideY;
     g.position.z += P.rideZ;
+    // stretching beside a wheeled ride: after the kid has stepped off, set the ride aside (little hop)
+    const pk = smooth((this.w.str - 0.6) / 0.4);
+    if (pk > 0 && PARK[this.ride] > 0) {
+      g.position.x += PARK[this.ride] * pk;
+      g.position.y += 0.05 * Math.sin(Math.PI * pk);
+      g.rotation.y += 0.22 * pk;
+    }
     ride.update(dt, this.speedS * (m.menu ? 0 : 1), P.steer, Math.max(0, P.squash), this.crank);
     // body
     r.hips.position.set(P.hx, P.hy, P.hz);
@@ -1203,7 +1315,8 @@ class AvatarImpl implements Avatar {
       }
       r.rideRoot.localToWorld(vA);
       r.hips.worldToLocal(vA);
-      vPole.set((i ? 1 : -1) * 0.18, 0.1, -1);
+      const ko = clamp(P.kneeOut, 0, 1);
+      vPole.set((i ? 1 : -1) * lerp(0.18, 1.0, ko), lerp(0.1, 0.45, ko), lerp(-1, -0.25, ko));
       solveTwoBone(r.thigh[i].position, vA, vPole, DIM.thigh, DIM.shin, -1, ik);
       r.thigh[i].quaternion.copy(ik.upper);
       r.shin[i].rotation.set(ik.bend, 0, 0);
@@ -1220,6 +1333,8 @@ class AvatarImpl implements Avatar {
         vA.set(P[A.gx], P[A.gy], P[A.gz]).applyMatrix4(g.matrix);
         r.rideRoot.localToWorld(vA);
         r.spine.worldToLocal(vA);
+        const sp = clamp(P[A.sp], 0, 1);
+        if (sp > 0) vA.lerp(vB.set(P[A.sx], P[A.sy], P[A.sz]), sp);
         const s = i ? 1 : -1;
         vPole.set(s * 0.8, -0.5, 0.6);
         solveTwoBone(sh.position, vA, vPole, DIM.upperArm, DIM.foreArm + DIM.hand, 1, ik);
@@ -1265,21 +1380,36 @@ class AvatarImpl implements Avatar {
     } else this.slideFix = damp(this.slideFix, 0, 5, dt);
   }
 
+  rigPoints(): RigPoints {
+    const r = this.rig;
+    const wp = (o: THREE.Object3D) => o.getWorldPosition(new THREE.Vector3());
+    return {
+      shoulder: r.shoulder.map(wp),
+      elbow: r.elbow.map(wp),
+      hand: r.hand.map(wp),
+      hip: r.thigh.map(wp),
+      knee: r.shin.map(wp),
+      ankle: r.foot.map(wp),
+      pelvis: wp(r.hips),
+      head: r.head,
+      spine: r.spine,
+      ride: this.rideObj.group,
+    };
+  }
+
+  browTop(): number {
+    return this.rig.face.browTop();
+  }
+
   /** Conservative head/hair top height in root space (bounding spheres). */
   topHeight(): number {
     const r = this.rig;
     const ace = this.character === 'ace';
-    vA.set(0, DIM.headC + (ace ? 0.045 : 0.0), ace ? 0 : 0.02);
+    // Ace: skull + cap; Ciela: skull + bob (bounding spheres, slightly conservative)
+    vA.set(0, DIM.headC + (ace ? 0.045 : 0.004), ace ? 0 : 0.01);
     r.head.localToWorld(vA);
     this.root.worldToLocal(vA);
-    let top = vA.y + (ace ? 0.272 : 0.27);
-    if (!ace) {
-      vB.set(0, 0.105, 0.005);
-      r.hair.localToWorld(vB);
-      this.root.worldToLocal(vB);
-      top = Math.max(top, vB.y + 0.158);
-    }
-    return top;
+    return vA.y + (ace ? 0.272 : 0.3); // Ciela: sphere also covers her hair bow
   }
 
   private springHair(dt: number, P: Pose): void {
@@ -1296,19 +1426,20 @@ class AvatarImpl implements Avatar {
     const ay = (vB.y - this.hairVel.y) / dt;
     this.hairVel.copy(vB);
     this.hairPrev.copy(vA);
-    const moana = this.character === 'moana';
-    const gain = moana ? 1 : 1.6;
+    const ciela = this.character === 'ciela';
+    const gain = ciela ? 1.3 : 1.6;
     const tPitch = clamp(-ay * 0.0045 * gain, -0.35, 0.35) + this.w.boost * 0.22 + this.speedS * 0.006;
     const tRoll = clamp(ax * 0.004 * gain, -0.35, 0.35);
-    const K = moana ? 140 : 220;
-    const D = moana ? 9 : 12;
+    const K = ciela ? 150 : 220;
+    const D = ciela ? 7 : 12;
     const h = this.hairAng;
     const hv = this.hairAngV;
     hv.x += (-K * (h.x - tPitch) - D * hv.x) * dt;
     hv.y += (-K * (h.y - tRoll) - D * hv.y) * dt;
     h.x = clamp(h.x + hv.x * dt, -0.5, 0.5);
     h.y = clamp(h.y + hv.y * dt, -0.5, 0.5);
-    r.hair.rotation.set(h.x * (moana ? 0.55 : 1.2), 0, h.y * (moana ? 0.6 : 1));
+    // Ciela's bob swings from the fringe line: only the ends move, the fringe stays put
+    r.hair.rotation.set(h.x * (ciela ? 0.3 : 1.2), 0, h.y * (ciela ? 0.45 : 1));
     void P;
   }
 
@@ -1339,6 +1470,34 @@ class AvatarImpl implements Avatar {
 
 export function createAvatar(character: CharacterId, ride: RideId): Avatar {
   return new AvatarImpl(character, ride);
+}
+
+/**
+ * Debug helper: brow top vs fringe bottom (head space, metres above the head centre).
+ * clearance > 0 means the fringe sits above the brows (and therefore above the eyes).
+ */
+export function debugFaceClearance(a: Avatar): { browTop: number; fringeBottom: number | null; clearance: number | null } {
+  const impl = a as AvatarImpl;
+  const browTop = impl.browTop();
+  const fringeBottom = a.character === 'ciela' ? FRINGE_BOTTOM - DIM.headC : null;
+  return { browTop, fringeBottom, clearance: fringeBottom === null ? null : fringeBottom - browTop };
+}
+
+export interface RigPoints {
+  shoulder: THREE.Vector3[];
+  elbow: THREE.Vector3[];
+  hand: THREE.Vector3[];
+  hip: THREE.Vector3[];
+  knee: THREE.Vector3[];
+  ankle: THREE.Vector3[];
+  pelvis: THREE.Vector3;
+  head: THREE.Object3D;
+  spine: THREE.Object3D;
+  ride: THREE.Object3D;
+}
+/** Debug helper (harness clip checks): world-space joint positions + key bones. */
+export function debugRig(a: Avatar): RigPoints {
+  return (a as AvatarImpl).rigPoints();
 }
 
 /** Debug helper for harnesses: draw-call-ish mesh count of an avatar. */

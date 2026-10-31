@@ -1,7 +1,7 @@
 // App flow / state machine: boot -> title -> character -> ride -> (tutorial) -> stages -> run
 // -> results, plus the book, pause and settings overlays. Owns saves, settings, menu audio and
 // narration; the engine owns in-run gameplay, in-run SFX/music and character reactions.
-import { STAGES, type BenefitId, type CharacterId, type JunkEffectId, type RideId, type RunMode, type StageId } from '../contracts';
+import { STAGES, type BenefitId, type CharacterId, type JunkEffectId, type RideId, type RunMode, type StageId, type StretchMove } from '../contracts';
 import type { Engine, EngineEvent, MenuView, RunOptions, RunStats } from '../engine/api';
 import { SaveData, type RunOutcome } from './Save';
 import { detectDevice, isFullscreenNow, toggleFullscreen, type DeviceInfo } from './Device';
@@ -10,7 +10,9 @@ import type { AudioPort, Bus, Speaker } from './types';
 import type { AppApi, UiSound } from '../ui/ctx';
 import { el, Screen, spatialMove, TapGuard } from '../ui/dom';
 import { loadFoodArt } from '../ui/foodArt';
-import { BootScreen, CharacterScreen, RideScreen, StageScreen, TitleScreen } from '../ui/screens';
+import { BootScreen, CharacterScreen, IntroScreen, RideScreen, StageScreen, TitleScreen } from '../ui/screens';
+import { WarmupController, WarmupView } from '../ui/Stretch';
+import { CooldownScreen } from '../ui/Cooldown';
 import { Hud } from '../ui/Hud';
 import { ResultsScreen } from '../ui/Results';
 import { BookScreen } from '../ui/Book';
@@ -18,9 +20,10 @@ import { PauseModal, SettingsModal } from '../ui/Modals';
 import { STAGE_ART, STAGE_NAME } from '../ui/icons';
 import { sectionIcon } from '../ui/icons';
 
-export type AppState = 'boot' | 'title' | 'character' | 'ride' | 'stage' | 'run' | 'results' | 'book';
+export type AppState = 'boot' | 'title' | 'character' | 'ride' | 'stage' | 'intro' | 'run' | 'cooldown' | 'results' | 'book';
 export type DirectRunOptions = RunOptions & { skipCountdown?: boolean };
 
+const WASD: Record<string, string> = { a: 'arrowleft', d: 'arrowright', w: 'arrowup', s: 'arrowdown' };
 const SOUND_ID: Record<UiSound, string> = { click: 'ui_click', back: 'ui_back', select: 'ui_select', unlock: 'ui_unlock', page: 'ui_page', star: 'star' };
 
 export interface AppOptions {
@@ -46,6 +49,10 @@ export class App implements AppApi {
   private stages: StageScreen;
   private results: ResultsScreen;
   private book: BookScreen;
+  private intro: IntroScreen;
+  private cooldown: CooldownScreen;
+  readonly warmup: WarmupController;
+  private pending: { stage: StageId; mode: RunMode } | null = null;
   private pauseModal: PauseModal;
   private settings: SettingsModal;
   readonly hud: Hud;
@@ -90,6 +97,14 @@ export class App implements AppApi {
     this.ui.append(this.hud.el, this.screensLayer, this.modalLayer, this.curtain);
     root.append(this.ui);
 
+    this.warmup = new WarmupController({
+      setMove: (m, o) => this.menuMove(m, o),
+      voice: (sp, g, o) => this.voice(sp, g, o),
+      sfx: (id) => this.audio.playSfx(id),
+      kid: () => this.save.state.character,
+      enabled: () => this.save.settings.stretches,
+      reduced: () => document.documentElement.classList.contains('reduced'),
+    });
     this.boot = new BootScreen(this, () => this.onBootPlay());
     this.title = new TitleScreen(this);
     this.character = new CharacterScreen(this);
@@ -107,6 +122,8 @@ export class App implements AppApi {
     });
     this.book = new BookScreen(this);
     this.book.onClose = () => this.closeBook();
+    this.intro = new IntroScreen(this, { go: () => this.goFromIntro(), back: () => this.goRide() });
+    this.cooldown = new CooldownScreen({ setMove: (m, o) => this.menuMove(m, o), voice: (sp, g, o) => this.voice(sp, g, o), sfx: (id) => this.audio.playSfx(id) });
     this.pauseModal = new PauseModal(this, {
       resume: () => this.resumeRun(),
       restart: () => this.restartRun(),
@@ -128,7 +145,7 @@ export class App implements AppApi {
       },
       close: () => this.closeModal(this.settings),
     });
-    for (const s of [this.boot, this.title, this.character, this.ride, this.stages, this.results, this.book]) this.screensLayer.append(s.el);
+    for (const s of [this.boot, this.title, this.character, this.ride, this.stages, this.intro, this.cooldown, this.results, this.book]) this.screensLayer.append(s.el);
     for (const m of [this.pauseModal, this.settings]) this.modalLayer.append(m.el);
 
     this.applySettings();
@@ -137,6 +154,29 @@ export class App implements AppApi {
   }
 
   // ================================================================ AppApi
+  newWarmView(): WarmupView {
+    return new WarmupView(() => {
+      this.sound('click');
+      this.warmup.toggleGuided();
+    });
+  }
+
+  warmGuided(): boolean {
+    return this.warmup?.isGuided ?? false;
+  }
+
+  pendingRun(): { stage: StageId; mode: RunMode } | null {
+    return this.pending;
+  }
+
+  private menuMove(m: StretchMove | null, o?: { glow?: boolean; side?: 1 | -1 }): void {
+    try {
+      this.engine.setMenuMove(m, o);
+    } catch {
+      /* engine without stretch support: kids just idle */
+    }
+  }
+
   touchGlyphs(): boolean {
     if (this.guard.lastPointerType) return this.guard.lastPointerType === 'touch' || this.guard.lastPointerType === 'pen';
     return this.device.touchPrimary;
@@ -169,6 +209,7 @@ export class App implements AppApi {
   }
 
   goCharacter(): void {
+    this.pending = null;
     this.menuScene('character');
     this.menuMusic();
     this.switchTo(this.character, 'character');
@@ -180,16 +221,36 @@ export class App implements AppApi {
     this.menuScene('ride');
     this.menuMusic();
     this.switchTo(this.ride, 'ride');
-    this.voice('narrator', 'pick_ride', { interrupt: true });
+    if (!this.pending) this.voice('narrator', 'pick_ride', { interrupt: true });
     this.armIdle();
   }
 
   afterRide(): void {
-    if (!this.save.state.tutorialDone) this.startTutorial();
+    if (this.pending) this.goIntro();
+    else if (!this.save.state.tutorialDone) this.startTutorial();
     else this.goStages();
   }
 
+  /** Brief place intro after the ride (re-)pick: stage backdrop, narrator intro, warm-up, Go. */
+  private goIntro(): void {
+    const p = this.pending;
+    if (!p) return this.goStages();
+    this.menuScene('stage', undefined, p.stage);
+    this.menuMusic();
+    this.intro.present(p.stage, p.mode, this.save.state.ride);
+    this.switchTo(this.intro, 'intro');
+    this.voice('narrator', p.mode === 'endless' ? 'endless' : `stage_${p.stage}`, { interrupt: true });
+  }
+
+  private goFromIntro(): void {
+    const p = this.pending;
+    if (!p || !this.save.isUnlocked(p.stage)) return this.goStages();
+    this.pending = null;
+    void this.beginRun({ character: this.save.state.character, ride: this.save.state.ride, stage: p.stage, mode: p.mode }, 'none');
+  }
+
   goStages(): void {
+    this.pending = null;
     this.leaveRunState();
     this.menuScene('stage');
     this.menuMusic();
@@ -250,9 +311,13 @@ export class App implements AppApi {
     void this.beginRun({ character: this.save.state.character, ride: this.save.state.ride, stage: 'indoor', mode: 'tutorial' }, 'none');
   }
 
+  /** Picking a place (stage select / "Next place") goes through the ride re-pick, then the intro. */
   startStage(stage: StageId, mode: RunMode): void {
     if (!this.save.isUnlocked(stage)) return;
-    void this.beginRun({ character: this.save.state.character, ride: this.save.state.ride, stage, mode }, mode === 'endless' ? 'endless' : 'stage');
+    this.save.state.stage = stage;
+    this.save.write();
+    this.pending = { stage, mode };
+    this.goRide();
   }
 
   quitApp(): void {
@@ -272,7 +337,7 @@ export class App implements AppApi {
       [
         'Tuning the ukulele…',
         withTimeout(
-          this.audio.preload(['mus_title', 'sfx:ui_*', 'star', 'narrator:title', 'narrator:welcome', 'narrator:pick_*', 'narrator:char_*', 'narrator:ride_*', 'ace:hello', 'moana:hello']),
+          this.audio.preload(['mus_title', 'sfx:ui_*', 'star', 'narrator:title', 'narrator:welcome', 'narrator:pick_*', 'narrator:char_*', 'narrator:ride_*', 'ace:hello', 'ciela:hello']),
           6000,
         ),
       ],
@@ -361,6 +426,9 @@ export class App implements AppApi {
     this.runOpts = { ...opts };
     this.state = 'run';
     this.music = null; // the engine owns music during a run
+    this.warmup.leave();
+    this.warmup.reset();
+    this.pending = null;
     this.pauseShown = false;
     this.lastResults = null;
     this.resetRunNarration();
@@ -563,7 +631,32 @@ export class App implements AppApi {
       return;
     }
     if (stats.finished) this.voice('narrator', 'finish', { interrupt: true });
-    window.setTimeout(() => token === this.runToken && this.showResults(stats, out), stats.finished ? 1400 : 1000);
+    const cool = this.wantsCooldown(stats);
+    window.setTimeout(() => token === this.runToken && (cool ? this.showCooldown(stats, out) : this.showResults(stats, out)), stats.finished ? 1400 : 1000);
+  }
+
+  /** Cool down after a real effort: a finished adventure, or an endless run of a minute or more. */
+  private wantsCooldown(stats: RunStats): boolean {
+    if (!this.save.settings.stretches) return false;
+    if (stats.mode === 'adventure') return !!stats.finished;
+    return stats.mode === 'endless' && (stats.timeSec ?? 0) >= 60;
+  }
+
+  private showCooldown(stats: RunStats, out: RunOutcome, startAt = 0): void {
+    this.leaveRunState();
+    this.lastResults = { stats, out };
+    this.menuScene('cooldown', false, stats.stage);
+    this.menuMusic();
+    this.switchTo(this.cooldown, 'cooldown');
+    const token = this.runToken;
+    this.cooldown.start(stats.character, () => token === this.runToken && this.state === 'cooldown' && this.showResults(stats, out), startAt);
+  }
+
+  /** Dev / test hook: the cool-down for canned stats (startAt = hold index). */
+  debugCooldown(stats: RunStats, startAt = 0): void {
+    this.runOpts = { character: stats.character, ride: stats.ride, stage: stats.stage, mode: stats.mode };
+    const out = this.save.recordRun(stats);
+    this.showCooldown(stats, out, startAt);
   }
 
   private showResults(stats: RunStats, out: RunOutcome): void {
@@ -615,6 +708,17 @@ export class App implements AppApi {
       case 'settings':
         this.openSettings();
         break;
+      case 'repick':
+        this.leaveRunState();
+        this.goStages();
+        this.startStage(this.save.state.stage, 'adventure');
+        break;
+      case 'intro':
+        this.leaveRunState();
+        this.goStages();
+        this.startStage(this.save.state.stage, 'adventure');
+        this.afterRide();
+        break;
       case 'pause':
         this.requestPause();
         break;
@@ -631,6 +735,9 @@ export class App implements AppApi {
     if (state !== 'run') this.leaveRunStateIfNeeded(state);
     this.state = state;
     s.show();
+    const warmView = s === this.character ? this.character.warm : s === this.ride ? this.ride.warm : s === this.intro ? this.intro.warm : null;
+    if (warmView) this.warmup.enter(warmView);
+    else this.warmup.leave();
     this.guard.arm(350);
   }
 
@@ -696,10 +803,13 @@ export class App implements AppApi {
   }
 
   private onKey(e: KeyboardEvent): void {
-    const k = e.key.toLowerCase();
+    let k = e.key.toLowerCase();
     const inRunNoMenu = this.state === 'run' && this.modals.length === 0;
     // During a run the engine owns gameplay keys + P/Esc (it listens on window). Never swallow them.
     if (inRunNoMenu) return;
+    // Menus: A/D/W/S work like the arrows (the same keys as the game).
+    const textInput = document.activeElement instanceof HTMLInputElement && document.activeElement.type !== 'range';
+    if (!textInput && !e.ctrlKey && !e.metaKey && !e.altKey && k in WASD) k = WASD[k];
     if (k === 'tab' || k.startsWith('arrow')) document.documentElement.classList.add('kbd');
     if (k === 'escape' || (k === 'p' && this.pauseShown && this.modals[this.modals.length - 1] === this.pauseModal)) {
       if (e.repeat) return;
@@ -765,6 +875,7 @@ export class App implements AppApi {
     const reduced = s.reducedMotion || prefersReduced;
     document.documentElement.classList.toggle('reduced', reduced);
     document.documentElement.classList.toggle('no-hints', !s.hints);
+    this.warmup?.refresh();
     try {
       this.engine.setSettings({ reducedMotion: reduced, quality: 'auto' });
     } catch {

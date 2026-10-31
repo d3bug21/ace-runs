@@ -9,11 +9,11 @@ import '../src/styles/main.css';
 import { App } from '../src/app/App';
 import { SaveData, sanitize } from '../src/app/Save';
 import { AudioManager } from '../src/audio/AudioManager';
-import { STAGES, type CharacterId, type PowerState, type RideId, type StageId } from '../src/contracts';
+import { STAGES, type CharacterId, type PowerState, type RideId, type StageId, type StretchMove } from '../src/contracts';
 import { FOOD_BY_ID, FOODS, HEALTHY } from '../src/content/foods';
 import type { Engine, EngineEvent, EngineSettings, HudState, MenuSceneOptions, RunOptions, RunStats, TutorialStep } from '../src/engine/api';
 
-const KID: Record<CharacterId, string> = { ace: '#2fb5a8', moana: '#ff7a6b' };
+const KID: Record<CharacterId, string> = { ace: '#eebb58', ciela: '#b59cf0' };
 const BG: Record<string, [string, string]> = {
   title: ['#bfe6f5', '#fff1d6'],
   indoor: ['#ffe9c7', '#ffc9a8'],
@@ -44,6 +44,9 @@ export class FakeEngine implements Engine {
   private inputOn = false;
   private lane = 0;
   hudOverride: Partial<HudState> = {};
+  /** Last setMenuMove call (tests read it). */
+  menuMove: { move: StretchMove | null; glow: boolean; side: 1 | -1; at: number } = { move: null, glow: false, side: 1, at: 0 };
+  menuMoveLog: (StretchMove | null)[] = [];
   private state: HudState;
 
   constructor(private host: HTMLElement) {
@@ -160,6 +163,11 @@ export class FakeEngine implements Engine {
     return { ...this.state, ...this.hudOverride, running: this.running, paused: this.paused };
   }
   setSettings(_s: EngineSettings): void {}
+  setMenuMove(move: StretchMove | null, opts?: { glow?: boolean; side?: 1 | -1 }): void {
+    this.menuMove = { move, glow: opts?.glow !== false && !!move, side: opts?.side ?? 1, at: performance.now() };
+    this.menuMoveLog.push(move);
+    if (this.menuMoveLog.length > 50) this.menuMoveLog.shift();
+  }
   setInputEnabled(on: boolean): void {
     this.inputOn = on;
   }
@@ -231,12 +239,29 @@ export class FakeEngine implements Engine {
     const baseY = portrait ? H * 0.42 : H * 0.6;
     let cx = W / 2;
     if (v === 'ride' && !portrait) cx = W * 0.62;
-    if (v === 'results' && !portrait) cx = W * 0.3;
+    if ((v === 'results' || v === 'cooldown') && !portrait) cx = W * 0.3;
     if ((v === 'stage' || v === 'book' || v === 'settings') && !portrait) cx = W * 0.18;
     if (v === 'title' || v === 'character') {
       this.kid(g, cx - s * 1.4, baseY + Math.sin(t * 2) * 4, s, KID.ace, this.menu.character === 'ace');
-      this.kid(g, cx + s * 1.4, baseY + Math.cos(t * 2) * 4, s, KID.moana, this.menu.character === 'moana');
+      this.kid(g, cx + s * 1.4, baseY + Math.cos(t * 2) * 4, s, KID.ciela, this.menu.character === 'ciela');
     } else this.kid(g, cx, baseY + Math.sin(t * 3) * 6, s, KID[this.menu.character], true);
+    // stand-in for the avatar's stretch: a warm glow ring + the move name
+    const mm = this.menuMove;
+    if (mm.move) {
+      const kx = v === 'character' || v === 'title' ? cx : cx;
+      if (mm.glow) {
+        const pulse = 0.5 + 0.5 * Math.sin(t * 4);
+        g.strokeStyle = `rgba(255,170,60,${0.35 + 0.35 * pulse})`;
+        g.lineWidth = s * 0.12;
+        g.beginPath();
+        g.arc(kx, baseY, s * 1.9, 0, Math.PI * 2);
+        g.stroke();
+      }
+      g.fillStyle = 'rgba(43,52,64,0.55)';
+      g.font = `600 ${Math.round(s * 0.32)}px Fredoka, sans-serif`;
+      g.textAlign = 'center';
+      g.fillText(mm.move.replace('_', ' '), kx, baseY + s * 2.2);
+    }
   }
 
   private kid(g: CanvasRenderingContext2D, x: number, y: number, s: number, col: string, hi = true): void {
