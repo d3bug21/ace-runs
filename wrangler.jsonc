@@ -1,0 +1,11 @@
+{
+  // Cloudflare Workers static-assets site for the browser build of Ace Runs!
+  // Build first with `npm run build:web`, then `npx wrangler deploy`.
+  "name": "ace-runs",
+  "compatibility_date": "2026-11-01",
+  // Custom domain on the Tamariki Games site; Cloudflare creates DNS and the certificate on deploy.
+  "routes": [{ "pattern": "ace-runs.tamarikigames.com", "custom_domain": true }],
+  // Also serve on ace-runs.<account>.workers.dev.
+  "workers_dev": true,
+  "assets": { "directory": "./dist" }
+}
