@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Stages A harness - indoor / arcade / outdoor</title>
+    <style>
+      html, body { margin: 0; height: 100%; overflow: hidden; background: #222; font-family: system-ui, sans-serif; }
+      canvas { display: block; }
+      #ui { position: fixed; left: 8px; top: 8px; right: 8px; display: flex; flex-wrap: wrap; gap: 4px; z-index: 2; }
+      #ui a, #ui button { font: 600 12px system-ui; padding: 4px 8px; border-radius: 8px; border: 0; background: rgba(255,255,255,0.85); color: #234; text-decoration: none; cursor: pointer; }
+      #ui a.on { background: #2fb5a8; color: #fff; }
+      #info { position: fixed; left: 8px; bottom: 8px; font: 12px ui-monospace, monospace; color: #fff; background: rgba(0,0,0,0.45); padding: 4px 8px; border-radius: 6px; z-index: 2; white-space: pre; }
+      body.clean #ui, body.clean #info { display: none; }
+    </style>
+  </head>
+  <body>
+    <div id="ui"></div>
+    <div id="info"></div>
+    <script type="module" src="./stagesA.ts"></script>
+  </body>
+</html>

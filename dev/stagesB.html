@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>STAGES-B harness - sports / jungle / parks</title>
+    <style>
+      html, body { margin: 0; height: 100%; overflow: hidden; background: #9fd6f0; font-family: system-ui, sans-serif; }
+      canvas { display: block; width: 100%; height: 100%; }
+      #ui { position: fixed; left: 8px; top: 8px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; z-index: 2;
+        background: rgba(255,255,255,0.82); padding: 6px 8px; border-radius: 10px; font-size: 12px; max-width: calc(100vw - 32px); }
+      #ui select, #ui button { font-size: 12px; }
+      #hud { position: fixed; left: 8px; bottom: 8px; z-index: 2; background: rgba(20,28,40,0.72); color: #fff; padding: 6px 9px;
+        border-radius: 8px; font: 11px/1.45 ui-monospace, Menlo, monospace; white-space: pre; pointer-events: none; }
+      body.clean #ui, body.clean #hud { display: none; }
+    </style>
+  </head>
+  <body>
+    <div id="ui">
+      <label>stage <select id="stage"><option>sports</option><option>jungle</option><option>parks</option></select></label>
+      <label>section <select id="section"></select></label>
+      <label>view <select id="view"><option>game</option><option>wide</option><option>high</option><option>side</option><option>close</option><option>top</option></select></label>
+      <label>obstacles <select id="mode"><option>kinds</option><option>patterns</option><option>movers</option><option>none</option></select></label>
+      <label><input type="checkbox" id="run" /> run</label>
+      <label><input type="checkbox" id="boxes" /> boxes</label>
+    </div>
+    <div id="hud"></div>
+    <script type="module" src="./stagesB.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Food + FX harness</title>
+    <style>
+      html, body { margin: 0; height: 100%; overflow: hidden; background: #9fd6f0; font-family: system-ui, sans-serif; }
+      #stage { position: fixed; inset: 0; }
+      #stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+      #ui { position: fixed; left: 8px; top: 8px; right: 8px; display: flex; flex-wrap: wrap; gap: 4px; z-index: 5; }
+      #ui a, #ui button, #ui label { font: 600 12px system-ui; padding: 4px 8px; border-radius: 8px; border: 0; background: rgba(255,255,255,0.85); color: #234; text-decoration: none; cursor: pointer; }
+      #ui a.on { background: #2fb5a8; color: #fff; }
+      #ui button.junk { background: #e9e2f6; }
+      #info { position: fixed; left: 8px; bottom: 8px; font: 12px ui-monospace, monospace; color: #fff; background: rgba(0,0,0,0.45); padding: 4px 8px; border-radius: 6px; z-index: 5; white-space: pre; }
+      #sheet { position: fixed; inset: 0; overflow: auto; background: #fbf7ef; padding: 48px 16px 16px; box-sizing: border-box; display: none; }
+      #sheet h2 { font: 700 16px system-ui; color: #2b3440; margin: 12px 0 6px; }
+      .grid { display: flex; flex-wrap: wrap; gap: 8px; }
+      .cell { width: 128px; text-align: center; font: 11px system-ui; color: #2b3440; }
+      .cell img, .cell .ic { width: 128px; height: 128px; display: block; background: #fff; border-radius: 16px; }
+      .cell.dark img { background: #24304a; }
+      .ic40 { width: 40px; height: 40px; display: inline-block; }
+      body.clean #ui, body.clean #info { display: none; }
+    </style>
+  </head>
+  <body>
+    <div id="stage"></div>
+    <div id="sheet"></div>
+    <div id="ui"></div>
+    <div id="info"></div>
+    <script type="module" src="./foodfx.ts"></script>
+  </body>
+</html>

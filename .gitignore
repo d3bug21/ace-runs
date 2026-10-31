@@ -1,0 +1,17 @@
+node_modules/
+dist/
+release/
+.vite/
+.cache/
+*.tsbuildinfo
+.env
+.env.*
+*.key
+*apikey*
+*api-key*
+.tmp/
+tmp/
+.DS_Store
+npm-debug.log*
+tests/output/
+scripts/.voice-design/

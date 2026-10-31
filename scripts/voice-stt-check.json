@@ -1,0 +1,2229 @@
+{
+  "checked_at": "2026-10-31T08:16:37.546Z",
+  "model": "scribe_v2",
+  "threshold": 0.6,
+  "first_pass": {
+    "checked": 213,
+    "flagged": 11,
+    "note": "First full pass over all 213 generated lines (before fixes)."
+  },
+  "fixes": [
+    {
+      "id": "ace_hello_1",
+      "first_heard": "Chona, I am Ace",
+      "fix": "request text \"Ki-a o-ra! I'm Ace!\" (hyphenation only) + [cheerful] tag; best of 4 takes by Scribe",
+      "final_heard": "Kia ora. I'm Ace"
+    },
+    {
+      "id": "moana_hello_1",
+      "first_heard": "Kiara, I'm Moana",
+      "fix": "request text \"Kia ora... I'm Moana!\" (pause); best of 4",
+      "final_heard": "Kia ora. I'm Moana"
+    },
+    {
+      "id": "ace_yum_4",
+      "first_heard": "Sure",
+      "fix": "regenerated best of 4; kept a take heard as 'Cha!' (non-rhotic Kiwi 'chur' ~ 'cheh', accepted alias)",
+      "final_heard": "Cha!"
+    },
+    {
+      "id": "moana_yum_4",
+      "first_heard": "Sure",
+      "fix": "Moana's voice rendered a bare 'Chur!' as 'Sure' in 23 of 33 experimental takes across 12 tag/punctuation/context variants (the rest were mostly fragments like Ch-r or Choo choo), so the manifest line was changed to 'Good as gold!' (Ace keeps 'Chur!')",
+      "final_heard": "Good as gold"
+    },
+    {
+      "id": "ace_yum_5",
+      "first_heard": "Hmm, crotchy",
+      "fix": "request text 'Mmm... crunchy!' (pause)",
+      "final_heard": "Mm, crunchy"
+    },
+    {
+      "id": "ace_shield_1",
+      "first_heard": "Gems, bounce off",
+      "fix": "request text 'Germs... bounce off!' (pause)",
+      "final_heard": "Germs bounce off"
+    },
+    {
+      "id": "moana_near_miss_1",
+      "first_heard": "[sneezing]",
+      "fix": "tag [relieved] instead of [excited]; best of 4",
+      "final_heard": "Phew!"
+    },
+    {
+      "id": "moana_start_2",
+      "first_heard": "Here we go. Ha",
+      "fix": "tag [cheerful]; best of 4",
+      "final_heard": "Here we go, eh"
+    },
+    {
+      "id": "moana_teeth_1",
+      "first_heard": "[giggles] Ooh, sticky teeth",
+      "fix": "regenerated (borderline 0.67)",
+      "final_heard": "[laughs] Uh, sticky teeth"
+    },
+    {
+      "id": "ace_jump_1",
+      "first_heard": "Ha!",
+      "fix": "regenerated best of 4",
+      "final_heard": "Hup!"
+    },
+    {
+      "id": "moana_jump_3",
+      "first_heard": "Up",
+      "fix": "regenerated best of 4",
+      "final_heard": "Hop"
+    },
+    {
+      "id": "ace_jump_3",
+      "first_heard": "Yeah!",
+      "fix": "regenerated best of 4, still 'Yeah' - accepted as a wordless jump exertion sound",
+      "final_heard": "Yeah"
+    },
+    {
+      "id": "ace_jump_2, moana_jump_2",
+      "first_heard": "Wee!",
+      "fix": "none needed: 'Wheee' vs 'Wee' is a spelling difference (scorer now treats wh~w)",
+      "final_heard": "Wee!"
+    }
+  ],
+  "summary": {
+    "checked": 213,
+    "flagged": 0,
+    "mean_similarity": 0.988
+  },
+  "results": [
+    {
+      "id": "ace_jump_3",
+      "speaker": "ace",
+      "expected": "Yah!",
+      "heard": "Yeah",
+      "similarity": 0,
+      "missing_keywords": [],
+      "flag": false,
+      "accepted": "short exertion interjection (Hup / Wheee / Yah / Hop); Scribe spells these loosely, any clean vocalisation is fine",
+      "checked_at": "2026-10-31T08:15:06.143Z"
+    },
+    {
+      "id": "moana_teeth_1",
+      "speaker": "moana",
+      "expected": "Ugh, sticky teeth!",
+      "heard": "[laughs] Uh, sticky teeth",
+      "similarity": 0.67,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:36.059Z"
+    },
+    {
+      "id": "narrator_benefit_shield_1",
+      "speaker": "narrator",
+      "expected": "Oranges and kiwifruit help fight germs!",
+      "heard": "Oranges and kiwi fruit help fight germs",
+      "similarity": 0.77,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:15.786Z"
+    },
+    {
+      "id": "ace_idle_2",
+      "speaker": "ace",
+      "expected": "Which way shall we go?",
+      "heard": "Which way should we go?",
+      "similarity": 0.8,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:14.581Z"
+    },
+    {
+      "id": "narrator_stage_outdoor_1",
+      "speaker": "narrator",
+      "expected": "The outdoor playground! Swings, see-saws and the roundabout!",
+      "heard": "The outdoor playground: swings, seesaws, and the roundabout",
+      "similarity": 0.82,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:02.535Z"
+    },
+    {
+      "id": "moana_muscles_2",
+      "speaker": "moana",
+      "expected": "Flex! Look how strong I am!",
+      "heard": "Flicks, look how strong I am",
+      "similarity": 0.83,
+      "missing_keywords": [],
+      "flag": false,
+      "accepted": "'Flex' heard as 'Flix' is the Kiwi vowel, not a mistake",
+      "checked_at": "2026-10-31T08:15:26.684Z"
+    },
+    {
+      "id": "ace_new_food_2",
+      "speaker": "ace",
+      "expected": "Ooh, a new food for my book!",
+      "heard": "Ooh, and new food for my book",
+      "similarity": 0.86,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:12.833Z"
+    },
+    {
+      "id": "narrator_benefit_bones_2",
+      "speaker": "narrator",
+      "expected": "Milk, yoghurt and cheese for strong bones!",
+      "heard": "Milk, yogurt, and cheese for strong bones",
+      "similarity": 0.86,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:15.307Z"
+    },
+    {
+      "id": "moana_slow_2",
+      "speaker": "moana",
+      "expected": "My legs feel so heavy...",
+      "heard": "Ah, my legs feel so heavy",
+      "similarity": 0.91,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:38.183Z"
+    },
+    {
+      "id": "ace_slow_2",
+      "speaker": "ace",
+      "expected": "Ohh, my legs feel all sleepy...",
+      "heard": "Ah, oh, my legs feel all sleepy",
+      "similarity": 0.92,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:14:58.549Z"
+    },
+    {
+      "id": "ace_ride_shoes_1",
+      "speaker": "ace",
+      "expected": "Running shoes! Super speedy feet!",
+      "heard": "Running shoes, super speedy feet",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:14:36.086Z"
+    },
+    {
+      "id": "ace_hello_1",
+      "speaker": "ace",
+      "expected": "Kia ora! I'm Ace!",
+      "heard": "Kia ora. I'm Ace",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:14:36.107Z"
+    },
+    {
+      "id": "ace_hello_2",
+      "speaker": "ace",
+      "expected": "Hey there! Ace here, ready to run!",
+      "heard": "Hey there, Ace here, ready to run",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:14:36.117Z"
+    },
+    {
+      "id": "ace_ride_bike_1",
+      "speaker": "ace",
+      "expected": "My bike! Ding ding, here I come!",
+      "heard": "My bike. Ding, ding, here I come",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:14:36.786Z"
+    },
+    {
+      "id": "ace_ride_scooter_1",
+      "speaker": "ace",
+      "expected": "Scooter time! Kick, kick, zoom!",
+      "heard": "Scooter time. Kick, kick, zoom",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:14:37.255Z"
+    },
+    {
+      "id": "ace_ride_skate_1",
+      "speaker": "ace",
+      "expected": "Skateboard! Sweet as, let's cruise!",
+      "heard": "Skateboard! Sweet as. Let's cruise",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:14:37.808Z"
+    },
+    {
+      "id": "ace_start_1",
+      "speaker": "ace",
+      "expected": "Let's go!",
+      "heard": "Let's go!",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:14:38.328Z"
+    },
+    {
+      "id": "ace_start_2",
+      "speaker": "ace",
+      "expected": "Here we go, eh!",
+      "heard": "Here we go, eh?",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:14:38.836Z"
+    },
+    {
+      "id": "ace_start_3",
+      "speaker": "ace",
+      "expected": "Ready? Let's run!",
+      "heard": "Ready? Let's run",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:14:39.390Z"
+    },
+    {
+      "id": "ace_yum_1",
+      "speaker": "ace",
+      "expected": "Yum!",
+      "heard": "Yum!",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:14:39.892Z"
+    },
+    {
+      "id": "ace_yum_2",
+      "speaker": "ace",
+      "expected": "Sweet as!",
+      "heard": "Sweet as",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:14:40.458Z"
+    },
+    {
+      "id": "ace_yum_3",
+      "speaker": "ace",
+      "expected": "Ka pai!",
+      "heard": "Ka Pai!",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:14:41.173Z"
+    },
+    {
+      "id": "ace_yum_4",
+      "speaker": "ace",
+      "expected": "Chur!",
+      "heard": "Cha!",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:14:41.808Z"
+    },
+    {
+      "id": "ace_yum_5",
+      "speaker": "ace",
+      "expected": "Mmm, crunchy!",
+      "heard": "Mm, crunchy",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:14:42.500Z"
+    },
+    {
+      "id": "ace_yum_6",
+      "speaker": "ace",
+      "expected": "Choice!",
+      "heard": "Choice",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:14:43.032Z"
+    },
+    {
+      "id": "ace_yum_7",
+      "speaker": "ace",
+      "expected": "Heaps good!",
+      "heard": "Heaps good",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:14:43.539Z"
+    },
+    {
+      "id": "ace_yum_8",
+      "speaker": "ace",
+      "expected": "Good as gold!",
+      "heard": "Good as gold",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:14:44.046Z"
+    },
+    {
+      "id": "ace_vision_1",
+      "speaker": "ace",
+      "expected": "Whoa, I can see heaps!",
+      "heard": "Whoa, I can see heaps",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:14:44.554Z"
+    },
+    {
+      "id": "ace_vision_2",
+      "speaker": "ace",
+      "expected": "My eyes are super sparkly!",
+      "heard": "My eyes are super sparkly",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:14:45.130Z"
+    },
+    {
+      "id": "ace_muscles_1",
+      "speaker": "ace",
+      "expected": "Look at my muscles!",
+      "heard": "Look at my muscles",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:14:45.608Z"
+    },
+    {
+      "id": "ace_muscles_2",
+      "speaker": "ace",
+      "expected": "Super strong, eh!",
+      "heard": "Super strong, eh?",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:14:46.054Z"
+    },
+    {
+      "id": "ace_bones_1",
+      "speaker": "ace",
+      "expected": "Strong bones!",
+      "heard": "Strong bones",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:14:46.505Z"
+    },
+    {
+      "id": "ace_bones_2",
+      "speaker": "ace",
+      "expected": "Shiny strong teeth!",
+      "heard": "Shiny, strong teeth",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:14:47.128Z"
+    },
+    {
+      "id": "ace_shield_1",
+      "speaker": "ace",
+      "expected": "Germs, bounce off!",
+      "heard": "Germs bounce off",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:14:47.628Z"
+    },
+    {
+      "id": "ace_shield_2",
+      "speaker": "ace",
+      "expected": "Shield up! No germs allowed!",
+      "heard": "Shield up. No germs allowed",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:14:48.149Z"
+    },
+    {
+      "id": "ace_energy_1",
+      "speaker": "ace",
+      "expected": "Zoom!",
+      "heard": "Zoom!",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:14:48.811Z"
+    },
+    {
+      "id": "ace_energy_2",
+      "speaker": "ace",
+      "expected": "Whoa, so much energy!",
+      "heard": "Whoa! So much energy",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:14:49.328Z"
+    },
+    {
+      "id": "ace_refresh_1",
+      "speaker": "ace",
+      "expected": "Ahh, refreshing!",
+      "heard": "Ah, refreshing",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:14:50.476Z"
+    },
+    {
+      "id": "ace_refresh_2",
+      "speaker": "ace",
+      "expected": "Water! Sweet as!",
+      "heard": "Water, sweet as",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:14:50.983Z"
+    },
+    {
+      "id": "ace_grow_1",
+      "speaker": "ace",
+      "expected": "Growing big and strong!",
+      "heard": "Growing big and strong",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:14:51.520Z"
+    },
+    {
+      "id": "ace_grow_2",
+      "speaker": "ace",
+      "expected": "Food friends, come to me!",
+      "heard": "Food friends, come to me",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:14:52.134Z"
+    },
+    {
+      "id": "ace_tummy_happy_1",
+      "speaker": "ace",
+      "expected": "Happy tummy!",
+      "heard": "Happy tummy",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:14:52.810Z"
+    },
+    {
+      "id": "ace_tummy_happy_2",
+      "speaker": "ace",
+      "expected": "Mmm, my tummy loves that!",
+      "heard": "Mm, my tummy loves that",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:14:53.436Z"
+    },
+    {
+      "id": "ace_sugar_1",
+      "speaker": "ace",
+      "expected": "Whoa, too fizzy!... So sleepy...",
+      "heard": "Whoa, too fizzy! So sleepy",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:14:54.198Z"
+    },
+    {
+      "id": "ace_sugar_2",
+      "speaker": "ace",
+      "expected": "Zoom, zoom... ohh, now I need a nap.",
+      "heard": "Zoom, zoom! Oh, now I need a nap",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:14:54.766Z"
+    },
+    {
+      "id": "ace_teeth_1",
+      "speaker": "ace",
+      "expected": "Ugh, sticky teeth!",
+      "heard": "[laughs] Ugh, sticky teeth",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:14:55.726Z"
+    },
+    {
+      "id": "ace_teeth_2",
+      "speaker": "ace",
+      "expected": "Oh no, sticky teeth! Time to brush!",
+      "heard": "[laughs] Oh no, sticky teeth. Time to brush",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:14:56.339Z"
+    },
+    {
+      "id": "ace_freeze_1",
+      "speaker": "ace",
+      "expected": "Brrr, brain freeze!",
+      "heard": "[laughs] Brr. Brain freeze",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:14:57.247Z"
+    },
+    {
+      "id": "ace_slow_1",
+      "speaker": "ace",
+      "expected": "I feel so slow...",
+      "heard": "[sighs] I feel so slow",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:14:57.915Z"
+    },
+    {
+      "id": "ace_tummy_1",
+      "speaker": "ace",
+      "expected": "Oh no, my tummy!",
+      "heard": "[laughs] Oh no, my tummy!",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:14:59.152Z"
+    },
+    {
+      "id": "ace_tummy_2",
+      "speaker": "ace",
+      "expected": "Ooh, rumbly tummy!",
+      "heard": "[laughs] Ooh, rumbly tummy",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:14:59.685Z"
+    },
+    {
+      "id": "ace_bounce_back_1",
+      "speaker": "ace",
+      "expected": "I feel better already!",
+      "heard": "I feel better already",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:00.318Z"
+    },
+    {
+      "id": "ace_bounce_back_2",
+      "speaker": "ace",
+      "expected": "Back to my best! Ka pai!",
+      "heard": "Back to my best. Ka pai",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:00.869Z"
+    },
+    {
+      "id": "ace_bump_1",
+      "speaker": "ace",
+      "expected": "Oops!",
+      "heard": "[laughs] Oops",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:01.379Z"
+    },
+    {
+      "id": "ace_bump_2",
+      "speaker": "ace",
+      "expected": "Whoa!",
+      "heard": "[laughs] Whoa!",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:02.091Z"
+    },
+    {
+      "id": "ace_bump_3",
+      "speaker": "ace",
+      "expected": "I'm okay!",
+      "heard": "[laughs] I'm okay",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:02.593Z"
+    },
+    {
+      "id": "ace_near_miss_1",
+      "speaker": "ace",
+      "expected": "Phew!",
+      "heard": "Phew!",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:03.191Z"
+    },
+    {
+      "id": "ace_near_miss_2",
+      "speaker": "ace",
+      "expected": "Close one!",
+      "heard": "Close one",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:03.625Z"
+    },
+    {
+      "id": "ace_near_miss_3",
+      "speaker": "ace",
+      "expected": "Whoa, just made it!",
+      "heard": "Whoa, just made it",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:04.313Z"
+    },
+    {
+      "id": "ace_jump_1",
+      "speaker": "ace",
+      "expected": "Hup!",
+      "heard": "Hup",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:04.837Z"
+    },
+    {
+      "id": "ace_jump_2",
+      "speaker": "ace",
+      "expected": "Wheee!",
+      "heard": "Wee!",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:05.584Z"
+    },
+    {
+      "id": "ace_glow_full_1",
+      "speaker": "ace",
+      "expected": "Healthy and happy!",
+      "heard": "Healthy and happy",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:06.633Z"
+    },
+    {
+      "id": "ace_glow_full_2",
+      "speaker": "ace",
+      "expected": "I'm glowing! Choice!",
+      "heard": "I'm glowing. Choice",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:07.197Z"
+    },
+    {
+      "id": "ace_shield_block_1",
+      "speaker": "ace",
+      "expected": "Ha! Bounced off!",
+      "heard": "Ha, bounced off",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:07.948Z"
+    },
+    {
+      "id": "ace_finish_1",
+      "speaker": "ace",
+      "expected": "We made it! Woo-hoo!",
+      "heard": "We made it. Woo-hoo!",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:08.548Z"
+    },
+    {
+      "id": "ace_finish_2",
+      "speaker": "ace",
+      "expected": "Finish line! Sweet as!",
+      "heard": "Finish line! Sweet as",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:09.242Z"
+    },
+    {
+      "id": "ace_results_great_1",
+      "speaker": "ace",
+      "expected": "Look at all that yummy food! Heaps good!",
+      "heard": "Look at all that yummy food. Heaps good",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:09.819Z"
+    },
+    {
+      "id": "ace_results_great_2",
+      "speaker": "ace",
+      "expected": "Best run ever, eh!",
+      "heard": "Best run ever, eh?",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:10.428Z"
+    },
+    {
+      "id": "ace_results_ok_1",
+      "speaker": "ace",
+      "expected": "Let's have another go!",
+      "heard": "Let's have another go",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:10.941Z"
+    },
+    {
+      "id": "ace_results_ok_2",
+      "speaker": "ace",
+      "expected": "Good try! One more run?",
+      "heard": "Good try. One more run?",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:11.443Z"
+    },
+    {
+      "id": "ace_new_food_1",
+      "speaker": "ace",
+      "expected": "A new food friend!",
+      "heard": "A new food friend",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:12.124Z"
+    },
+    {
+      "id": "ace_unlock_1",
+      "speaker": "ace",
+      "expected": "A new place to explore!",
+      "heard": "A new place to explore",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:13.371Z"
+    },
+    {
+      "id": "ace_idle_1",
+      "speaker": "ace",
+      "expected": "Ready when you are!",
+      "heard": "Ready when you are",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:14.134Z"
+    },
+    {
+      "id": "ace_idle_3",
+      "speaker": "ace",
+      "expected": "Come on, let's run, eh?",
+      "heard": "Come on, let's run, eh?",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:15.157Z"
+    },
+    {
+      "id": "moana_hello_1",
+      "speaker": "moana",
+      "expected": "Kia ora! I'm Moana!",
+      "heard": "Kia ora, I'm Moana",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:15.738Z"
+    },
+    {
+      "id": "moana_hello_2",
+      "speaker": "moana",
+      "expected": "Hi! Moana here! Let's have some fun!",
+      "heard": "Hi, Moana here. Let's have some fun",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:16.268Z"
+    },
+    {
+      "id": "moana_ride_shoes_1",
+      "speaker": "moana",
+      "expected": "Running shoes on! Fast feet!",
+      "heard": "Running shoes on. Fast feet",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:16.818Z"
+    },
+    {
+      "id": "moana_ride_bike_1",
+      "speaker": "moana",
+      "expected": "Bike ride! Ring, ring!",
+      "heard": "Bike ride. Ring, ring",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:17.452Z"
+    },
+    {
+      "id": "moana_ride_scooter_1",
+      "speaker": "moana",
+      "expected": "My scooter! Push and glide!",
+      "heard": "My scooter! Push and glide",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:17.968Z"
+    },
+    {
+      "id": "moana_ride_skate_1",
+      "speaker": "moana",
+      "expected": "Skateboard! Let's carve it up!",
+      "heard": "Skateboard. Let's carve it up",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:18.551Z"
+    },
+    {
+      "id": "moana_start_1",
+      "speaker": "moana",
+      "expected": "Let's go!",
+      "heard": "Let's go!",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:19.076Z"
+    },
+    {
+      "id": "moana_start_2",
+      "speaker": "moana",
+      "expected": "Here we go, eh!",
+      "heard": "Here we go, eh",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:19.570Z"
+    },
+    {
+      "id": "moana_start_3",
+      "speaker": "moana",
+      "expected": "Ready, steady, run!",
+      "heard": "Ready, steady, run!",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:20.116Z"
+    },
+    {
+      "id": "moana_yum_1",
+      "speaker": "moana",
+      "expected": "Yum yum!",
+      "heard": "Yum, yum",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:20.897Z"
+    },
+    {
+      "id": "moana_yum_2",
+      "speaker": "moana",
+      "expected": "Sweet as!",
+      "heard": "Sweet as",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:21.384Z"
+    },
+    {
+      "id": "moana_yum_3",
+      "speaker": "moana",
+      "expected": "Ka pai!",
+      "heard": "Ka pai!",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:21.908Z"
+    },
+    {
+      "id": "moana_yum_4",
+      "speaker": "moana",
+      "expected": "Good as gold!",
+      "heard": "Good as gold",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:22.364Z"
+    },
+    {
+      "id": "moana_yum_5",
+      "speaker": "moana",
+      "expected": "Mmm, juicy!",
+      "heard": "Mm, juicy",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:22.867Z"
+    },
+    {
+      "id": "moana_yum_6",
+      "speaker": "moana",
+      "expected": "So yummy!",
+      "heard": "So yummy!",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:23.426Z"
+    },
+    {
+      "id": "moana_yum_7",
+      "speaker": "moana",
+      "expected": "Heaps good!",
+      "heard": "Heaps good!",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:23.942Z"
+    },
+    {
+      "id": "moana_yum_8",
+      "speaker": "moana",
+      "expected": "Choice!",
+      "heard": "Choice",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:24.520Z"
+    },
+    {
+      "id": "moana_vision_1",
+      "speaker": "moana",
+      "expected": "Ooh, everything's so bright!",
+      "heard": "Ooh, everything's so bright",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:24.978Z"
+    },
+    {
+      "id": "moana_vision_2",
+      "speaker": "moana",
+      "expected": "Sparkly eyes! I can see heaps!",
+      "heard": "Sparkly eyes. I can see heaps",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:25.535Z"
+    },
+    {
+      "id": "moana_muscles_1",
+      "speaker": "moana",
+      "expected": "Strong as!",
+      "heard": "Strong as",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:26.062Z"
+    },
+    {
+      "id": "moana_bones_1",
+      "speaker": "moana",
+      "expected": "Strong bones and teeth!",
+      "heard": "Strong bones and teeth",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:27.498Z"
+    },
+    {
+      "id": "moana_bones_2",
+      "speaker": "moana",
+      "expected": "Ting! Shiny teeth!",
+      "heard": "Ting! Shiny teeth",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:28.083Z"
+    },
+    {
+      "id": "moana_shield_1",
+      "speaker": "moana",
+      "expected": "Bubble shield! Germs, go away!",
+      "heard": "Bubble shield! Germs, go away!",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:28.714Z"
+    },
+    {
+      "id": "moana_shield_2",
+      "speaker": "moana",
+      "expected": "No germs on me!",
+      "heard": "No germs on me",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:29.247Z"
+    },
+    {
+      "id": "moana_energy_1",
+      "speaker": "moana",
+      "expected": "Zoom, zoom!",
+      "heard": "Zoom, zoom!",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:29.866Z"
+    },
+    {
+      "id": "moana_energy_2",
+      "speaker": "moana",
+      "expected": "Whee, so speedy!",
+      "heard": "Whee! So speedy",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:30.502Z"
+    },
+    {
+      "id": "moana_refresh_1",
+      "speaker": "moana",
+      "expected": "Ahh, that's better!",
+      "heard": "Ah, that's better",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:31.045Z"
+    },
+    {
+      "id": "moana_refresh_2",
+      "speaker": "moana",
+      "expected": "Splash! So refreshing!",
+      "heard": "Splash! So refreshing",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:31.695Z"
+    },
+    {
+      "id": "moana_grow_1",
+      "speaker": "moana",
+      "expected": "Growing strong!",
+      "heard": "Growing strong",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:32.207Z"
+    },
+    {
+      "id": "moana_grow_2",
+      "speaker": "moana",
+      "expected": "Food friends, fly to me!",
+      "heard": "Food Friends, fly to me",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:32.722Z"
+    },
+    {
+      "id": "moana_tummy_happy_1",
+      "speaker": "moana",
+      "expected": "My tummy's smiling!",
+      "heard": "My tummy's smiling",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:33.189Z"
+    },
+    {
+      "id": "moana_tummy_happy_2",
+      "speaker": "moana",
+      "expected": "Happy tummy, happy me!",
+      "heard": "Happy tummy, happy me",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:33.841Z"
+    },
+    {
+      "id": "moana_sugar_1",
+      "speaker": "moana",
+      "expected": "Wheee, so fizzy!... Now I'm sleepy...",
+      "heard": "Whee, so fizzy! Now I'm sleepy",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:34.797Z"
+    },
+    {
+      "id": "moana_sugar_2",
+      "speaker": "moana",
+      "expected": "Too much sugar... I need a nap...",
+      "heard": "Too much sugar. I need a nap",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:35.450Z"
+    },
+    {
+      "id": "moana_teeth_2",
+      "speaker": "moana",
+      "expected": "Oh no, my teeth feel all gluey!",
+      "heard": "[giggles] Oh no, my teeth feel all gluey",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:36.638Z"
+    },
+    {
+      "id": "moana_freeze_1",
+      "speaker": "moana",
+      "expected": "Ooh, brain freeze! Brrr!",
+      "heard": "[giggles] Ooh, brain freeze. Brr.",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:37.272Z"
+    },
+    {
+      "id": "moana_slow_1",
+      "speaker": "moana",
+      "expected": "Ohh, I'm so slow...",
+      "heard": "[sighs] Oh, I'm so slow",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:37.729Z"
+    },
+    {
+      "id": "moana_tummy_1",
+      "speaker": "moana",
+      "expected": "Oh no, my tummy!",
+      "heard": "[laughs] Oh no, my tummy",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:38.719Z"
+    },
+    {
+      "id": "moana_tummy_2",
+      "speaker": "moana",
+      "expected": "Uh oh, grumbly tummy!",
+      "heard": "[laughs] Uh-oh, grumbly tummy",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:39.270Z"
+    },
+    {
+      "id": "moana_bounce_back_1",
+      "speaker": "moana",
+      "expected": "Yay, I feel better!",
+      "heard": "Yay, I feel better",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:39.737Z"
+    },
+    {
+      "id": "moana_bounce_back_2",
+      "speaker": "moana",
+      "expected": "All better! Good as gold!",
+      "heard": "All better. Good as gold",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:40.191Z"
+    },
+    {
+      "id": "moana_bump_1",
+      "speaker": "moana",
+      "expected": "Oopsie!",
+      "heard": "[laughs] Oopsie",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:40.685Z"
+    },
+    {
+      "id": "moana_bump_2",
+      "speaker": "moana",
+      "expected": "Whoops!",
+      "heard": "[laughs] Whoops.",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:41.272Z"
+    },
+    {
+      "id": "moana_bump_3",
+      "speaker": "moana",
+      "expected": "I'm okay!",
+      "heard": "[giggles] I'm okay",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:41.895Z"
+    },
+    {
+      "id": "moana_near_miss_1",
+      "speaker": "moana",
+      "expected": "Phew!",
+      "heard": "Phew!",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:42.405Z"
+    },
+    {
+      "id": "moana_near_miss_2",
+      "speaker": "moana",
+      "expected": "Close one!",
+      "heard": "Close one",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:42.922Z"
+    },
+    {
+      "id": "moana_near_miss_3",
+      "speaker": "moana",
+      "expected": "Ooh, that was close!",
+      "heard": "Ooh, that was close",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:43.440Z"
+    },
+    {
+      "id": "moana_jump_1",
+      "speaker": "moana",
+      "expected": "Hup!",
+      "heard": "Hup!",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:44.191Z"
+    },
+    {
+      "id": "moana_jump_2",
+      "speaker": "moana",
+      "expected": "Wheee!",
+      "heard": "Wee!",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:44.906Z"
+    },
+    {
+      "id": "moana_jump_3",
+      "speaker": "moana",
+      "expected": "Hop!",
+      "heard": "Hop",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:45.388Z"
+    },
+    {
+      "id": "moana_glow_full_1",
+      "speaker": "moana",
+      "expected": "Healthy and happy!",
+      "heard": "Healthy and happy",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:45.897Z"
+    },
+    {
+      "id": "moana_glow_full_2",
+      "speaker": "moana",
+      "expected": "I'm all glowy! Sweet as!",
+      "heard": "I'm all glowy. Sweet as",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:46.392Z"
+    },
+    {
+      "id": "moana_shield_block_1",
+      "speaker": "moana",
+      "expected": "Ha! Bounced right off!",
+      "heard": "Ha, bounced right off",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:46.965Z"
+    },
+    {
+      "id": "moana_finish_1",
+      "speaker": "moana",
+      "expected": "We did it! Yay!",
+      "heard": "We did it. Yay!",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:47.806Z"
+    },
+    {
+      "id": "moana_finish_2",
+      "speaker": "moana",
+      "expected": "Finish line! Choice!",
+      "heard": "Finish line. Choice",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:48.663Z"
+    },
+    {
+      "id": "moana_results_great_1",
+      "speaker": "moana",
+      "expected": "Wow, look at all our food friends!",
+      "heard": "Wow, look at all our food friends",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:49.179Z"
+    },
+    {
+      "id": "moana_results_great_2",
+      "speaker": "moana",
+      "expected": "That was the best! Heaps good!",
+      "heard": "That was the best. Heaps good",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:49.720Z"
+    },
+    {
+      "id": "moana_results_ok_1",
+      "speaker": "moana",
+      "expected": "Let's have another go!",
+      "heard": "Let's have another go",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:50.321Z"
+    },
+    {
+      "id": "moana_results_ok_2",
+      "speaker": "moana",
+      "expected": "Nice try! Let's go again!",
+      "heard": "Nice try. Let's go again",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:50.988Z"
+    },
+    {
+      "id": "moana_new_food_1",
+      "speaker": "moana",
+      "expected": "A new food friend!",
+      "heard": "A new food friend",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:51.567Z"
+    },
+    {
+      "id": "moana_new_food_2",
+      "speaker": "moana",
+      "expected": "Ooh, someone new for our book!",
+      "heard": "Ooh, someone new for our book",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:52.061Z"
+    },
+    {
+      "id": "moana_unlock_1",
+      "speaker": "moana",
+      "expected": "Ooh, a new place to explore!",
+      "heard": "Ooh, a new place to explore",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:52.766Z"
+    },
+    {
+      "id": "moana_idle_1",
+      "speaker": "moana",
+      "expected": "Let's go on an adventure!",
+      "heard": "Let's go on an adventure",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:53.237Z"
+    },
+    {
+      "id": "moana_idle_2",
+      "speaker": "moana",
+      "expected": "Pick a ride, eh!",
+      "heard": "Pick a ride, eh?",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:53.689Z"
+    },
+    {
+      "id": "moana_idle_3",
+      "speaker": "moana",
+      "expected": "I love fruit and veggies!",
+      "heard": "I love fruit and veggies",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:54.272Z"
+    },
+    {
+      "id": "narrator_title_1",
+      "speaker": "narrator",
+      "expected": "Ace Runs!",
+      "heard": "Ace runs",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:54.839Z"
+    },
+    {
+      "id": "narrator_welcome_1",
+      "speaker": "narrator",
+      "expected": "Kia ora! Welcome to Ace Runs!",
+      "heard": "Kia ora. Welcome to Ace Runs",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:55.371Z"
+    },
+    {
+      "id": "narrator_welcome_2",
+      "speaker": "narrator",
+      "expected": "Kia ora, friend! Ready for a healthy adventure?",
+      "heard": "Kia ora friend. Ready for a healthy adventure?",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:55.903Z"
+    },
+    {
+      "id": "narrator_pick_character_1",
+      "speaker": "narrator",
+      "expected": "Who's going to run today?",
+      "heard": "Who's going to run today?",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:56.457Z"
+    },
+    {
+      "id": "narrator_char_ace_1",
+      "speaker": "narrator",
+      "expected": "Ace!",
+      "heard": "Ace",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:56.941Z"
+    },
+    {
+      "id": "narrator_char_moana_1",
+      "speaker": "narrator",
+      "expected": "Moana!",
+      "heard": "Moana",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:57.589Z"
+    },
+    {
+      "id": "narrator_pick_ride_1",
+      "speaker": "narrator",
+      "expected": "How will you travel?",
+      "heard": "How will you travel?",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:58.143Z"
+    },
+    {
+      "id": "narrator_ride_shoes_1",
+      "speaker": "narrator",
+      "expected": "Running shoes!",
+      "heard": "Running shoes",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:58.628Z"
+    },
+    {
+      "id": "narrator_ride_bike_1",
+      "speaker": "narrator",
+      "expected": "The bike!",
+      "heard": "The bike",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:59.126Z"
+    },
+    {
+      "id": "narrator_ride_scooter_1",
+      "speaker": "narrator",
+      "expected": "The scooter!",
+      "heard": "The scooter",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:15:59.607Z"
+    },
+    {
+      "id": "narrator_ride_skate_1",
+      "speaker": "narrator",
+      "expected": "The skateboard!",
+      "heard": "The skateboard",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:00.101Z"
+    },
+    {
+      "id": "narrator_pick_stage_1",
+      "speaker": "narrator",
+      "expected": "Where shall we run today?",
+      "heard": "Where shall we run today?",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:00.570Z"
+    },
+    {
+      "id": "narrator_stage_indoor_1",
+      "speaker": "narrator",
+      "expected": "The indoor playground! Soft play, ball pits and slides!",
+      "heard": "The indoor playground, soft play, ball pits and slides",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:01.179Z"
+    },
+    {
+      "id": "narrator_stage_arcade_1",
+      "speaker": "narrator",
+      "expected": "The arcade! Glowing games, claw machines and prizes!",
+      "heard": "The arcade! Glowing games, claw machines, and prizes",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:01.769Z"
+    },
+    {
+      "id": "narrator_stage_sports_1",
+      "speaker": "narrator",
+      "expected": "The sports park! Rugby, netball, cricket and heaps more!",
+      "heard": "The sports park: rugby, netball, cricket, and heaps more",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:03.324Z"
+    },
+    {
+      "id": "narrator_stage_jungle_1",
+      "speaker": "narrator",
+      "expected": "The jungle! Swinging monkeys, ambling elephants and hopping frogs!",
+      "heard": "The jungle. Swinging monkeys, ambling elephants, and hopping frogs",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:03.938Z"
+    },
+    {
+      "id": "narrator_stage_parks_1",
+      "speaker": "narrator",
+      "expected": "The parks and gardens! Let's run through all four seasons!",
+      "heard": "The parks and gardens. Let's run through all four seasons",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:04.568Z"
+    },
+    {
+      "id": "narrator_sport_rugby_1",
+      "speaker": "narrator",
+      "expected": "Rugby!",
+      "heard": "Rugby",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:05.067Z"
+    },
+    {
+      "id": "narrator_sport_football_1",
+      "speaker": "narrator",
+      "expected": "Football!",
+      "heard": "Football",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:05.646Z"
+    },
+    {
+      "id": "narrator_sport_netball_1",
+      "speaker": "narrator",
+      "expected": "Netball!",
+      "heard": "Netball",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:06.121Z"
+    },
+    {
+      "id": "narrator_sport_basketball_1",
+      "speaker": "narrator",
+      "expected": "Basketball!",
+      "heard": "Basketball",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:06.582Z"
+    },
+    {
+      "id": "narrator_sport_cricket_1",
+      "speaker": "narrator",
+      "expected": "Cricket!",
+      "heard": "Cricket",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:07.054Z"
+    },
+    {
+      "id": "narrator_sport_tennis_1",
+      "speaker": "narrator",
+      "expected": "Tennis!",
+      "heard": "Tennis",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:07.578Z"
+    },
+    {
+      "id": "narrator_sport_hockey_1",
+      "speaker": "narrator",
+      "expected": "Hockey!",
+      "heard": "Hockey",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:08.213Z"
+    },
+    {
+      "id": "narrator_sport_athletics_1",
+      "speaker": "narrator",
+      "expected": "Athletics!",
+      "heard": "Athletics",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:08.703Z"
+    },
+    {
+      "id": "narrator_sport_swimming_1",
+      "speaker": "narrator",
+      "expected": "Swimming!",
+      "heard": "Swimming",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:09.209Z"
+    },
+    {
+      "id": "narrator_sport_cycling_1",
+      "speaker": "narrator",
+      "expected": "Cycling!",
+      "heard": "Cycling",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:09.746Z"
+    },
+    {
+      "id": "narrator_season_winter_1",
+      "speaker": "narrator",
+      "expected": "It's winter! Frosty, snowy and bare branches!",
+      "heard": "It's winter. Frosty, snowy, and bare branches",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:10.309Z"
+    },
+    {
+      "id": "narrator_season_spring_1",
+      "speaker": "narrator",
+      "expected": "Spring! Blossom, lambs and new shoots!",
+      "heard": "Spring, blossom, lambs and new shoots",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:10.966Z"
+    },
+    {
+      "id": "narrator_season_summer_1",
+      "speaker": "narrator",
+      "expected": "Summer! Sunshine, picnics and big green trees!",
+      "heard": "Summer. Sunshine, picnics, and big green trees",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:11.696Z"
+    },
+    {
+      "id": "narrator_season_autumn_1",
+      "speaker": "narrator",
+      "expected": "Autumn! Golden leaves falling and puddles!",
+      "heard": "Autumn. Golden leaves falling and puddles",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:12.202Z"
+    },
+    {
+      "id": "narrator_benefit_vision_1",
+      "speaker": "narrator",
+      "expected": "Carrots help your eyes!",
+      "heard": "Carrots help your eyes",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:12.642Z"
+    },
+    {
+      "id": "narrator_benefit_vision_2",
+      "speaker": "narrator",
+      "expected": "Carrots help you see bright and clear!",
+      "heard": "Carrots help you see bright and clear",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:13.081Z"
+    },
+    {
+      "id": "narrator_benefit_muscles_1",
+      "speaker": "narrator",
+      "expected": "Green veggies build strong muscles!",
+      "heard": "Green veggies build strong muscles",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:13.579Z"
+    },
+    {
+      "id": "narrator_benefit_muscles_2",
+      "speaker": "narrator",
+      "expected": "Broccoli and spinach make you strong!",
+      "heard": "Broccoli and spinach make you strong",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:14.252Z"
+    },
+    {
+      "id": "narrator_benefit_bones_1",
+      "speaker": "narrator",
+      "expected": "Dairy makes strong bones and teeth!",
+      "heard": "Dairy makes strong bones and teeth",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:14.771Z"
+    },
+    {
+      "id": "narrator_benefit_shield_2",
+      "speaker": "narrator",
+      "expected": "Fruit helps your body fight off germs!",
+      "heard": "Fruit helps your body fight off germs",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:16.290Z"
+    },
+    {
+      "id": "narrator_benefit_energy_1",
+      "speaker": "narrator",
+      "expected": "Bananas give you zippy energy!",
+      "heard": "Bananas give you zippy energy",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:17.190Z"
+    },
+    {
+      "id": "narrator_benefit_energy_2",
+      "speaker": "narrator",
+      "expected": "Energy food! Off you zoom!",
+      "heard": "Energy food. Off you zoom",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:17.716Z"
+    },
+    {
+      "id": "narrator_benefit_refresh_1",
+      "speaker": "narrator",
+      "expected": "Water is the best drink!",
+      "heard": "Water is the best drink",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:18.255Z"
+    },
+    {
+      "id": "narrator_benefit_refresh_2",
+      "speaker": "narrator",
+      "expected": "A splash of water! So refreshing!",
+      "heard": "A splash of water, so refreshing",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:18.753Z"
+    },
+    {
+      "id": "narrator_benefit_grow_1",
+      "speaker": "narrator",
+      "expected": "Eggs, chicken and fish help you grow strong!",
+      "heard": "Eggs, chicken, and fish help you grow strong",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:19.262Z"
+    },
+    {
+      "id": "narrator_benefit_grow_2",
+      "speaker": "narrator",
+      "expected": "Growing strong! Food friends fly to you!",
+      "heard": "Growing strong. Food friends fly to you",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:19.739Z"
+    },
+    {
+      "id": "narrator_benefit_tummy_1",
+      "speaker": "narrator",
+      "expected": "Fruit and veggies make a happy tummy!",
+      "heard": "Fruit and veggies make a happy tummy",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:20.280Z"
+    },
+    {
+      "id": "narrator_benefit_tummy_2",
+      "speaker": "narrator",
+      "expected": "Wholesome food, happy tummy!",
+      "heard": "Wholesome food, happy tummy",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:20.846Z"
+    },
+    {
+      "id": "narrator_junk_sugar_1",
+      "speaker": "narrator",
+      "expected": "Fizzy drinks give a quick buzz, then a sleepy slump.",
+      "heard": "Fizzy drinks give a quick buzz, then a sleepy slump",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:21.403Z"
+    },
+    {
+      "id": "narrator_junk_teeth_1",
+      "speaker": "narrator",
+      "expected": "Lollies make teeth sticky. Remember to brush!",
+      "heard": "Lollies make teeth sticky. Remember to brush",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:21.996Z"
+    },
+    {
+      "id": "narrator_junk_freeze_1",
+      "speaker": "narrator",
+      "expected": "Ice cream is a chilly sometimes treat!",
+      "heard": "Ice cream is a chilly sometimes treat",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:22.532Z"
+    },
+    {
+      "id": "narrator_junk_slow_1",
+      "speaker": "narrator",
+      "expected": "Greasy food can make you feel slow for a while.",
+      "heard": "Greasy food can make you feel slow for a while",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:22.998Z"
+    },
+    {
+      "id": "narrator_junk_tummy_1",
+      "speaker": "narrator",
+      "expected": "Old food can upset your tummy. Grab something fresh!",
+      "heard": "Old food can upset your tummy. Grab something fresh",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:23.492Z"
+    },
+    {
+      "id": "narrator_sometimes_1",
+      "speaker": "narrator",
+      "expected": "Treats are sometimes foods!",
+      "heard": "Treats are sometimes foods",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:24.036Z"
+    },
+    {
+      "id": "narrator_sometimes_2",
+      "speaker": "narrator",
+      "expected": "Healthy food makes you strong every day!",
+      "heard": "Healthy food makes you strong every day",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:24.826Z"
+    },
+    {
+      "id": "narrator_sometimes_3",
+      "speaker": "narrator",
+      "expected": "Water and fresh food help you bounce back!",
+      "heard": "Water and fresh food help you bounce back",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:25.274Z"
+    },
+    {
+      "id": "narrator_glow_full_1",
+      "speaker": "narrator",
+      "expected": "Healthy and happy!",
+      "heard": "Healthy and happy",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:25.772Z"
+    },
+    {
+      "id": "narrator_countdown_1",
+      "speaker": "narrator",
+      "expected": "Ready... set... go!",
+      "heard": "Ready, set, go",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:26.258Z"
+    },
+    {
+      "id": "narrator_tut_intro_1",
+      "speaker": "narrator",
+      "expected": "Let's learn the moves!",
+      "heard": "Let's learn the moves",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:26.876Z"
+    },
+    {
+      "id": "narrator_tut_left_1",
+      "speaker": "narrator",
+      "expected": "Move left!",
+      "heard": "Move left",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:27.335Z"
+    },
+    {
+      "id": "narrator_tut_right_1",
+      "speaker": "narrator",
+      "expected": "Move right!",
+      "heard": "Move right",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:27.833Z"
+    },
+    {
+      "id": "narrator_tut_jump_1",
+      "speaker": "narrator",
+      "expected": "Jump over the low things!",
+      "heard": "Jump over the low things",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:28.349Z"
+    },
+    {
+      "id": "narrator_tut_slide_1",
+      "speaker": "narrator",
+      "expected": "Slide under the high things!",
+      "heard": "Slide under the high things",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:29.130Z"
+    },
+    {
+      "id": "narrator_tut_healthy_1",
+      "speaker": "narrator",
+      "expected": "Healthy food powers you up!",
+      "heard": "Healthy food powers you up",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:29.631Z"
+    },
+    {
+      "id": "narrator_tut_junk_1",
+      "speaker": "narrator",
+      "expected": "Junk food slows you down for a while - treats are sometimes foods!",
+      "heard": "Junk food slows you down for a while. Treats are sometimes foods",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:30.151Z"
+    },
+    {
+      "id": "narrator_tut_done_1",
+      "speaker": "narrator",
+      "expected": "You've got it! Off you go!",
+      "heard": "You've got it. Off you go",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:30.656Z"
+    },
+    {
+      "id": "narrator_finish_1",
+      "speaker": "narrator",
+      "expected": "Finish line! Well done!",
+      "heard": "Finish line. Well done",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:31.150Z"
+    },
+    {
+      "id": "narrator_results_1",
+      "speaker": "narrator",
+      "expected": "Look at all the healthy food you collected!",
+      "heard": "Look at all the healthy food you collected",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:31.647Z"
+    },
+    {
+      "id": "narrator_results_2",
+      "speaker": "narrator",
+      "expected": "What a run! Let's see your food friends!",
+      "heard": "What a run! Let's see your food friends",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:32.222Z"
+    },
+    {
+      "id": "narrator_results_great_1",
+      "speaker": "narrator",
+      "expected": "Amazing! You're a healthy hero!",
+      "heard": "Amazing! You're a healthy hero",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:32.849Z"
+    },
+    {
+      "id": "narrator_results_try_1",
+      "speaker": "narrator",
+      "expected": "Great try! Let's go again!",
+      "heard": "Great try. Let's go again",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:34.345Z"
+    },
+    {
+      "id": "narrator_unlock_1",
+      "speaker": "narrator",
+      "expected": "A new place has opened up!",
+      "heard": "A new place has opened up",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:34.873Z"
+    },
+    {
+      "id": "narrator_new_food_1",
+      "speaker": "narrator",
+      "expected": "A new food friend for your book!",
+      "heard": "A new food friend for your book",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:35.428Z"
+    },
+    {
+      "id": "narrator_book_1",
+      "speaker": "narrator",
+      "expected": "Your food friends book!",
+      "heard": "Your Food Friends book",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:35.888Z"
+    },
+    {
+      "id": "narrator_paused_1",
+      "speaker": "narrator",
+      "expected": "Paused. Take a breather!",
+      "heard": "Paused. Take a breather",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:36.531Z"
+    },
+    {
+      "id": "narrator_endless_1",
+      "speaker": "narrator",
+      "expected": "Endless run! How far can you go?",
+      "heard": "Endless Run. How far can you go?",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:37.055Z"
+    },
+    {
+      "id": "narrator_last_season_1",
+      "speaker": "narrator",
+      "expected": "You ran through every season!",
+      "heard": "You ran through every season",
+      "similarity": 1,
+      "missing_keywords": [],
+      "flag": false,
+      "checked_at": "2026-10-31T08:16:37.546Z"
+    }
+  ]
+}

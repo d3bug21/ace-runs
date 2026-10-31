@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ace Runs! - audio sandbox</title>
+    <link rel="icon" href="data:," />
+    <style>
+      :root { font-family: system-ui, sans-serif; color: #24323a; background: #f4f1ea; }
+      body { margin: 0; padding: 20px 24px 60px; }
+      h1 { font-size: 22px; margin: 0 0 4px; }
+      h2 { font-size: 15px; margin: 22px 0 8px; text-transform: uppercase; letter-spacing: 0.06em; color: #4d6470; }
+      .hint { color: #5d6f78; font-size: 13px; margin: 0 0 14px; }
+      .row { display: flex; flex-wrap: wrap; gap: 6px; }
+      button { font: inherit; font-size: 13px; border: 1px solid #c9d3d6; background: #fff; border-radius: 8px; padding: 5px 9px; cursor: pointer; }
+      button:hover { border-color: #2fb5a8; }
+      button.on { background: #2fb5a8; color: #fff; border-color: #2fb5a8; }
+      .vol { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; font-size: 13px; }
+      .vol label { display: flex; gap: 6px; align-items: center; }
+      #status { font-size: 13px; padding: 8px 10px; background: #fff; border-radius: 8px; border: 1px solid #dde4e6; margin-top: 10px; white-space: pre-wrap; }
+      #sub { min-height: 22px; font-weight: 600; margin-top: 8px; }
+    </style>
+  </head>
+  <body>
+    <h1>Ace Runs! audio sandbox</h1>
+    <p class="hint">Dev harness for src/audio/AudioManager.ts. Click anything once to unlock audio.</p>
+    <div class="vol" id="vols"></div>
+    <div id="sub"></div>
+    <div id="status">loading...</div>
+    <div id="groups"></div>
+    <script type="module" src="./audio.ts"></script>
+  </body>
+</html>

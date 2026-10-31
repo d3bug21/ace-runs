@@ -1,0 +1,2983 @@
+{
+ "entries": [
+  {
+   "id": "ace_hello_1",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "hello",
+   "text": "Kia ora! I'm Ace!",
+   "tts": "Kia ora! I'm Ace!",
+   "file": "audio/voice/ace_hello_1.mp3",
+   "duration": 2.87
+  },
+  {
+   "id": "ace_hello_2",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "hello",
+   "text": "Hey there! Ace here, ready to run!",
+   "tts": "Hey there! Ace here, ready to run!",
+   "file": "audio/voice/ace_hello_2.mp3",
+   "duration": 2.53
+  },
+  {
+   "id": "ace_ride_shoes_1",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "ride_shoes",
+   "text": "Running shoes! Super speedy feet!",
+   "tts": "Running shoes! Super speedy feet!",
+   "file": "audio/voice/ace_ride_shoes_1.mp3",
+   "duration": 2.95
+  },
+  {
+   "id": "ace_ride_bike_1",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "ride_bike",
+   "text": "My bike! Ding ding, here I come!",
+   "tts": "My bike! Ding ding, here I come!",
+   "file": "audio/voice/ace_ride_bike_1.mp3",
+   "duration": 3.11
+  },
+  {
+   "id": "ace_ride_scooter_1",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "ride_scooter",
+   "text": "Scooter time! Kick, kick, zoom!",
+   "tts": "Scooter time! Kick, kick, zoom!",
+   "file": "audio/voice/ace_ride_scooter_1.mp3",
+   "duration": 3.74
+  },
+  {
+   "id": "ace_ride_skate_1",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "ride_skate",
+   "text": "Skateboard! Sweet as, let's cruise!",
+   "tts": "Skateboard! Sweet as, let's cruise!",
+   "file": "audio/voice/ace_ride_skate_1.mp3",
+   "duration": 3.42
+  },
+  {
+   "id": "ace_start_1",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "start",
+   "text": "Let's go!",
+   "tts": "Let's go!",
+   "file": "audio/voice/ace_start_1.mp3",
+   "duration": 1.02
+  },
+  {
+   "id": "ace_start_2",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "start",
+   "text": "Here we go, eh!",
+   "tts": "Here we go, eh!",
+   "file": "audio/voice/ace_start_2.mp3",
+   "duration": 2.06
+  },
+  {
+   "id": "ace_start_3",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "start",
+   "text": "Ready? Let's run!",
+   "tts": "Ready? Let's run!",
+   "file": "audio/voice/ace_start_3.mp3",
+   "duration": 1.75
+  },
+  {
+   "id": "ace_yum_1",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "yum",
+   "text": "Yum!",
+   "tts": "Yum!",
+   "file": "audio/voice/ace_yum_1.mp3",
+   "duration": 1.44
+  },
+  {
+   "id": "ace_yum_2",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "yum",
+   "text": "Sweet as!",
+   "tts": "Sweet as!",
+   "file": "audio/voice/ace_yum_2.mp3",
+   "duration": 1.25
+  },
+  {
+   "id": "ace_yum_3",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "yum",
+   "text": "Ka pai!",
+   "tts": "Ka pai!",
+   "file": "audio/voice/ace_yum_3.mp3",
+   "duration": 1.59
+  },
+  {
+   "id": "ace_yum_4",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "yum",
+   "text": "Chur!",
+   "tts": "Chur!",
+   "file": "audio/voice/ace_yum_4.mp3",
+   "duration": 1.18
+  },
+  {
+   "id": "ace_yum_5",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "yum",
+   "text": "Mmm, crunchy!",
+   "tts": "Mmm, crunchy!",
+   "file": "audio/voice/ace_yum_5.mp3",
+   "duration": 1.99
+  },
+  {
+   "id": "ace_yum_6",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "yum",
+   "text": "Choice!",
+   "tts": "Choice!",
+   "file": "audio/voice/ace_yum_6.mp3",
+   "duration": 0.94
+  },
+  {
+   "id": "ace_yum_7",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "yum",
+   "text": "Heaps good!",
+   "tts": "Heaps good!",
+   "file": "audio/voice/ace_yum_7.mp3",
+   "duration": 1.59
+  },
+  {
+   "id": "ace_yum_8",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "yum",
+   "text": "Good as gold!",
+   "tts": "Good as gold!",
+   "file": "audio/voice/ace_yum_8.mp3",
+   "duration": 1.83
+  },
+  {
+   "id": "ace_vision_1",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "vision",
+   "text": "Whoa, I can see heaps!",
+   "tts": "Whoa, I can see heaps!",
+   "file": "audio/voice/ace_vision_1.mp3",
+   "duration": 2.87
+  },
+  {
+   "id": "ace_vision_2",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "vision",
+   "text": "My eyes are super sparkly!",
+   "tts": "My eyes are super sparkly!",
+   "file": "audio/voice/ace_vision_2.mp3",
+   "duration": 2.72
+  },
+  {
+   "id": "ace_muscles_1",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "muscles",
+   "text": "Look at my muscles!",
+   "tts": "Look at my muscles!",
+   "file": "audio/voice/ace_muscles_1.mp3",
+   "duration": 1.99
+  },
+  {
+   "id": "ace_muscles_2",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "muscles",
+   "text": "Super strong, eh!",
+   "tts": "Super strong, eh!",
+   "file": "audio/voice/ace_muscles_2.mp3",
+   "duration": 2.06
+  },
+  {
+   "id": "ace_bones_1",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "bones",
+   "text": "Strong bones!",
+   "tts": "Strong bones!",
+   "file": "audio/voice/ace_bones_1.mp3",
+   "duration": 1.91
+  },
+  {
+   "id": "ace_bones_2",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "bones",
+   "text": "Shiny strong teeth!",
+   "tts": "Shiny strong teeth!",
+   "file": "audio/voice/ace_bones_2.mp3",
+   "duration": 2.22
+  },
+  {
+   "id": "ace_shield_1",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "shield",
+   "text": "Germs, bounce off!",
+   "tts": "Germs, bounce off!",
+   "file": "audio/voice/ace_shield_1.mp3",
+   "duration": 2.61
+  },
+  {
+   "id": "ace_shield_2",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "shield",
+   "text": "Shield up! No germs allowed!",
+   "tts": "Shield up! No germs allowed!",
+   "file": "audio/voice/ace_shield_2.mp3",
+   "duration": 3.19
+  },
+  {
+   "id": "ace_energy_1",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "energy",
+   "text": "Zoom!",
+   "tts": "Zoom!",
+   "file": "audio/voice/ace_energy_1.mp3",
+   "duration": 1.33
+  },
+  {
+   "id": "ace_energy_2",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "energy",
+   "text": "Whoa, so much energy!",
+   "tts": "Whoa, so much energy!",
+   "file": "audio/voice/ace_energy_2.mp3",
+   "duration": 2.53
+  },
+  {
+   "id": "ace_refresh_1",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "refresh",
+   "text": "Ahh, refreshing!",
+   "tts": "Ahh, refreshing!",
+   "file": "audio/voice/ace_refresh_1.mp3",
+   "duration": 1.75
+  },
+  {
+   "id": "ace_refresh_2",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "refresh",
+   "text": "Water! Sweet as!",
+   "tts": "Water! Sweet as!",
+   "file": "audio/voice/ace_refresh_2.mp3",
+   "duration": 2.22
+  },
+  {
+   "id": "ace_grow_1",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "grow",
+   "text": "Growing big and strong!",
+   "tts": "Growing big and strong!",
+   "file": "audio/voice/ace_grow_1.mp3",
+   "duration": 2.14
+  },
+  {
+   "id": "ace_grow_2",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "grow",
+   "text": "Food friends, come to me!",
+   "tts": "Food friends, come to me!",
+   "file": "audio/voice/ace_grow_2.mp3",
+   "duration": 2.06
+  },
+  {
+   "id": "ace_tummy_happy_1",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "tummy_happy",
+   "text": "Happy tummy!",
+   "tts": "Happy tummy!",
+   "file": "audio/voice/ace_tummy_happy_1.mp3",
+   "duration": 1.91
+  },
+  {
+   "id": "ace_tummy_happy_2",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "tummy_happy",
+   "text": "Mmm, my tummy loves that!",
+   "tts": "Mmm, my tummy loves that!",
+   "file": "audio/voice/ace_tummy_happy_2.mp3",
+   "duration": 2.87
+  },
+  {
+   "id": "ace_sugar_1",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "sugar",
+   "text": "Whoa, too fizzy!... So sleepy...",
+   "tts": "Whoa, too fizzy!... So sleepy...",
+   "file": "audio/voice/ace_sugar_1.mp3",
+   "duration": 3.66
+  },
+  {
+   "id": "ace_sugar_2",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "sugar",
+   "text": "Zoom, zoom... ohh, now I need a nap.",
+   "tts": "Zoom, zoom... ohh, now I need a nap.",
+   "file": "audio/voice/ace_sugar_2.mp3",
+   "duration": 3.58
+  },
+  {
+   "id": "ace_teeth_1",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "teeth",
+   "text": "Ugh, sticky teeth!",
+   "tts": "Ugh, sticky teeth!",
+   "file": "audio/voice/ace_teeth_1.mp3",
+   "duration": 3.19
+  },
+  {
+   "id": "ace_teeth_2",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "teeth",
+   "text": "Oh no, sticky teeth! Time to brush!",
+   "tts": "Oh no, sticky teeth! Time to brush!",
+   "file": "audio/voice/ace_teeth_2.mp3",
+   "duration": 3.89
+  },
+  {
+   "id": "ace_freeze_1",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "freeze",
+   "text": "Brrr, brain freeze!",
+   "tts": "Brrr, brain freeze!",
+   "file": "audio/voice/ace_freeze_1.mp3",
+   "duration": 3.5
+  },
+  {
+   "id": "ace_slow_1",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "slow",
+   "text": "I feel so slow...",
+   "tts": "I feel so slow...",
+   "file": "audio/voice/ace_slow_1.mp3",
+   "duration": 2.95
+  },
+  {
+   "id": "ace_slow_2",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "slow",
+   "text": "Ohh, my legs feel all sleepy...",
+   "tts": "Ohh, my legs feel all sleepy...",
+   "file": "audio/voice/ace_slow_2.mp3",
+   "duration": 3.89
+  },
+  {
+   "id": "ace_tummy_1",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "tummy",
+   "text": "Oh no, my tummy!",
+   "tts": "Oh no, my tummy!",
+   "file": "audio/voice/ace_tummy_1.mp3",
+   "duration": 3.19
+  },
+  {
+   "id": "ace_tummy_2",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "tummy",
+   "text": "Ooh, rumbly tummy!",
+   "tts": "Ooh, rumbly tummy!",
+   "file": "audio/voice/ace_tummy_2.mp3",
+   "duration": 3.11
+  },
+  {
+   "id": "ace_bounce_back_1",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "bounce_back",
+   "text": "I feel better already!",
+   "tts": "I feel better already!",
+   "file": "audio/voice/ace_bounce_back_1.mp3",
+   "duration": 2.06
+  },
+  {
+   "id": "ace_bounce_back_2",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "bounce_back",
+   "text": "Back to my best! Ka pai!",
+   "tts": "Back to my best! Ka pai!",
+   "file": "audio/voice/ace_bounce_back_2.mp3",
+   "duration": 2.22
+  },
+  {
+   "id": "ace_bump_1",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "bump",
+   "text": "Oops!",
+   "tts": "Oops!",
+   "file": "audio/voice/ace_bump_1.mp3",
+   "duration": 1.51
+  },
+  {
+   "id": "ace_bump_2",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "bump",
+   "text": "Whoa!",
+   "tts": "Whoa!",
+   "file": "audio/voice/ace_bump_2.mp3",
+   "duration": 2.06
+  },
+  {
+   "id": "ace_bump_3",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "bump",
+   "text": "I'm okay!",
+   "tts": "I'm okay!",
+   "file": "audio/voice/ace_bump_3.mp3",
+   "duration": 1.83
+  },
+  {
+   "id": "ace_near_miss_1",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "near_miss",
+   "text": "Phew!",
+   "tts": "Phew!",
+   "file": "audio/voice/ace_near_miss_1.mp3",
+   "duration": 0.94
+  },
+  {
+   "id": "ace_near_miss_2",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "near_miss",
+   "text": "Close one!",
+   "tts": "Close one!",
+   "file": "audio/voice/ace_near_miss_2.mp3",
+   "duration": 1.44
+  },
+  {
+   "id": "ace_near_miss_3",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "near_miss",
+   "text": "Whoa, just made it!",
+   "tts": "Whoa, just made it!",
+   "file": "audio/voice/ace_near_miss_3.mp3",
+   "duration": 1.99
+  },
+  {
+   "id": "ace_jump_1",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "jump",
+   "text": "Hup!",
+   "tts": "Hup!",
+   "file": "audio/voice/ace_jump_1.mp3",
+   "duration": 1.33
+  },
+  {
+   "id": "ace_jump_2",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "jump",
+   "text": "Wheee!",
+   "tts": "Wheee!",
+   "file": "audio/voice/ace_jump_2.mp3",
+   "duration": 1.75
+  },
+  {
+   "id": "ace_jump_3",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "jump",
+   "text": "Yah!",
+   "tts": "Yah!",
+   "file": "audio/voice/ace_jump_3.mp3",
+   "duration": 0.94
+  },
+  {
+   "id": "ace_glow_full_1",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "glow_full",
+   "text": "Healthy and happy!",
+   "tts": "Healthy and happy!",
+   "file": "audio/voice/ace_glow_full_1.mp3",
+   "duration": 2.06
+  },
+  {
+   "id": "ace_glow_full_2",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "glow_full",
+   "text": "I'm glowing! Choice!",
+   "tts": "I'm glowing! Choice!",
+   "file": "audio/voice/ace_glow_full_2.mp3",
+   "duration": 2.3
+  },
+  {
+   "id": "ace_shield_block_1",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "shield_block",
+   "text": "Ha! Bounced off!",
+   "tts": "Ha! Bounced off!",
+   "file": "audio/voice/ace_shield_block_1.mp3",
+   "duration": 1.99
+  },
+  {
+   "id": "ace_finish_1",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "finish",
+   "text": "We made it! Woo-hoo!",
+   "tts": "We made it! Woo-hoo!",
+   "file": "audio/voice/ace_finish_1.mp3",
+   "duration": 2.46
+  },
+  {
+   "id": "ace_finish_2",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "finish",
+   "text": "Finish line! Sweet as!",
+   "tts": "Finish line! Sweet as!",
+   "file": "audio/voice/ace_finish_2.mp3",
+   "duration": 2.3
+  },
+  {
+   "id": "ace_results_great_1",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "results_great",
+   "text": "Look at all that yummy food! Heaps good!",
+   "tts": "Look at all that yummy food! Heaps good!",
+   "file": "audio/voice/ace_results_great_1.mp3",
+   "duration": 4.0
+  },
+  {
+   "id": "ace_results_great_2",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "results_great",
+   "text": "Best run ever, eh!",
+   "tts": "Best run ever, eh!",
+   "file": "audio/voice/ace_results_great_2.mp3",
+   "duration": 2.38
+  },
+  {
+   "id": "ace_results_ok_1",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "results_ok",
+   "text": "Let's have another go!",
+   "tts": "Let's have another go!",
+   "file": "audio/voice/ace_results_ok_1.mp3",
+   "duration": 1.59
+  },
+  {
+   "id": "ace_results_ok_2",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "results_ok",
+   "text": "Good try! One more run?",
+   "tts": "Good try! One more run?",
+   "file": "audio/voice/ace_results_ok_2.mp3",
+   "duration": 2.72
+  },
+  {
+   "id": "ace_new_food_1",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "new_food",
+   "text": "A new food friend!",
+   "tts": "A new food friend!",
+   "file": "audio/voice/ace_new_food_1.mp3",
+   "duration": 2.14
+  },
+  {
+   "id": "ace_new_food_2",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "new_food",
+   "text": "Ooh, a new food for my book!",
+   "tts": "Ooh, a new food for my book!",
+   "file": "audio/voice/ace_new_food_2.mp3",
+   "duration": 2.53
+  },
+  {
+   "id": "ace_unlock_1",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "unlock",
+   "text": "A new place to explore!",
+   "tts": "A new place to explore!",
+   "file": "audio/voice/ace_unlock_1.mp3",
+   "duration": 2.14
+  },
+  {
+   "id": "ace_idle_1",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "idle",
+   "text": "Ready when you are!",
+   "tts": "Ready when you are!",
+   "file": "audio/voice/ace_idle_1.mp3",
+   "duration": 1.67
+  },
+  {
+   "id": "ace_idle_2",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "idle",
+   "text": "Which way shall we go?",
+   "tts": "Which way shall we go?",
+   "file": "audio/voice/ace_idle_2.mp3",
+   "duration": 1.83
+  },
+  {
+   "id": "ace_idle_3",
+   "kind": "voice",
+   "speaker": "ace",
+   "group": "idle",
+   "text": "Come on, let's run, eh?",
+   "tts": "Come on, let's run, eh?",
+   "file": "audio/voice/ace_idle_3.mp3",
+   "duration": 1.83
+  },
+  {
+   "id": "moana_hello_1",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "hello",
+   "text": "Kia ora! I'm Moana!",
+   "tts": "Kia ora! I'm Moana!",
+   "file": "audio/voice/moana_hello_1.mp3",
+   "duration": 2.38
+  },
+  {
+   "id": "moana_hello_2",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "hello",
+   "text": "Hi! Moana here! Let's have some fun!",
+   "tts": "Hi! Moana here! Let's have some fun!",
+   "file": "audio/voice/moana_hello_2.mp3",
+   "duration": 3.5
+  },
+  {
+   "id": "moana_ride_shoes_1",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "ride_shoes",
+   "text": "Running shoes on! Fast feet!",
+   "tts": "Running shoes on! Fast feet!",
+   "file": "audio/voice/moana_ride_shoes_1.mp3",
+   "duration": 2.61
+  },
+  {
+   "id": "moana_ride_bike_1",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "ride_bike",
+   "text": "Bike ride! Ring, ring!",
+   "tts": "Bike ride! Ring, ring!",
+   "file": "audio/voice/moana_ride_bike_1.mp3",
+   "duration": 2.3
+  },
+  {
+   "id": "moana_ride_scooter_1",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "ride_scooter",
+   "text": "My scooter! Push and glide!",
+   "tts": "My scooter! Push and glide!",
+   "file": "audio/voice/moana_ride_scooter_1.mp3",
+   "duration": 2.95
+  },
+  {
+   "id": "moana_ride_skate_1",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "ride_skate",
+   "text": "Skateboard! Let's carve it up!",
+   "tts": "Skateboard! Let's carve it up!",
+   "file": "audio/voice/moana_ride_skate_1.mp3",
+   "duration": 2.3
+  },
+  {
+   "id": "moana_start_1",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "start",
+   "text": "Let's go!",
+   "tts": "Let's go!",
+   "file": "audio/voice/moana_start_1.mp3",
+   "duration": 1.44
+  },
+  {
+   "id": "moana_start_2",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "start",
+   "text": "Here we go, eh!",
+   "tts": "Here we go, eh!",
+   "file": "audio/voice/moana_start_2.mp3",
+   "duration": 1.99
+  },
+  {
+   "id": "moana_start_3",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "start",
+   "text": "Ready, steady, run!",
+   "tts": "Ready, steady, run!",
+   "file": "audio/voice/moana_start_3.mp3",
+   "duration": 3.34
+  },
+  {
+   "id": "moana_yum_1",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "yum",
+   "text": "Yum yum!",
+   "tts": "Yum yum!",
+   "file": "audio/voice/moana_yum_1.mp3",
+   "duration": 1.33
+  },
+  {
+   "id": "moana_yum_2",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "yum",
+   "text": "Sweet as!",
+   "tts": "Sweet as!",
+   "file": "audio/voice/moana_yum_2.mp3",
+   "duration": 1.59
+  },
+  {
+   "id": "moana_yum_3",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "yum",
+   "text": "Ka pai!",
+   "tts": "Ka pai!",
+   "file": "audio/voice/moana_yum_3.mp3",
+   "duration": 1.44
+  },
+  {
+   "id": "moana_yum_4",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "yum",
+   "text": "Good as gold!",
+   "tts": "Good as gold!",
+   "file": "audio/voice/moana_yum_4.mp3",
+   "duration": 2.38
+  },
+  {
+   "id": "moana_yum_5",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "yum",
+   "text": "Mmm, juicy!",
+   "tts": "Mmm, juicy!",
+   "file": "audio/voice/moana_yum_5.mp3",
+   "duration": 2.06
+  },
+  {
+   "id": "moana_yum_6",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "yum",
+   "text": "So yummy!",
+   "tts": "So yummy!",
+   "file": "audio/voice/moana_yum_6.mp3",
+   "duration": 1.91
+  },
+  {
+   "id": "moana_yum_7",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "yum",
+   "text": "Heaps good!",
+   "tts": "Heaps good!",
+   "file": "audio/voice/moana_yum_7.mp3",
+   "duration": 1.59
+  },
+  {
+   "id": "moana_yum_8",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "yum",
+   "text": "Choice!",
+   "tts": "Choice!",
+   "file": "audio/voice/moana_yum_8.mp3",
+   "duration": 1.18
+  },
+  {
+   "id": "moana_vision_1",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "vision",
+   "text": "Ooh, everything's so bright!",
+   "tts": "Ooh, everything's so bright!",
+   "file": "audio/voice/moana_vision_1.mp3",
+   "duration": 2.61
+  },
+  {
+   "id": "moana_vision_2",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "vision",
+   "text": "Sparkly eyes! I can see heaps!",
+   "tts": "Sparkly eyes! I can see heaps!",
+   "file": "audio/voice/moana_vision_2.mp3",
+   "duration": 3.34
+  },
+  {
+   "id": "moana_muscles_1",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "muscles",
+   "text": "Strong as!",
+   "tts": "Strong as!",
+   "file": "audio/voice/moana_muscles_1.mp3",
+   "duration": 1.67
+  },
+  {
+   "id": "moana_muscles_2",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "muscles",
+   "text": "Flex! Look how strong I am!",
+   "tts": "Flex! Look how strong I am!",
+   "file": "audio/voice/moana_muscles_2.mp3",
+   "duration": 2.95
+  },
+  {
+   "id": "moana_bones_1",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "bones",
+   "text": "Strong bones and teeth!",
+   "tts": "Strong bones and teeth!",
+   "file": "audio/voice/moana_bones_1.mp3",
+   "duration": 2.22
+  },
+  {
+   "id": "moana_bones_2",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "bones",
+   "text": "Ting! Shiny teeth!",
+   "tts": "Ting! Shiny teeth!",
+   "file": "audio/voice/moana_bones_2.mp3",
+   "duration": 2.22
+  },
+  {
+   "id": "moana_shield_1",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "shield",
+   "text": "Bubble shield! Germs, go away!",
+   "tts": "Bubble shield! Germs, go away!",
+   "file": "audio/voice/moana_shield_1.mp3",
+   "duration": 2.79
+  },
+  {
+   "id": "moana_shield_2",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "shield",
+   "text": "No germs on me!",
+   "tts": "No germs on me!",
+   "file": "audio/voice/moana_shield_2.mp3",
+   "duration": 1.91
+  },
+  {
+   "id": "moana_energy_1",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "energy",
+   "text": "Zoom, zoom!",
+   "tts": "Zoom, zoom!",
+   "file": "audio/voice/moana_energy_1.mp3",
+   "duration": 1.33
+  },
+  {
+   "id": "moana_energy_2",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "energy",
+   "text": "Whee, so speedy!",
+   "tts": "Whee, so speedy!",
+   "file": "audio/voice/moana_energy_2.mp3",
+   "duration": 2.46
+  },
+  {
+   "id": "moana_refresh_1",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "refresh",
+   "text": "Ahh, that's better!",
+   "tts": "Ahh, that's better!",
+   "file": "audio/voice/moana_refresh_1.mp3",
+   "duration": 2.06
+  },
+  {
+   "id": "moana_refresh_2",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "refresh",
+   "text": "Splash! So refreshing!",
+   "tts": "Splash! So refreshing!",
+   "file": "audio/voice/moana_refresh_2.mp3",
+   "duration": 2.72
+  },
+  {
+   "id": "moana_grow_1",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "grow",
+   "text": "Growing strong!",
+   "tts": "Growing strong!",
+   "file": "audio/voice/moana_grow_1.mp3",
+   "duration": 1.83
+  },
+  {
+   "id": "moana_grow_2",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "grow",
+   "text": "Food friends, fly to me!",
+   "tts": "Food friends, fly to me!",
+   "file": "audio/voice/moana_grow_2.mp3",
+   "duration": 2.46
+  },
+  {
+   "id": "moana_tummy_happy_1",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "tummy_happy",
+   "text": "My tummy's smiling!",
+   "tts": "My tummy's smiling!",
+   "file": "audio/voice/moana_tummy_happy_1.mp3",
+   "duration": 2.06
+  },
+  {
+   "id": "moana_tummy_happy_2",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "tummy_happy",
+   "text": "Happy tummy, happy me!",
+   "tts": "Happy tummy, happy me!",
+   "file": "audio/voice/moana_tummy_happy_2.mp3",
+   "duration": 2.22
+  },
+  {
+   "id": "moana_sugar_1",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "sugar",
+   "text": "Wheee, so fizzy!... Now I'm sleepy...",
+   "tts": "Wheee, so fizzy!... Now I'm sleepy...",
+   "file": "audio/voice/moana_sugar_1.mp3",
+   "duration": 5.09
+  },
+  {
+   "id": "moana_sugar_2",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "sugar",
+   "text": "Too much sugar... I need a nap...",
+   "tts": "Too much sugar... I need a nap...",
+   "file": "audio/voice/moana_sugar_2.mp3",
+   "duration": 2.95
+  },
+  {
+   "id": "moana_teeth_1",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "teeth",
+   "text": "Ugh, sticky teeth!",
+   "tts": "Ugh, sticky teeth!",
+   "file": "audio/voice/moana_teeth_1.mp3",
+   "duration": 3.11
+  },
+  {
+   "id": "moana_teeth_2",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "teeth",
+   "text": "Oh no, my teeth feel all gluey!",
+   "tts": "Oh no, my teeth feel all gluey!",
+   "file": "audio/voice/moana_teeth_2.mp3",
+   "duration": 3.58
+  },
+  {
+   "id": "moana_freeze_1",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "freeze",
+   "text": "Ooh, brain freeze! Brrr!",
+   "tts": "Ooh, brain freeze! Brrr!",
+   "file": "audio/voice/moana_freeze_1.mp3",
+   "duration": 4.23
+  },
+  {
+   "id": "moana_slow_1",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "slow",
+   "text": "Ohh, I'm so slow...",
+   "tts": "Ohh, I'm so slow...",
+   "file": "audio/voice/moana_slow_1.mp3",
+   "duration": 4.39
+  },
+  {
+   "id": "moana_slow_2",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "slow",
+   "text": "My legs feel so heavy...",
+   "tts": "My legs feel so heavy...",
+   "file": "audio/voice/moana_slow_2.mp3",
+   "duration": 3.74
+  },
+  {
+   "id": "moana_tummy_1",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "tummy",
+   "text": "Oh no, my tummy!",
+   "tts": "Oh no, my tummy!",
+   "file": "audio/voice/moana_tummy_1.mp3",
+   "duration": 3.27
+  },
+  {
+   "id": "moana_tummy_2",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "tummy",
+   "text": "Uh oh, grumbly tummy!",
+   "tts": "Uh oh, grumbly tummy!",
+   "file": "audio/voice/moana_tummy_2.mp3",
+   "duration": 3.42
+  },
+  {
+   "id": "moana_bounce_back_1",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "bounce_back",
+   "text": "Yay, I feel better!",
+   "tts": "Yay, I feel better!",
+   "file": "audio/voice/moana_bounce_back_1.mp3",
+   "duration": 2.22
+  },
+  {
+   "id": "moana_bounce_back_2",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "bounce_back",
+   "text": "All better! Good as gold!",
+   "tts": "All better! Good as gold!",
+   "file": "audio/voice/moana_bounce_back_2.mp3",
+   "duration": 2.46
+  },
+  {
+   "id": "moana_bump_1",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "bump",
+   "text": "Oopsie!",
+   "tts": "Oopsie!",
+   "file": "audio/voice/moana_bump_1.mp3",
+   "duration": 1.99
+  },
+  {
+   "id": "moana_bump_2",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "bump",
+   "text": "Whoops!",
+   "tts": "Whoops!",
+   "file": "audio/voice/moana_bump_2.mp3",
+   "duration": 2.14
+  },
+  {
+   "id": "moana_bump_3",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "bump",
+   "text": "I'm okay!",
+   "tts": "I'm okay!",
+   "file": "audio/voice/moana_bump_3.mp3",
+   "duration": 1.99
+  },
+  {
+   "id": "moana_near_miss_1",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "near_miss",
+   "text": "Phew!",
+   "tts": "Phew!",
+   "file": "audio/voice/moana_near_miss_1.mp3",
+   "duration": 1.33
+  },
+  {
+   "id": "moana_near_miss_2",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "near_miss",
+   "text": "Close one!",
+   "tts": "Close one!",
+   "file": "audio/voice/moana_near_miss_2.mp3",
+   "duration": 1.44
+  },
+  {
+   "id": "moana_near_miss_3",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "near_miss",
+   "text": "Ooh, that was close!",
+   "tts": "Ooh, that was close!",
+   "file": "audio/voice/moana_near_miss_3.mp3",
+   "duration": 2.46
+  },
+  {
+   "id": "moana_jump_1",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "jump",
+   "text": "Hup!",
+   "tts": "Hup!",
+   "file": "audio/voice/moana_jump_1.mp3",
+   "duration": 0.94
+  },
+  {
+   "id": "moana_jump_2",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "jump",
+   "text": "Wheee!",
+   "tts": "Wheee!",
+   "file": "audio/voice/moana_jump_2.mp3",
+   "duration": 1.44
+  },
+  {
+   "id": "moana_jump_3",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "jump",
+   "text": "Hop!",
+   "tts": "Hop!",
+   "file": "audio/voice/moana_jump_3.mp3",
+   "duration": 0.7
+  },
+  {
+   "id": "moana_glow_full_1",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "glow_full",
+   "text": "Healthy and happy!",
+   "tts": "Healthy and happy!",
+   "file": "audio/voice/moana_glow_full_1.mp3",
+   "duration": 1.83
+  },
+  {
+   "id": "moana_glow_full_2",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "glow_full",
+   "text": "I'm all glowy! Sweet as!",
+   "tts": "I'm all glowy! Sweet as!",
+   "file": "audio/voice/moana_glow_full_2.mp3",
+   "duration": 2.79
+  },
+  {
+   "id": "moana_shield_block_1",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "shield_block",
+   "text": "Ha! Bounced right off!",
+   "tts": "Ha! Bounced right off!",
+   "file": "audio/voice/moana_shield_block_1.mp3",
+   "duration": 2.22
+  },
+  {
+   "id": "moana_finish_1",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "finish",
+   "text": "We did it! Yay!",
+   "tts": "We did it! Yay!",
+   "file": "audio/voice/moana_finish_1.mp3",
+   "duration": 2.3
+  },
+  {
+   "id": "moana_finish_2",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "finish",
+   "text": "Finish line! Choice!",
+   "tts": "Finish line! Choice!",
+   "file": "audio/voice/moana_finish_2.mp3",
+   "duration": 2.3
+  },
+  {
+   "id": "moana_results_great_1",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "results_great",
+   "text": "Wow, look at all our food friends!",
+   "tts": "Wow, look at all our food friends!",
+   "file": "audio/voice/moana_results_great_1.mp3",
+   "duration": 2.53
+  },
+  {
+   "id": "moana_results_great_2",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "results_great",
+   "text": "That was the best! Heaps good!",
+   "tts": "That was the best! Heaps good!",
+   "file": "audio/voice/moana_results_great_2.mp3",
+   "duration": 2.61
+  },
+  {
+   "id": "moana_results_ok_1",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "results_ok",
+   "text": "Let's have another go!",
+   "tts": "Let's have another go!",
+   "file": "audio/voice/moana_results_ok_1.mp3",
+   "duration": 1.67
+  },
+  {
+   "id": "moana_results_ok_2",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "results_ok",
+   "text": "Nice try! Let's go again!",
+   "tts": "Nice try! Let's go again!",
+   "file": "audio/voice/moana_results_ok_2.mp3",
+   "duration": 2.46
+  },
+  {
+   "id": "moana_new_food_1",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "new_food",
+   "text": "A new food friend!",
+   "tts": "A new food friend!",
+   "file": "audio/voice/moana_new_food_1.mp3",
+   "duration": 1.83
+  },
+  {
+   "id": "moana_new_food_2",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "new_food",
+   "text": "Ooh, someone new for our book!",
+   "tts": "Ooh, someone new for our book!",
+   "file": "audio/voice/moana_new_food_2.mp3",
+   "duration": 2.53
+  },
+  {
+   "id": "moana_unlock_1",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "unlock",
+   "text": "Ooh, a new place to explore!",
+   "tts": "Ooh, a new place to explore!",
+   "file": "audio/voice/moana_unlock_1.mp3",
+   "duration": 2.46
+  },
+  {
+   "id": "moana_idle_1",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "idle",
+   "text": "Let's go on an adventure!",
+   "tts": "Let's go on an adventure!",
+   "file": "audio/voice/moana_idle_1.mp3",
+   "duration": 1.99
+  },
+  {
+   "id": "moana_idle_2",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "idle",
+   "text": "Pick a ride, eh!",
+   "tts": "Pick a ride, eh!",
+   "file": "audio/voice/moana_idle_2.mp3",
+   "duration": 1.75
+  },
+  {
+   "id": "moana_idle_3",
+   "kind": "voice",
+   "speaker": "moana",
+   "group": "idle",
+   "text": "I love fruit and veggies!",
+   "tts": "I love fruit and veggies!",
+   "file": "audio/voice/moana_idle_3.mp3",
+   "duration": 2.38
+  },
+  {
+   "id": "narrator_title_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "title",
+   "text": "Ace Runs!",
+   "tts": "Ace Runs!",
+   "file": "audio/voice/narrator_title_1.mp3",
+   "duration": 1.51
+  },
+  {
+   "id": "narrator_welcome_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "welcome",
+   "text": "Kia ora! Welcome to Ace Runs!",
+   "tts": "Kia ora! Welcome to Ace Runs!",
+   "file": "audio/voice/narrator_welcome_1.mp3",
+   "duration": 2.72
+  },
+  {
+   "id": "narrator_welcome_2",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "welcome",
+   "text": "Kia ora, friend! Ready for a healthy adventure?",
+   "tts": "Kia ora, friend! Ready for a healthy adventure?",
+   "file": "audio/voice/narrator_welcome_2.mp3",
+   "duration": 3.11
+  },
+  {
+   "id": "narrator_pick_character_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "pick_character",
+   "text": "Who's going to run today?",
+   "tts": "Who's going to run today?",
+   "file": "audio/voice/narrator_pick_character_1.mp3",
+   "duration": 1.75
+  },
+  {
+   "id": "narrator_char_ace_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "char_ace",
+   "text": "Ace!",
+   "tts": "Ace!",
+   "file": "audio/voice/narrator_char_ace_1.mp3",
+   "duration": 0.94
+  },
+  {
+   "id": "narrator_char_moana_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "char_moana",
+   "text": "Moana!",
+   "tts": "Moana!",
+   "file": "audio/voice/narrator_char_moana_1.mp3",
+   "duration": 1.1
+  },
+  {
+   "id": "narrator_pick_ride_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "pick_ride",
+   "text": "How will you travel?",
+   "tts": "How will you travel?",
+   "file": "audio/voice/narrator_pick_ride_1.mp3",
+   "duration": 1.33
+  },
+  {
+   "id": "narrator_ride_shoes_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "ride_shoes",
+   "text": "Running shoes!",
+   "tts": "Running shoes!",
+   "file": "audio/voice/narrator_ride_shoes_1.mp3",
+   "duration": 1.44
+  },
+  {
+   "id": "narrator_ride_bike_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "ride_bike",
+   "text": "The bike!",
+   "tts": "The bike!",
+   "file": "audio/voice/narrator_ride_bike_1.mp3",
+   "duration": 1.18
+  },
+  {
+   "id": "narrator_ride_scooter_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "ride_scooter",
+   "text": "The scooter!",
+   "tts": "The scooter!",
+   "file": "audio/voice/narrator_ride_scooter_1.mp3",
+   "duration": 1.1
+  },
+  {
+   "id": "narrator_ride_skate_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "ride_skate",
+   "text": "The skateboard!",
+   "tts": "The skateboard!",
+   "file": "audio/voice/narrator_ride_skate_1.mp3",
+   "duration": 1.33
+  },
+  {
+   "id": "narrator_pick_stage_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "pick_stage",
+   "text": "Where shall we run today?",
+   "tts": "Where shall we run today?",
+   "file": "audio/voice/narrator_pick_stage_1.mp3",
+   "duration": 1.59
+  },
+  {
+   "id": "narrator_stage_indoor_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "stage_indoor",
+   "text": "The indoor playground! Soft play, ball pits and slides!",
+   "tts": "The indoor playground! Soft play, ball pits and slides!",
+   "file": "audio/voice/narrator_stage_indoor_1.mp3",
+   "duration": 4.7
+  },
+  {
+   "id": "narrator_stage_arcade_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "stage_arcade",
+   "text": "The arcade! Glowing games, claw machines and prizes!",
+   "tts": "The arcade! Glowing games, claw machines and prizes!",
+   "file": "audio/voice/narrator_stage_arcade_1.mp3",
+   "duration": 4.7
+  },
+  {
+   "id": "narrator_stage_outdoor_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "stage_outdoor",
+   "text": "The outdoor playground! Swings, see-saws and the roundabout!",
+   "tts": "The outdoor playground! Swings, see-saws and the roundabout!",
+   "file": "audio/voice/narrator_stage_outdoor_1.mp3",
+   "duration": 4.78
+  },
+  {
+   "id": "narrator_stage_sports_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "stage_sports",
+   "text": "The sports park! Rugby, netball, cricket and heaps more!",
+   "tts": "The sports park! Rugby, netball, cricket and heaps more!",
+   "file": "audio/voice/narrator_stage_sports_1.mp3",
+   "duration": 4.54
+  },
+  {
+   "id": "narrator_stage_jungle_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "stage_jungle",
+   "text": "The jungle! Swinging monkeys, ambling elephants and hopping frogs!",
+   "tts": "The jungle! Swinging monkeys, ambling elephants and hopping frogs!",
+   "file": "audio/voice/narrator_stage_jungle_1.mp3",
+   "duration": 5.28
+  },
+  {
+   "id": "narrator_stage_parks_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "stage_parks",
+   "text": "The parks and gardens! Let's run through all four seasons!",
+   "tts": "The parks and gardens! Let's run through all four seasons!",
+   "file": "audio/voice/narrator_stage_parks_1.mp3",
+   "duration": 4.23
+  },
+  {
+   "id": "narrator_sport_rugby_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "sport_rugby",
+   "text": "Rugby!",
+   "tts": "Rugby!",
+   "file": "audio/voice/narrator_sport_rugby_1.mp3",
+   "duration": 0.86
+  },
+  {
+   "id": "narrator_sport_football_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "sport_football",
+   "text": "Football!",
+   "tts": "Football!",
+   "file": "audio/voice/narrator_sport_football_1.mp3",
+   "duration": 0.94
+  },
+  {
+   "id": "narrator_sport_netball_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "sport_netball",
+   "text": "Netball!",
+   "tts": "Netball!",
+   "file": "audio/voice/narrator_sport_netball_1.mp3",
+   "duration": 1.1
+  },
+  {
+   "id": "narrator_sport_basketball_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "sport_basketball",
+   "text": "Basketball!",
+   "tts": "Basketball!",
+   "file": "audio/voice/narrator_sport_basketball_1.mp3",
+   "duration": 1.1
+  },
+  {
+   "id": "narrator_sport_cricket_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "sport_cricket",
+   "text": "Cricket!",
+   "tts": "Cricket!",
+   "file": "audio/voice/narrator_sport_cricket_1.mp3",
+   "duration": 1.02
+  },
+  {
+   "id": "narrator_sport_tennis_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "sport_tennis",
+   "text": "Tennis!",
+   "tts": "Tennis!",
+   "file": "audio/voice/narrator_sport_tennis_1.mp3",
+   "duration": 1.1
+  },
+  {
+   "id": "narrator_sport_hockey_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "sport_hockey",
+   "text": "Hockey!",
+   "tts": "Hockey!",
+   "file": "audio/voice/narrator_sport_hockey_1.mp3",
+   "duration": 0.94
+  },
+  {
+   "id": "narrator_sport_athletics_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "sport_athletics",
+   "text": "Athletics!",
+   "tts": "Athletics!",
+   "file": "audio/voice/narrator_sport_athletics_1.mp3",
+   "duration": 1.33
+  },
+  {
+   "id": "narrator_sport_swimming_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "sport_swimming",
+   "text": "Swimming!",
+   "tts": "Swimming!",
+   "file": "audio/voice/narrator_sport_swimming_1.mp3",
+   "duration": 1.1
+  },
+  {
+   "id": "narrator_sport_cycling_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "sport_cycling",
+   "text": "Cycling!",
+   "tts": "Cycling!",
+   "file": "audio/voice/narrator_sport_cycling_1.mp3",
+   "duration": 1.02
+  },
+  {
+   "id": "narrator_season_winter_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "season_winter",
+   "text": "It's winter! Frosty, snowy and bare branches!",
+   "tts": "It's winter! Frosty, snowy and bare branches!",
+   "file": "audio/voice/narrator_season_winter_1.mp3",
+   "duration": 4.39
+  },
+  {
+   "id": "narrator_season_spring_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "season_spring",
+   "text": "Spring! Blossom, lambs and new shoots!",
+   "tts": "Spring! Blossom, lambs and new shoots!",
+   "file": "audio/voice/narrator_season_spring_1.mp3",
+   "duration": 3.89
+  },
+  {
+   "id": "narrator_season_summer_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "season_summer",
+   "text": "Summer! Sunshine, picnics and big green trees!",
+   "tts": "Summer! Sunshine, picnics and big green trees!",
+   "file": "audio/voice/narrator_season_summer_1.mp3",
+   "duration": 4.39
+  },
+  {
+   "id": "narrator_season_autumn_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "season_autumn",
+   "text": "Autumn! Golden leaves falling and puddles!",
+   "tts": "Autumn! Golden leaves falling and puddles!",
+   "file": "audio/voice/narrator_season_autumn_1.mp3",
+   "duration": 3.89
+  },
+  {
+   "id": "narrator_benefit_vision_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "benefit_vision",
+   "text": "Carrots help your eyes!",
+   "tts": "Carrots help your eyes!",
+   "file": "audio/voice/narrator_benefit_vision_1.mp3",
+   "duration": 1.83
+  },
+  {
+   "id": "narrator_benefit_vision_2",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "benefit_vision",
+   "text": "Carrots help you see bright and clear!",
+   "tts": "Carrots help you see bright and clear!",
+   "file": "audio/voice/narrator_benefit_vision_2.mp3",
+   "duration": 2.72
+  },
+  {
+   "id": "narrator_benefit_muscles_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "benefit_muscles",
+   "text": "Green veggies build strong muscles!",
+   "tts": "Green veggies build strong muscles!",
+   "file": "audio/voice/narrator_benefit_muscles_1.mp3",
+   "duration": 2.95
+  },
+  {
+   "id": "narrator_benefit_muscles_2",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "benefit_muscles",
+   "text": "Broccoli and spinach make you strong!",
+   "tts": "Broccoli and spinach make you strong!",
+   "file": "audio/voice/narrator_benefit_muscles_2.mp3",
+   "duration": 2.79
+  },
+  {
+   "id": "narrator_benefit_bones_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "benefit_bones",
+   "text": "Dairy makes strong bones and teeth!",
+   "tts": "Dairy makes strong bones and teeth!",
+   "file": "audio/voice/narrator_benefit_bones_1.mp3",
+   "duration": 2.61
+  },
+  {
+   "id": "narrator_benefit_bones_2",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "benefit_bones",
+   "text": "Milk, yoghurt and cheese for strong bones!",
+   "tts": "Milk, yoghurt and cheese for strong bones!",
+   "file": "audio/voice/narrator_benefit_bones_2.mp3",
+   "duration": 3.42
+  },
+  {
+   "id": "narrator_benefit_shield_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "benefit_shield",
+   "text": "Oranges and kiwifruit help fight germs!",
+   "tts": "Oranges and kiwifruit help fight germs!",
+   "file": "audio/voice/narrator_benefit_shield_1.mp3",
+   "duration": 3.03
+  },
+  {
+   "id": "narrator_benefit_shield_2",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "benefit_shield",
+   "text": "Fruit helps your body fight off germs!",
+   "tts": "Fruit helps your body fight off germs!",
+   "file": "audio/voice/narrator_benefit_shield_2.mp3",
+   "duration": 2.72
+  },
+  {
+   "id": "narrator_benefit_energy_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "benefit_energy",
+   "text": "Bananas give you zippy energy!",
+   "tts": "Bananas give you zippy energy!",
+   "file": "audio/voice/narrator_benefit_energy_1.mp3",
+   "duration": 2.61
+  },
+  {
+   "id": "narrator_benefit_energy_2",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "benefit_energy",
+   "text": "Energy food! Off you zoom!",
+   "tts": "Energy food! Off you zoom!",
+   "file": "audio/voice/narrator_benefit_energy_2.mp3",
+   "duration": 2.61
+  },
+  {
+   "id": "narrator_benefit_refresh_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "benefit_refresh",
+   "text": "Water is the best drink!",
+   "tts": "Water is the best drink!",
+   "file": "audio/voice/narrator_benefit_refresh_1.mp3",
+   "duration": 2.14
+  },
+  {
+   "id": "narrator_benefit_refresh_2",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "benefit_refresh",
+   "text": "A splash of water! So refreshing!",
+   "tts": "A splash of water! So refreshing!",
+   "file": "audio/voice/narrator_benefit_refresh_2.mp3",
+   "duration": 3.27
+  },
+  {
+   "id": "narrator_benefit_grow_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "benefit_grow",
+   "text": "Eggs, chicken and fish help you grow strong!",
+   "tts": "Eggs, chicken and fish help you grow strong!",
+   "file": "audio/voice/narrator_benefit_grow_1.mp3",
+   "duration": 3.58
+  },
+  {
+   "id": "narrator_benefit_grow_2",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "benefit_grow",
+   "text": "Growing strong! Food friends fly to you!",
+   "tts": "Growing strong! Food friends fly to you!",
+   "file": "audio/voice/narrator_benefit_grow_2.mp3",
+   "duration": 3.66
+  },
+  {
+   "id": "narrator_benefit_tummy_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "benefit_tummy",
+   "text": "Fruit and veggies make a happy tummy!",
+   "tts": "Fruit and veggies make a happy tummy!",
+   "file": "audio/voice/narrator_benefit_tummy_1.mp3",
+   "duration": 2.72
+  },
+  {
+   "id": "narrator_benefit_tummy_2",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "benefit_tummy",
+   "text": "Wholesome food, happy tummy!",
+   "tts": "Wholesome food, happy tummy!",
+   "file": "audio/voice/narrator_benefit_tummy_2.mp3",
+   "duration": 2.46
+  },
+  {
+   "id": "narrator_junk_sugar_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "junk_sugar",
+   "text": "Fizzy drinks give a quick buzz, then a sleepy slump.",
+   "tts": "Fizzy drinks give a quick buzz, then a sleepy slump.",
+   "file": "audio/voice/narrator_junk_sugar_1.mp3",
+   "duration": 4.15
+  },
+  {
+   "id": "narrator_junk_teeth_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "junk_teeth",
+   "text": "Lollies make teeth sticky. Remember to brush!",
+   "tts": "Lollies make teeth sticky. Remember to brush!",
+   "file": "audio/voice/narrator_junk_teeth_1.mp3",
+   "duration": 3.58
+  },
+  {
+   "id": "narrator_junk_freeze_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "junk_freeze",
+   "text": "Ice cream is a chilly sometimes treat!",
+   "tts": "Ice cream is a chilly sometimes treat!",
+   "file": "audio/voice/narrator_junk_freeze_1.mp3",
+   "duration": 3.03
+  },
+  {
+   "id": "narrator_junk_slow_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "junk_slow",
+   "text": "Greasy food can make you feel slow for a while.",
+   "tts": "Greasy food can make you feel slow for a while.",
+   "file": "audio/voice/narrator_junk_slow_1.mp3",
+   "duration": 3.42
+  },
+  {
+   "id": "narrator_junk_tummy_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "junk_tummy",
+   "text": "Old food can upset your tummy. Grab something fresh!",
+   "tts": "Old food can upset your tummy. Grab something fresh!",
+   "file": "audio/voice/narrator_junk_tummy_1.mp3",
+   "duration": 3.66
+  },
+  {
+   "id": "narrator_sometimes_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "sometimes",
+   "text": "Treats are sometimes foods!",
+   "tts": "Treats are sometimes foods!",
+   "file": "audio/voice/narrator_sometimes_1.mp3",
+   "duration": 2.22
+  },
+  {
+   "id": "narrator_sometimes_2",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "sometimes",
+   "text": "Healthy food makes you strong every day!",
+   "tts": "Healthy food makes you strong every day!",
+   "file": "audio/voice/narrator_sometimes_2.mp3",
+   "duration": 3.11
+  },
+  {
+   "id": "narrator_sometimes_3",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "sometimes",
+   "text": "Water and fresh food help you bounce back!",
+   "tts": "Water and fresh food help you bounce back!",
+   "file": "audio/voice/narrator_sometimes_3.mp3",
+   "duration": 3.27
+  },
+  {
+   "id": "narrator_glow_full_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "glow_full",
+   "text": "Healthy and happy!",
+   "tts": "Healthy and happy!",
+   "file": "audio/voice/narrator_glow_full_1.mp3",
+   "duration": 1.67
+  },
+  {
+   "id": "narrator_countdown_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "countdown",
+   "text": "Ready... set... go!",
+   "tts": "Ready... set... go!",
+   "file": "audio/voice/narrator_countdown_1.mp3",
+   "duration": 2.53
+  },
+  {
+   "id": "narrator_tut_intro_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "tut_intro",
+   "text": "Let's learn the moves!",
+   "tts": "Let's learn the moves!",
+   "file": "audio/voice/narrator_tut_intro_1.mp3",
+   "duration": 1.67
+  },
+  {
+   "id": "narrator_tut_left_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "tut_left",
+   "text": "Move left!",
+   "tts": "Move left!",
+   "file": "audio/voice/narrator_tut_left_1.mp3",
+   "duration": 1.44
+  },
+  {
+   "id": "narrator_tut_right_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "tut_right",
+   "text": "Move right!",
+   "tts": "Move right!",
+   "file": "audio/voice/narrator_tut_right_1.mp3",
+   "duration": 1.33
+  },
+  {
+   "id": "narrator_tut_jump_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "tut_jump",
+   "text": "Jump over the low things!",
+   "tts": "Jump over the low things!",
+   "file": "audio/voice/narrator_tut_jump_1.mp3",
+   "duration": 2.14
+  },
+  {
+   "id": "narrator_tut_slide_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "tut_slide",
+   "text": "Slide under the high things!",
+   "tts": "Slide under the high things!",
+   "file": "audio/voice/narrator_tut_slide_1.mp3",
+   "duration": 2.3
+  },
+  {
+   "id": "narrator_tut_healthy_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "tut_healthy",
+   "text": "Healthy food powers you up!",
+   "tts": "Healthy food powers you up!",
+   "file": "audio/voice/narrator_tut_healthy_1.mp3",
+   "duration": 2.22
+  },
+  {
+   "id": "narrator_tut_junk_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "tut_junk",
+   "text": "Junk food slows you down for a while - treats are sometimes foods!",
+   "tts": "Junk food slows you down for a while - treats are sometimes foods!",
+   "file": "audio/voice/narrator_tut_junk_1.mp3",
+   "duration": 4.54
+  },
+  {
+   "id": "narrator_tut_done_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "tut_done",
+   "text": "You've got it! Off you go!",
+   "tts": "You've got it! Off you go!",
+   "file": "audio/voice/narrator_tut_done_1.mp3",
+   "duration": 2.06
+  },
+  {
+   "id": "narrator_finish_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "finish",
+   "text": "Finish line! Well done!",
+   "tts": "Finish line! Well done!",
+   "file": "audio/voice/narrator_finish_1.mp3",
+   "duration": 2.72
+  },
+  {
+   "id": "narrator_results_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "results",
+   "text": "Look at all the healthy food you collected!",
+   "tts": "Look at all the healthy food you collected!",
+   "file": "audio/voice/narrator_results_1.mp3",
+   "duration": 3.03
+  },
+  {
+   "id": "narrator_results_2",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "results",
+   "text": "What a run! Let's see your food friends!",
+   "tts": "What a run! Let's see your food friends!",
+   "file": "audio/voice/narrator_results_2.mp3",
+   "duration": 3.19
+  },
+  {
+   "id": "narrator_results_great_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "results_great",
+   "text": "Amazing! You're a healthy hero!",
+   "tts": "Amazing! You're a healthy hero!",
+   "file": "audio/voice/narrator_results_great_1.mp3",
+   "duration": 3.11
+  },
+  {
+   "id": "narrator_results_try_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "results_try",
+   "text": "Great try! Let's go again!",
+   "tts": "Great try! Let's go again!",
+   "file": "audio/voice/narrator_results_try_1.mp3",
+   "duration": 2.46
+  },
+  {
+   "id": "narrator_unlock_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "unlock",
+   "text": "A new place has opened up!",
+   "tts": "A new place has opened up!",
+   "file": "audio/voice/narrator_unlock_1.mp3",
+   "duration": 1.99
+  },
+  {
+   "id": "narrator_new_food_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "new_food",
+   "text": "A new food friend for your book!",
+   "tts": "A new food friend for your book!",
+   "file": "audio/voice/narrator_new_food_1.mp3",
+   "duration": 2.38
+  },
+  {
+   "id": "narrator_book_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "book",
+   "text": "Your food friends book!",
+   "tts": "Your food friends book!",
+   "file": "audio/voice/narrator_book_1.mp3",
+   "duration": 1.91
+  },
+  {
+   "id": "narrator_paused_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "paused",
+   "text": "Paused. Take a breather!",
+   "tts": "Paused. Take a breather!",
+   "file": "audio/voice/narrator_paused_1.mp3",
+   "duration": 2.72
+  },
+  {
+   "id": "narrator_endless_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "endless",
+   "text": "Endless run! How far can you go?",
+   "tts": "Endless run! How far can you go?",
+   "file": "audio/voice/narrator_endless_1.mp3",
+   "duration": 3.19
+  },
+  {
+   "id": "narrator_last_season_1",
+   "kind": "voice",
+   "speaker": "narrator",
+   "group": "last_season",
+   "text": "You ran through every season!",
+   "tts": "You ran through every season!",
+   "file": "audio/voice/narrator_last_season_1.mp3",
+   "duration": 2.38
+  },
+  {
+   "id": "ui_click",
+   "kind": "sfx",
+   "group": "ui",
+   "prompt": "soft rounded UI click like tapping a wooden toy block, very short",
+   "file": "audio/sfx/ui_click.mp3",
+   "duration": 0.3,
+   "volume": 0.7
+  },
+  {
+   "id": "ui_back",
+   "kind": "sfx",
+   "group": "ui",
+   "prompt": "soft gentle descending UI swoosh for going back, very short",
+   "file": "audio/sfx/ui_back.mp3",
+   "duration": 0.4,
+   "volume": 0.6
+  },
+  {
+   "id": "ui_select",
+   "kind": "sfx",
+   "group": "ui",
+   "prompt": "happy bubbly pop with a tiny bright chime, menu selection confirm",
+   "file": "audio/sfx/ui_select.mp3",
+   "duration": 0.5,
+   "volume": 0.8
+  },
+  {
+   "id": "ui_unlock",
+   "kind": "sfx",
+   "group": "ui",
+   "prompt": "sparkly magical unlock chime, twinkling bells rising, joyful",
+   "file": "audio/sfx/ui_unlock.mp3",
+   "duration": 2.0
+  },
+  {
+   "id": "ui_page",
+   "kind": "sfx",
+   "group": "ui",
+   "prompt": "paper book page turning, soft and crisp",
+   "file": "audio/sfx/ui_page.mp3",
+   "duration": 0.6,
+   "volume": 0.8
+  },
+  {
+   "id": "star",
+   "kind": "sfx",
+   "group": "ui",
+   "prompt": "bright clear glockenspiel ding with a sparkly shimmer as a star appears, clear and present",
+   "file": "audio/sfx/star.mp3",
+   "duration": 0.8
+  },
+  {
+   "id": "whoosh_lane",
+   "kind": "sfx",
+   "group": "moves",
+   "prompt": "very short soft airy whoosh of quickly moving sideways",
+   "file": "audio/sfx/whoosh_lane.mp3",
+   "duration": 0.3,
+   "variants": 3,
+   "volume": 0.55
+  },
+  {
+   "id": "jump",
+   "kind": "sfx",
+   "group": "moves",
+   "prompt": "soft springy cartoon boing with a light whoosh upward, playful jump",
+   "file": "audio/sfx/jump.mp3",
+   "duration": 0.4,
+   "volume": 0.6
+  },
+  {
+   "id": "land",
+   "kind": "sfx",
+   "group": "moves",
+   "prompt": "soft padded thump of sneakers landing, gentle",
+   "file": "audio/sfx/land.mp3",
+   "duration": 0.3,
+   "volume": 0.6
+  },
+  {
+   "id": "slide",
+   "kind": "sfx",
+   "group": "moves",
+   "prompt": "quick smooth swish of sliding low along the ground",
+   "file": "audio/sfx/slide.mp3",
+   "duration": 0.5,
+   "volume": 0.6
+  },
+  {
+   "id": "bump",
+   "kind": "sfx",
+   "group": "moves",
+   "prompt": "soft padded cartoon bonk on a cushion, squishy and funny, not painful",
+   "file": "audio/sfx/bump.mp3",
+   "duration": 0.5,
+   "volume": 0.8
+  },
+  {
+   "id": "near_miss",
+   "kind": "sfx",
+   "group": "moves",
+   "prompt": "zippy quick whoosh followed by a bright tiny ding",
+   "file": "audio/sfx/near_miss.mp3",
+   "duration": 0.6,
+   "volume": 0.7
+  },
+  {
+   "id": "bonk",
+   "kind": "sfx",
+   "group": "moves",
+   "prompt": "cartoon boing knock as an object gets bumped away, springy and funny",
+   "file": "audio/sfx/bonk.mp3",
+   "duration": 0.6
+  },
+  {
+   "id": "shield_bounce",
+   "kind": "sfx",
+   "group": "moves",
+   "prompt": "wobbly soap bubble boing, rubbery and bouncy, magical",
+   "file": "audio/sfx/shield_bounce.mp3",
+   "duration": 0.7
+  },
+  {
+   "id": "countdown_beep",
+   "kind": "sfx",
+   "group": "moves",
+   "prompt": "soft friendly countdown beep tone, single",
+   "file": "audio/sfx/countdown_beep.mp3",
+   "duration": 0.3,
+   "volume": 0.7
+  },
+  {
+   "id": "go",
+   "kind": "sfx",
+   "group": "moves",
+   "prompt": "cheerful bright go chime with a little upward whoosh",
+   "file": "audio/sfx/go.mp3",
+   "duration": 0.7
+  },
+  {
+   "id": "finish_fanfare",
+   "kind": "sfx",
+   "group": "moves",
+   "prompt": "short happy celebration fanfare on soft brass, xylophone and handclaps",
+   "file": "audio/sfx/finish_fanfare.mp3",
+   "duration": 3.0
+  },
+  {
+   "id": "stage_clear",
+   "kind": "sfx",
+   "group": "moves",
+   "prompt": "joyful short success jingle on xylophone and chimes",
+   "file": "audio/sfx/stage_clear.mp3",
+   "duration": 2.0
+  },
+  {
+   "id": "heart_up",
+   "kind": "sfx",
+   "group": "moves",
+   "prompt": "warm cute rising bloop chime, getting a heart back",
+   "file": "audio/sfx/heart_up.mp3",
+   "duration": 0.7
+  },
+  {
+   "id": "bite_crunch",
+   "kind": "sfx",
+   "group": "food",
+   "prompt": "crisp crunchy bite of a fresh raw carrot, close and munchy",
+   "file": "audio/sfx/bite_crunch.mp3",
+   "duration": 0.5,
+   "variants": 3
+  },
+  {
+   "id": "bite_juicy",
+   "kind": "sfx",
+   "group": "food",
+   "prompt": "juicy fresh fruit bite, a crisp apple crunch with a little squirt of juice",
+   "file": "audio/sfx/bite_juicy.mp3",
+   "duration": 0.5,
+   "variants": 3
+  },
+  {
+   "id": "bite_soft",
+   "kind": "sfx",
+   "group": "food",
+   "prompt": "soft gentle bite of a banana or soft bread, quiet and pleasant",
+   "file": "audio/sfx/bite_soft.mp3",
+   "duration": 0.4,
+   "variants": 2
+  },
+  {
+   "id": "slurp_drink",
+   "kind": "sfx",
+   "group": "food",
+   "prompt": "quick gulp of a cool drink from a glass, refreshing",
+   "file": "audio/sfx/slurp_drink.mp3",
+   "duration": 0.7,
+   "variants": 2
+  },
+  {
+   "id": "splash_water",
+   "kind": "sfx",
+   "group": "food",
+   "prompt": "refreshing playful water splash with a few sparkling droplets",
+   "file": "audio/sfx/splash_water.mp3",
+   "duration": 0.8
+  },
+  {
+   "id": "sparkle_vision",
+   "kind": "sfx",
+   "group": "food",
+   "prompt": "twinkly magical sparkle shimmer, bright little bells",
+   "file": "audio/sfx/sparkle_vision.mp3",
+   "duration": 1.0
+  },
+  {
+   "id": "flex_muscle",
+   "kind": "sfx",
+   "group": "food",
+   "prompt": "cartoon power-up flex sound, a springy rising twang with a punchy pop, no voice",
+   "file": "audio/sfx/flex_muscle.mp3",
+   "duration": 0.7
+  },
+  {
+   "id": "ding_bones",
+   "kind": "sfx",
+   "group": "food",
+   "prompt": "bright clean high ting like a shiny tooth sparkle, single",
+   "file": "audio/sfx/ding_bones.mp3",
+   "duration": 0.6
+  },
+  {
+   "id": "shield_up",
+   "kind": "sfx",
+   "group": "food",
+   "prompt": "soft bubbly whoomp as a glowing bubble shield inflates, magical",
+   "file": "audio/sfx/shield_up.mp3",
+   "duration": 0.8
+  },
+  {
+   "id": "zoom_boost",
+   "kind": "sfx",
+   "group": "food",
+   "prompt": "zippy cartoon speed burst whoosh, rising and exciting",
+   "file": "audio/sfx/zoom_boost.mp3",
+   "duration": 0.8
+  },
+  {
+   "id": "magnet",
+   "kind": "sfx",
+   "group": "food",
+   "prompt": "gentle magical pulling hum with soft twinkles, swirling",
+   "file": "audio/sfx/magnet.mp3",
+   "duration": 1.2
+  },
+  {
+   "id": "grow_chart",
+   "kind": "sfx",
+   "group": "food",
+   "prompt": "quick cheerful rising arpeggio on marimba, growing taller",
+   "file": "audio/sfx/grow_chart.mp3",
+   "duration": 1.0
+  },
+  {
+   "id": "happy_tummy",
+   "kind": "sfx",
+   "group": "food",
+   "prompt": "warm cosy soft chime, content and comforting",
+   "file": "audio/sfx/happy_tummy.mp3",
+   "duration": 0.8
+  },
+  {
+   "id": "glow_level",
+   "kind": "sfx",
+   "group": "food",
+   "prompt": "soft rising chime with gentle shimmer, level up",
+   "file": "audio/sfx/glow_level.mp3",
+   "duration": 0.8
+  },
+  {
+   "id": "glow_full",
+   "kind": "sfx",
+   "group": "food",
+   "prompt": "warm sparkly magical swell with chimes, glowing and joyful",
+   "file": "audio/sfx/glow_full.mp3",
+   "duration": 1.8
+  },
+  {
+   "id": "bounce_back",
+   "kind": "sfx",
+   "group": "food",
+   "prompt": "refreshing bright chime like a fresh breeze, sparkly and clean",
+   "file": "audio/sfx/bounce_back.mp3",
+   "duration": 0.9
+  },
+  {
+   "id": "junk_fizz_hiss",
+   "kind": "sfx",
+   "group": "junk",
+   "prompt": "soda can opening with a crisp pssst hiss and fizzing bubbles",
+   "file": "audio/sfx/junk_fizz_hiss.mp3",
+   "duration": 1.0
+  },
+  {
+   "id": "sugar_buzz",
+   "kind": "sfx",
+   "group": "junk",
+   "prompt": "jittery buzzy cartoon wobble, silly and zippy",
+   "file": "audio/sfx/sugar_buzz.mp3",
+   "duration": 1.0
+  },
+  {
+   "id": "sleepy_yawn",
+   "kind": "sfx",
+   "group": "junk",
+   "prompt": "cartoon slide whistle sliding down slowly, then one tiny soft snore, no voice",
+   "file": "audio/sfx/sleepy_yawn.mp3",
+   "duration": 1.6
+  },
+  {
+   "id": "tummy_rumble",
+   "kind": "sfx",
+   "group": "junk",
+   "prompt": "funny cartoon tummy rumble gurgle, silly and soft",
+   "file": "audio/sfx/tummy_rumble.mp3",
+   "duration": 1.2
+  },
+  {
+   "id": "sticky_squelch",
+   "kind": "sfx",
+   "group": "junk",
+   "prompt": "sticky chewy squish of toffee, playful cartoon",
+   "file": "audio/sfx/sticky_squelch.mp3",
+   "duration": 0.6
+  },
+  {
+   "id": "slow_heavy",
+   "kind": "sfx",
+   "group": "junk",
+   "prompt": "slow cartoon wah wah wah descending tuba, silly and gentle",
+   "file": "audio/sfx/slow_heavy.mp3",
+   "duration": 1.8
+  },
+  {
+   "id": "brain_freeze",
+   "kind": "sfx",
+   "group": "junk",
+   "prompt": "brrr shivery icy jingle with tinkling ice chimes, cartoon",
+   "file": "audio/sfx/brain_freeze.mp3",
+   "duration": 1.2
+  },
+  {
+   "id": "footsteps_loop",
+   "kind": "sfx",
+   "group": "rides",
+   "prompt": "close-up continuous quick running footsteps of a child in sneakers on a rubber play floor, steady even rhythm, about three steps per second",
+   "file": "audio/sfx/footsteps_loop.mp3",
+   "duration": 3.0,
+   "loop": true,
+   "volume": 0.5
+  },
+  {
+   "id": "bike_freewheel_loop",
+   "kind": "sfx",
+   "group": "rides",
+   "prompt": "bicycle freewheel ticking with a soft chain whirr, steady rolling",
+   "file": "audio/sfx/bike_freewheel_loop.mp3",
+   "duration": 3.0,
+   "loop": true,
+   "volume": 0.5
+  },
+  {
+   "id": "scooter_rattle_loop",
+   "kind": "sfx",
+   "group": "rides",
+   "prompt": "close-up continuous rolling rattle of small kick scooter wheels on a slightly rough pavement, steady rhythmic clatter",
+   "file": "audio/sfx/scooter_rattle_loop.mp3",
+   "duration": 3.0,
+   "loop": true,
+   "volume": 0.5
+  },
+  {
+   "id": "skate_roll_loop",
+   "kind": "sfx",
+   "group": "rides",
+   "prompt": "skateboard wheels rolling smoothly on concrete, steady gentle rumble",
+   "file": "audio/sfx/skate_roll_loop.mp3",
+   "duration": 3.0,
+   "loop": true,
+   "volume": 0.5
+  },
+  {
+   "id": "bike_bell",
+   "kind": "sfx",
+   "group": "rides",
+   "prompt": "classic bicycle bell ring ring, bright and friendly",
+   "file": "audio/sfx/bike_bell.mp3",
+   "duration": 1.0
+  },
+  {
+   "id": "scooter_kick",
+   "kind": "sfx",
+   "group": "rides",
+   "prompt": "foot pushing off the pavement on a kick scooter, a clear scrape and swoosh",
+   "file": "audio/sfx/scooter_kick.mp3",
+   "duration": 0.5,
+   "volume": 0.6
+  },
+  {
+   "id": "skate_pop",
+   "kind": "sfx",
+   "group": "rides",
+   "prompt": "skateboard ollie pop, crisp tail snap",
+   "file": "audio/sfx/skate_pop.mp3",
+   "duration": 0.4
+  },
+  {
+   "id": "skate_land",
+   "kind": "sfx",
+   "group": "rides",
+   "prompt": "skateboard landing on concrete, wheels clack and roll",
+   "file": "audio/sfx/skate_land.mp3",
+   "duration": 0.5
+  },
+  {
+   "id": "bike_hop",
+   "kind": "sfx",
+   "group": "rides",
+   "prompt": "bicycle hop, springy tyres bouncing on the ground",
+   "file": "audio/sfx/bike_hop.mp3",
+   "duration": 0.5
+  },
+  {
+   "id": "arcade_bleep",
+   "kind": "sfx",
+   "group": "arcade",
+   "prompt": "friendly retro arcade game bleep bloop, short chiptune blip",
+   "file": "audio/sfx/arcade_bleep.mp3",
+   "duration": 0.6,
+   "variants": 3,
+   "volume": 0.6
+  },
+  {
+   "id": "claw_machine",
+   "kind": "sfx",
+   "group": "arcade",
+   "prompt": "toy claw machine whirring and clicking, then a soft clunk",
+   "file": "audio/sfx/claw_machine.mp3",
+   "duration": 1.5,
+   "volume": 0.7
+  },
+  {
+   "id": "air_hockey_puck",
+   "kind": "sfx",
+   "group": "arcade",
+   "prompt": "air hockey puck clacking off the rail with a soft air hiss",
+   "file": "audio/sfx/air_hockey_puck.mp3",
+   "duration": 0.6,
+   "volume": 0.7
+  },
+  {
+   "id": "prize_ding",
+   "kind": "sfx",
+   "group": "arcade",
+   "prompt": "prize counter bell ding with a little ticket rattle, happy",
+   "file": "audio/sfx/prize_ding.mp3",
+   "duration": 0.8
+  },
+  {
+   "id": "ball_pit_rustle",
+   "kind": "sfx",
+   "group": "indoor",
+   "prompt": "hollow plastic balls rustling and tumbling in a ball pit, no people",
+   "file": "audio/sfx/ball_pit_rustle.mp3",
+   "duration": 1.0,
+   "volume": 0.7
+  },
+  {
+   "id": "foam_squish",
+   "kind": "sfx",
+   "group": "indoor",
+   "prompt": "soft foam block squish, padded and spongy",
+   "file": "audio/sfx/foam_squish.mp3",
+   "duration": 0.5,
+   "volume": 0.7
+  },
+  {
+   "id": "tube_slide_whee",
+   "kind": "sfx",
+   "group": "indoor",
+   "prompt": "playful whoosh down a plastic tube slide with a squeaky rub, no voice",
+   "file": "audio/sfx/tube_slide_whee.mp3",
+   "duration": 1.2,
+   "volume": 0.7
+  },
+  {
+   "id": "swing_creak",
+   "kind": "sfx",
+   "group": "outdoor",
+   "prompt": "gentle playground swing creak, soft rhythmic",
+   "file": "audio/sfx/swing_creak.mp3",
+   "duration": 1.5,
+   "volume": 0.6
+  },
+  {
+   "id": "seesaw_thunk",
+   "kind": "sfx",
+   "group": "outdoor",
+   "prompt": "wooden see-saw soft thunk as it touches down",
+   "file": "audio/sfx/seesaw_thunk.mp3",
+   "duration": 0.5,
+   "volume": 0.7
+  },
+  {
+   "id": "roundabout_whirr",
+   "kind": "sfx",
+   "group": "outdoor",
+   "prompt": "playground roundabout spinning with a soft metal whirr",
+   "file": "audio/sfx/roundabout_whirr.mp3",
+   "duration": 1.5,
+   "volume": 0.6
+  },
+  {
+   "id": "sports_whistle",
+   "kind": "sfx",
+   "group": "sports",
+   "prompt": "referee's whistle, one short friendly blast",
+   "file": "audio/sfx/sports_whistle.mp3",
+   "duration": 0.7,
+   "volume": 0.6
+  },
+  {
+   "id": "crowd_cheer",
+   "kind": "sfx",
+   "group": "sports",
+   "prompt": "warm friendly crowd at a kids sports day, wordless happy cheering, hooray and clapping",
+   "file": "audio/sfx/crowd_cheer.mp3",
+   "duration": 2.5,
+   "variants": 2,
+   "volume": 0.6
+  },
+  {
+   "id": "rugby_thud",
+   "kind": "sfx",
+   "group": "sports",
+   "prompt": "rugby ball thud as it is kicked and caught",
+   "file": "audio/sfx/rugby_thud.mp3",
+   "duration": 0.5,
+   "volume": 0.7
+  },
+  {
+   "id": "ball_kick",
+   "kind": "sfx",
+   "group": "sports",
+   "prompt": "football being kicked, crisp thump",
+   "file": "audio/sfx/ball_kick.mp3",
+   "duration": 0.4,
+   "volume": 0.7
+  },
+  {
+   "id": "tennis_pok",
+   "kind": "sfx",
+   "group": "sports",
+   "prompt": "tennis ball hit by a racquet, crisp pok",
+   "file": "audio/sfx/tennis_pok.mp3",
+   "duration": 0.3,
+   "volume": 0.7
+  },
+  {
+   "id": "basketball_bounce",
+   "kind": "sfx",
+   "group": "sports",
+   "prompt": "basketball bouncing twice on a wooden court",
+   "file": "audio/sfx/basketball_bounce.mp3",
+   "duration": 0.8,
+   "volume": 0.7
+  },
+  {
+   "id": "cricket_tok",
+   "kind": "sfx",
+   "group": "sports",
+   "prompt": "cricket bat hitting a ball, wooden tok",
+   "file": "audio/sfx/cricket_tok.mp3",
+   "duration": 0.4,
+   "volume": 0.7
+  },
+  {
+   "id": "swim_splash",
+   "kind": "sfx",
+   "group": "sports",
+   "prompt": "playful splash into a swimming pool",
+   "file": "audio/sfx/swim_splash.mp3",
+   "duration": 0.8,
+   "volume": 0.7
+  },
+  {
+   "id": "bike_whirr",
+   "kind": "sfx",
+   "group": "sports",
+   "prompt": "racing bicycle whirring past quickly",
+   "file": "audio/sfx/bike_whirr.mp3",
+   "duration": 1.0,
+   "volume": 0.6
+  },
+  {
+   "id": "monkey_ooh",
+   "kind": "sfx",
+   "group": "jungle",
+   "prompt": "playful cheeky monkey hoots, ooh ooh ah ah, happy and friendly",
+   "file": "audio/sfx/monkey_ooh.mp3",
+   "duration": 1.2,
+   "volume": 0.6
+  },
+  {
+   "id": "parrot_squawk",
+   "kind": "sfx",
+   "group": "jungle",
+   "prompt": "friendly colourful parrot squawk and chirp, cheerful",
+   "file": "audio/sfx/parrot_squawk.mp3",
+   "duration": 0.8,
+   "volume": 0.5
+  },
+  {
+   "id": "elephant_toot",
+   "kind": "sfx",
+   "group": "jungle",
+   "prompt": "gentle playful elephant trumpet toot, soft and friendly, not loud",
+   "file": "audio/sfx/elephant_toot.mp3",
+   "duration": 1.2,
+   "volume": 0.5
+  },
+  {
+   "id": "frog_ribbit",
+   "kind": "sfx",
+   "group": "jungle",
+   "prompt": "cute little frog ribbit, two croaks",
+   "file": "audio/sfx/frog_ribbit.mp3",
+   "duration": 0.6,
+   "volume": 0.6
+  },
+  {
+   "id": "bird_tweet",
+   "kind": "sfx",
+   "group": "parks",
+   "prompt": "cheerful songbird tweet and warble, like a New Zealand tui bird song with bell-like notes",
+   "file": "audio/sfx/bird_tweet.mp3",
+   "duration": 1.5,
+   "variants": 2,
+   "volume": 0.5
+  },
+  {
+   "id": "lamb_baa",
+   "kind": "sfx",
+   "group": "parks",
+   "prompt": "cute little lamb baa, soft and gentle",
+   "file": "audio/sfx/lamb_baa.mp3",
+   "duration": 0.8,
+   "volume": 0.6
+  },
+  {
+   "id": "snow_crunch",
+   "kind": "sfx",
+   "group": "parks",
+   "prompt": "soft footsteps crunching in fresh snow",
+   "file": "audio/sfx/snow_crunch.mp3",
+   "duration": 0.6,
+   "volume": 0.6
+  },
+  {
+   "id": "leaves_rustle",
+   "kind": "sfx",
+   "group": "parks",
+   "prompt": "crunchy dry autumn leaves rustling and scattering",
+   "file": "audio/sfx/leaves_rustle.mp3",
+   "duration": 0.8,
+   "volume": 0.6
+  },
+  {
+   "id": "puddle_splash",
+   "kind": "sfx",
+   "group": "parks",
+   "prompt": "child in gumboots stomping into a shallow rain puddle, a clear wet splash",
+   "file": "audio/sfx/puddle_splash.mp3",
+   "duration": 0.8,
+   "volume": 0.7
+  },
+  {
+   "id": "amb_indoor",
+   "kind": "ambience",
+   "group": "indoor",
+   "prompt": "busy cosy indoor soft play centre, continuous cheerful chatter and giggles of children playing in the distance, plastic balls rustling, soft room echo",
+   "duration": 22,
+   "loop": true,
+   "file": "audio/ambience/amb_indoor.mp3",
+   "volume": 0.6
+  },
+  {
+   "id": "amb_arcade",
+   "kind": "ambience",
+   "group": "arcade",
+   "prompt": "friendly family arcade, continuous soft hum of game machines, many cheerful game bleeps and jingles around the room, tickets and coins, a far-off prize bell",
+   "duration": 22,
+   "loop": true,
+   "file": "audio/ambience/amb_arcade.mp3",
+   "volume": 0.55
+  },
+  {
+   "id": "amb_outdoor",
+   "kind": "ambience",
+   "group": "outdoor",
+   "prompt": "sunny outdoor playground, continuous birdsong, breeze rustling leaves, children laughing and playing in the distance, a swing gently creaking",
+   "duration": 22,
+   "loop": true,
+   "file": "audio/ambience/amb_outdoor.mp3",
+   "volume": 0.6
+  },
+  {
+   "id": "amb_sports",
+   "kind": "ambience",
+   "group": "sports",
+   "prompt": "sports field on a sunny day, continuous friendly crowd murmur and light applause in the stands, an occasional far-off referee whistle, breeze",
+   "duration": 22,
+   "loop": true,
+   "file": "audio/ambience/amb_sports.mp3",
+   "volume": 0.55
+  },
+  {
+   "id": "amb_jungle",
+   "kind": "ambience",
+   "group": "jungle",
+   "prompt": "friendly lush jungle ambience, soft insects, cheerful birds, distant playful monkeys, gentle trickling stream",
+   "duration": 22,
+   "loop": true,
+   "file": "audio/ambience/amb_jungle.mp3",
+   "volume": 0.6
+  },
+  {
+   "id": "amb_winter",
+   "kind": "ambience",
+   "group": "parks",
+   "prompt": "winter park, steady soft wind gusting through bare trees, light snow falling, distant crunchy footsteps in snow, occasional chirps of small winter birds",
+   "duration": 22,
+   "loop": true,
+   "file": "audio/ambience/amb_winter.mp3",
+   "volume": 0.6
+  },
+  {
+   "id": "amb_spring",
+   "kind": "ambience",
+   "group": "parks",
+   "prompt": "spring garden ambience, cheerful birdsong, buzzing bees, a distant lamb baa, light breeze",
+   "duration": 22,
+   "loop": true,
+   "file": "audio/ambience/amb_spring.mp3",
+   "volume": 0.6
+  },
+  {
+   "id": "amb_summer",
+   "kind": "ambience",
+   "group": "parks",
+   "prompt": "warm summer park ambience, cicadas, soft breeze, happy distant picnic chatter, birds",
+   "duration": 22,
+   "loop": true,
+   "file": "audio/ambience/amb_summer.mp3",
+   "volume": 0.55
+  },
+  {
+   "id": "amb_autumn",
+   "kind": "ambience",
+   "group": "parks",
+   "prompt": "autumn park, breeze rustling and swirling crunchy dry leaves, steady light rain pitter-patter, a few birds calling",
+   "duration": 22,
+   "loop": true,
+   "file": "audio/ambience/amb_autumn.mp3",
+   "volume": 0.6
+  },
+  {
+   "id": "mus_title",
+   "kind": "music",
+   "group": "title",
+   "prompt": "bright joyful theme for a children's running game, plucky ukulele and marimba melody, light shaker, handclaps, warm bass, sunny New Zealand summer feeling, catchy hummable hook, 110 bpm, instrumental",
+   "duration": 70,
+   "loop": true,
+   "file": "audio/music/mus_title.mp3"
+  },
+  {
+   "id": "mus_indoor",
+   "kind": "music",
+   "group": "indoor",
+   "prompt": "bouncy playful soft-play music for young kids, boingy pizzicato strings, toy piano, kazoo-like woodwind, soft bass and light drums, giggly and cosy, 120 bpm, instrumental",
+   "duration": 65,
+   "loop": true,
+   "file": "audio/music/mus_indoor.mp3"
+  },
+  {
+   "id": "mus_arcade",
+   "kind": "music",
+   "group": "arcade",
+   "prompt": "friendly chiptune pop for kids, bright square-wave melody, bubbly arpeggios, punchy but soft drum machine, happy and catchy, 125 bpm, instrumental",
+   "duration": 65,
+   "loop": true,
+   "file": "audio/music/mus_arcade.mp3"
+  },
+  {
+   "id": "mus_outdoor",
+   "kind": "music",
+   "group": "outdoor",
+   "prompt": "sunny acoustic playground music, strummed acoustic guitar, glockenspiel, whistled-style recorder melody, light tambourine, carefree and warm, 115 bpm, instrumental",
+   "duration": 65,
+   "loop": true,
+   "file": "audio/music/mus_outdoor.mp3"
+  },
+  {
+   "id": "mus_sports",
+   "kind": "music",
+   "group": "sports",
+   "prompt": "upbeat friendly stadium music for a kids sports day, light brass section riffs, marching snare drumline-lite, handclaps, energetic and positive but not harsh, 125 bpm, instrumental",
+   "duration": 65,
+   "loop": true,
+   "file": "audio/music/mus_sports.mp3"
+  },
+  {
+   "id": "mus_jungle",
+   "kind": "music",
+   "group": "jungle",
+   "prompt": "playful jungle adventure music for kids, marimba melody, wooden hand percussion, bongos, shakers, soft flute, curious and cheeky, 112 bpm, instrumental",
+   "duration": 65,
+   "loop": true,
+   "file": "audio/music/mus_jungle.mp3"
+  },
+  {
+   "id": "mus_parks",
+   "kind": "music",
+   "group": "parks",
+   "prompt": "gentle orchestral and acoustic garden stroll music, light pizzicato strings, flute, clarinet, harp and soft acoustic guitar, warm and pastoral, suits all four seasons, 100 bpm, instrumental",
+   "duration": 70,
+   "loop": true,
+   "file": "audio/music/mus_parks.mp3"
+  },
+  {
+   "id": "mus_results",
+   "kind": "music",
+   "group": "results",
+   "prompt": "short happy celebration loop for kids, xylophone, ukulele, handclaps, proud bright brass stabs, joyful, 115 bpm, instrumental",
+   "duration": 30,
+   "loop": true,
+   "file": "audio/music/mus_results.mp3"
+  }
+ ]
+}
